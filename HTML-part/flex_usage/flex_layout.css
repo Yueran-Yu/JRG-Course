@@ -1,0 +1,88 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  background: grey;
+  padding: 4px 0;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  /* if not add this vertical-align, there will a tiny space at the bottom of the image; */
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo > img {
+  height: 26px;
+  vertical-align: middle;
+}
+
+ul {
+  /* margin-left: auto; */
+  display: flex;
+}
+
+ul > li {
+  line-height: 32px;
+  padding: 4px 0.5em;
+  line-height: 32px;
+}
+
+.content{
+  display: flex;
+  min-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.content > aside{
+  background: rgb(155, 233, 166);
+  width: 200px;
+}
+
+.content > main{
+  background: rgb(159, 201, 255);
+  height: 400px;
+  flex-grow:1;
+}
+
+.content > .ad{
+  background: rgb(255, 186, 96);
+  width:100px;
+}
+.imageList{
+  min-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+}
+
+.imageList > .x{
+  display: flex;
+  /* 不要换行 */
+  flex-wrap: wrap;
+margin-right: -12px;
+}
+
+.image{
+  width: 191px;
+  height: 191px;
+  background: grey;
+  border: 1px solid rgb(193, 138, 255);
+  margin-right:12px;
+  margin-top: 10px;
+}
