@@ -19,28 +19,54 @@ let canvas = document.getElementById('canvas')
 let div = document.createElement('div')
 canvas.width = document.documentElement.clientWidth
 canvas.height = document.documentElement.clientHeight
+var isTouchDevice = 'ontouchstart' in document.documentElement
 var ctx = canvas.getContext("2d")
 ctx.fillStyle = "blue"
+ctx.lineWidth = 20
+ctx.lineCap = "round"
 let painting = false
+let last
 
-canvas.onmousedown = () => {
-  painting = true
-}
-canvas.onmousemove = (e) => {
-  if (painting === true) {
+// console.log(isTouchDevice)
+
+if (isTouchDevice) {
+  canvas.ontouchmove = (e) => {
+    // console.log(e.touches[0])
+    let x = e.touches[0].clientX
+    let y = e.touches[0].clientY
     ctx.beginPath();
-    ctx.arc(e.clientX - 6, e.clientY - 8, 10, 0, 2 * Math.PI)
+    ctx.arc(x, y, 10, 0, 2 * Math.PI)
     ctx.fill()
-    // ctx.stroke()
+  }
+} else {
+  canvas.onmousedown = (e) => {
+    painting = true
+    last = [e.clientX, e.clientY]
+  }
+  canvas.onmousemove = (e) => {
+    if (painting === true) {
+      // ctx.beginPath();
+      // ctx.arc(e.clientX, e.clientY, 10, 0, 2 * Math.PI)
+      // ctx.fill()
+      drawLine(last[0], last[1], e.clientX, e.clientY)
+      last = [e.clientX, e.clientY]
+    } else {
+      console.log('Do noting')
+    }
+  }
 
-  } else {
-    console.log('Do noting')
+  canvas.onmouseup = () => {
+    painting = false
   }
 }
 
-canvas.onmouseup = () => {
-  painting = false
+function drawLine(x1,y1,x2,y2){
+  ctx.beginPath();     // Start a new path
+  ctx.moveTo(x1, y1);  // Move the pen to (30, 50)
+  ctx.lineTo(x2, y2);  // Draw a line to (150, 100)
+  ctx.stroke();
 }
+
 
 
 
