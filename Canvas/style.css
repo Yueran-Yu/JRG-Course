@@ -4,8 +4,14 @@
   box-sizing: border-box;
 }
 
+body{
+  border: 1px solid blue;
+}
+
 #canvas{
-  height: 100vh;
+  display: block;
   border:1px solid red;
 }
+
+
 
