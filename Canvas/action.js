@@ -22,32 +22,51 @@ canvas.height = document.documentElement.clientHeight
 var isTouchDevice = 'ontouchstart' in document.documentElement
 var ctx = canvas.getContext("2d")
 ctx.fillStyle = "blue"
-ctx.lineWidth = 20
+ctx.lineWidth = 40
 ctx.lineCap = "round"
 let painting = false
 let last
 
-// console.log(isTouchDevice)
 
+// console.log(isTouchDevice)
 if (isTouchDevice) {
+  canvas.ontouchstart = (e) => {
+
+    // very important: console.log(e),
+    // to find out all the properties in the ontouchstart, ontouchmove and ontouchend
+    // then you can find 'touches' property
+    painting = true
+    let x = e.touches[0].clientX
+    let y = e.touches[0].clientY
+    last = [x, y]
+  }
+
   canvas.ontouchmove = (e) => {
     // console.log(e.touches[0])
     let x = e.touches[0].clientX
     let y = e.touches[0].clientY
-    ctx.beginPath();
-    ctx.arc(x, y, 10, 0, 2 * Math.PI)
-    ctx.fill()
+    if(painting === true){
+      drawLine(last[0], last[1], x, y)
+      last = [x, y]
+    }else{
+      console.log('Do noting in the phone')
+    }
+
+    canvas.ontouchend = (e) =>{
+      painting = false
+    }
   }
 } else {
+
+  // when press down
   canvas.onmousedown = (e) => {
     painting = true
     last = [e.clientX, e.clientY]
   }
+
+  // mouse move
   canvas.onmousemove = (e) => {
     if (painting === true) {
-      // ctx.beginPath();
-      // ctx.arc(e.clientX, e.clientY, 10, 0, 2 * Math.PI)
-      // ctx.fill()
       drawLine(last[0], last[1], e.clientX, e.clientY)
       last = [e.clientX, e.clientY]
     } else {
@@ -55,16 +74,17 @@ if (isTouchDevice) {
     }
   }
 
+  // when press up
   canvas.onmouseup = () => {
     painting = false
   }
 }
 
-function drawLine(x1,y1,x2,y2){
+function drawLine(x1, y1, x2, y2) {
   ctx.beginPath();     // Start a new path
-  ctx.moveTo(x1, y1);  // Move the pen to (30, 50)
-  ctx.lineTo(x2, y2);  // Draw a line to (150, 100)
-  ctx.stroke();
+  ctx.moveTo(x1, y1);  // Move the pen to (x1, y1)
+  ctx.lineTo(x2, y2);  // Draw a line to (x2, y2)
+  ctx.stroke(); // Render the path
 }
 
 
