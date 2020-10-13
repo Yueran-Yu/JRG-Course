@@ -22,7 +22,7 @@ canvas.height = document.documentElement.clientHeight
 var isTouchDevice = 'ontouchstart' in document.documentElement
 var ctx = canvas.getContext("2d")
 ctx.fillStyle = "blue"
-ctx.lineWidth = 40
+ctx.lineWidth = 10
 ctx.lineCap = "round"
 let painting = false
 let last
