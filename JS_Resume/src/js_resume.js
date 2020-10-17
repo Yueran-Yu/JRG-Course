@@ -35,10 +35,10 @@ width:100px;
 height:100px;
 top:0;
 left:50%;
-background: white;
+background: #fff;
 transform:translateX(-50%);
 border-radius:50%;
-background: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(0,0,9,1) 25%, rgba(255,255,255,1) 25%, rgba(255,255,255,1) 100%, rgba(255,255,255,0) 100%);
+background: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 25%, rgba(255,255,255,1) 25%, rgba(255,255,255,1) 100%, rgba(255,255,255,0) 100%);
 }
 
 #div1::after{
@@ -46,12 +46,11 @@ background: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(0,0,9,1) 25%, rgba(25
   height:100px;
   bottom:0;
   left:50%;
-  background: black;
+  background: #000;
   transform:translateX(-50%);
   border-radius:50%;
-  background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 25%, rgba(0,0,9,1) 25%, rgba(0,0,0,1) 100%, rgba(255,255,255,0) 100%);
+  background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 25%, rgba(0,0,0,1) 25%, rgba(0,0,0,1) 100%);
   }
-
 `
 let str2 = ''
 // console.log(`string length is:${str.length}`)
