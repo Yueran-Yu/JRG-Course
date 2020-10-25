@@ -50,5 +50,14 @@ addChild(node3, 13)
 
 removeNode(node2)
 
-console.log(tree)
+// console.log(tree)
 // traverseNode(tree, node => { console.log(node.data) })
+
+// const div1=  document.getElementById('test')
+// const div1=  document.getElementsByClassName('red')[0]
+// const div1=  window.test
+// const div1=  document.querySelector('#test')
+// const div1=  document.querySelector('test')
+// const div1=  document.querySelectorAll('#test')
+const div1=  document.querySelectorAll('#test')[0]
+console.log(div1)
