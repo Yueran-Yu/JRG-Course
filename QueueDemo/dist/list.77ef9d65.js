@@ -117,79 +117,73 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"../../../../../../.config/yarn/global/node_modules/parcel/src/builtins/bundle-url.js":[function(require,module,exports) {
-var bundleURL = null;
-
-function getBundleURLCached() {
-  if (!bundleURL) {
-    bundleURL = getBundleURL();
-  }
-
-  return bundleURL;
-}
-
-function getBundleURL() {
-  // Attempt to find the URL of the current script and use that as the base URL
-  try {
-    throw new Error();
-  } catch (err) {
-    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
-
-    if (matches) {
-      return getBaseURL(matches[0]);
-    }
-  }
-
-  return '/';
-}
-
-function getBaseURL(url) {
-  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
-}
-
-exports.getBundleURL = getBundleURLCached;
-exports.getBaseURL = getBaseURL;
-},{}],"../../../../../../.config/yarn/global/node_modules/parcel/src/builtins/css-loader.js":[function(require,module,exports) {
-var bundle = require('./bundle-url');
-
-function updateLink(link) {
-  var newLink = link.cloneNode();
-
-  newLink.onload = function () {
-    link.remove();
+})({"list.js":[function(require,module,exports) {
+var createNode = function createNode(value) {
+  return {
+    data: value,
+    next: null
   };
+};
 
-  newLink.href = link.href.split('?')[0] + '?' + Date.now();
-  link.parentNode.insertBefore(newLink, link.nextSibling);
-}
+var createList = function createList(value) {
+  return createNode(value);
+};
 
-var cssTimeout = null;
+var appendList = function appendList(list, value) {
+  var node = createNode(value);
+  var x = list;
 
-function reloadCSS() {
-  if (cssTimeout) {
-    return;
+  while (x.next) {
+    x = x.next;
   }
 
-  cssTimeout = setTimeout(function () {
-    var links = document.querySelectorAll('link[rel="stylesheet"]');
+  x.next = node;
+  return node;
+};
 
-    for (var i = 0; i < links.length; i++) {
-      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
-        updateLink(links[i]);
-      }
-    }
+var removeFromList = function removeFromList(list, node) {
+  debugger;
+  var x = list;
+  var p = node;
 
-    cssTimeout = null;
-  }, 50);
-}
+  while (x !== node && x !== null) {
+    p = x;
+    x = x.next;
+  }
 
-module.exports = reloadCSS;
-},{"./bundle-url":"../../../../../../.config/yarn/global/node_modules/parcel/src/builtins/bundle-url.js"}],"style.css":[function(require,module,exports) {
-var reloadCSS = require('_css_loader');
+  if (x === null) {
+    return false;
+  } else if (x === p) {
+    p = x.next;
+    return p;
+  } else {
+    p.next = x.next;
+    return list;
+  }
+};
 
-module.hot.dispose(reloadCSS);
-module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../../../.config/yarn/global/node_modules/parcel/src/builtins/css-loader.js"}],"../../../../../../.config/yarn/global/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+var traverseList = function traverseList(list, fn) {
+  var x = list;
+
+  while (x !== null) {
+    fn(x);
+    x = x.next;
+  }
+};
+
+var list = createList(10);
+var node = list;
+var node2 = appendList(list, 20);
+var node3 = appendList(list, 30);
+var node4 = appendList(list, 40);
+var node5 = appendList(list, 50); // console.log(node2)
+// removeFromList(list, node2)
+
+removeFromList(list, node);
+traverseList(list, function (node) {
+  console.log(node.data);
+}); // console.log(list)
+},{}],"../../../../../../.config/yarn/global/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -393,5 +387,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../../../../.config/yarn/global/node_modules/parcel/src/builtins/hmr-runtime.js"], null)
-//# sourceMappingURL=/style.e308ff8e.js.map
+},{}]},{},["../../../../../../.config/yarn/global/node_modules/parcel/src/builtins/hmr-runtime.js","list.js"], null)
+//# sourceMappingURL=/list.77ef9d65.js.map

@@ -118,14 +118,34 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"script.js":[function(require,module,exports) {
+// The most important functions are queue.push()   queue.shift()
 var divScreen = document.querySelector('#screen');
 var btnCreateNumber = document.querySelector('.createNumber');
 var btnCallNumber = document.querySelector('.callNumber');
 var showNewNumber = document.querySelector('#newNumber');
-var queue = document.querySelector('#queue');
+var showQueue = document.querySelector('#queue');
 var n = 0;
+var queue = [];
 
-btnCreateNumber.onclick = function () {};
+btnCreateNumber.onclick = function () {
+  n += 1; // queue.push(n)
+
+  queue.push.call(queue, n);
+  showNewNumber.innerText = n; // showQueue.innerText = queue.toString()
+
+  showQueue.innerText = JSON.stringify(queue);
+};
+
+btnCallNumber.onclick = function () {
+  if (queue.length === 0) {
+    divScreen.innerText = "No New Numbers to Call.";
+  } else {
+    // const outN  = queue.shift()
+    queue.shift.call(queue);
+    divScreen.innerText = "".concat(outN, "  is ready for Dinner.");
+    showQueue.innerText = JSON.stringify(queue);
+  }
+};
 },{}],"../../../../../../.config/yarn/global/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -154,7 +174,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51893" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49705" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
