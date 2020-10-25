@@ -121,7 +121,8 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 var createTree = function createTree(value) {
   return {
     data: value,
-    children: null
+    children: null,
+    parent: null
   };
 };
 
@@ -129,7 +130,7 @@ var addChild = function addChild(node, value) {
   var newNode = {
     data: value,
     children: null,
-    parent: null
+    parent: node
   };
   node.children = node.children || [];
   node.children.push(newNode);
@@ -148,19 +149,31 @@ var traverseNode = function traverseNode(tree, fn) {
   }
 };
 
-var removeNode = function removeNode(tree, node) {};
+var removeNode = function removeNode(node) {
+  var siblings = node.parent.children;
+  var index = 0;
+
+  for (var i = 0; i < siblings.length; i++) {
+    if (siblings[i] == node) {
+      index = i;
+    }
+  }
+
+  siblings.splice(index, 1);
+};
 
 var tree = createTree(10);
 var node1 = addChild(tree, 20);
-addChild(tree, 30);
-addChild(tree, 40);
+var node2 = addChild(tree, 30);
+var node3 = addChild(tree, 40);
 addChild(node1, 12);
 addChild(node1, 13);
 addChild(node1, 14);
-console.log(tree);
-traverseNode(tree, function (node) {
-  console.log(node.data);
-});
+addChild(node2, 12);
+addChild(node2, 14);
+addChild(node3, 13);
+removeNode(node2);
+console.log(tree); // traverseNode(tree, node => { console.log(node.data) })
 },{}],"../../../../../../.config/yarn/global/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
