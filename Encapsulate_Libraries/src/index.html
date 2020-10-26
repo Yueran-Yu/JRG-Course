@@ -4,17 +4,38 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DOM 1</title>
+  <style>
+    .red{
+      background: red;
+    }
+  </style>
 </head>
 <body>
   <div>
     <div id="test">test after</div></div>
 
-    <div id="empty">outside
+    <div id="empty"> empty outside
       <div id="e1">1</div>
       <div id="e2">2</div>
       <div id="e3">3</div>
     </div>
 
+    <div id="siblings"> siblings outside
+      <div id="s1">1</div>
+      <div id="s2">2</div>
+      <div id="s3">3</div>
+    </div>
+
+    <div id="traverse"> traverse outside
+      <div id="t1">t1</div>
+      <div id="t2">t2</div>
+      <div id="t3">t3</div>
+    </div>
+
+
+    <div id="test2">test after
+      <div class="red">paragraph inside the test</div>
+    </div></div>
 
   <script src="./dom.js"></script>
   <script src="./main.js"></script>

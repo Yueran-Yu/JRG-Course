@@ -117,47 +117,74 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"main.js":[function(require,module,exports) {
-var div = dom.create('<div>newDiv</div>');
-console.log(div);
-dom.after(test, div);
-var div3 = dom.create('<div id="parent">new parent</div>');
-dom.wrap(test, div3);
-var nodes = dom.empty(window.empty);
-console.log(nodes);
-dom.attr(test, 'title', 'Hi, I am Grace');
-var attr1 = dom.attr(test, 'title');
-dom.text(test, "This is a brand new content.");
-dom.style(test, {
-  border: '4px solid red',
-  color: 'green'
-});
-console.log(dom.style(test, 'border'));
-dom.style(test, 'border', '5px dashed blue');
-dom.class.add(test, 'red');
-dom.class.remove(test, 'red');
-console.log(dom.class.has(test, 'red'));
+})({"../../../../../../.config/yarn/global/node_modules/parcel/src/builtins/bundle-url.js":[function(require,module,exports) {
+var bundleURL = null;
 
-var fn = function fn() {
-  console.log("this is the onclick event.");
-};
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
+  }
 
-dom.on(test, 'click', fn);
-dom.off(test, 'click', fn);
-var testDiv = dom.find('#test2')[0];
-console.log(testDiv);
-console.log(dom.find('.red', testDiv)[0]);
-console.log(dom.parent(test));
-var s2 = dom.find('#s2')[0];
-console.log(dom.siblings(s2));
-console.log(dom.next(s2));
-console.log(dom.previous(s2));
-var t = dom.find('#traverse')[0];
-dom.each(dom.children(t), function (n) {
-  return dom.style(n, 'color', 'red');
-});
-console.log(dom.index(s2));
-},{}],"../../../../../../.config/yarn/global/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+  return bundleURL;
+}
+
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
+  try {
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
+
+    if (matches) {
+      return getBaseURL(matches[0]);
+    }
+  }
+
+  return '/';
+}
+
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
+}
+
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],"../../../../../../.config/yarn/global/node_modules/parcel/src/builtins/css-loader.js":[function(require,module,exports) {
+var bundle = require('./bundle-url');
+
+function updateLink(link) {
+  var newLink = link.cloneNode();
+
+  newLink.onload = function () {
+    link.remove();
+  };
+
+  newLink.href = link.href.split('?')[0] + '?' + Date.now();
+  link.parentNode.insertBefore(newLink, link.nextSibling);
+}
+
+var cssTimeout = null;
+
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
+  }
+
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+
+    for (var i = 0; i < links.length; i++) {
+      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
+        updateLink(links[i]);
+      }
+    }
+
+    cssTimeout = null;
+  }, 50);
+}
+
+module.exports = reloadCSS;
+},{"./bundle-url":"../../../../../../.config/yarn/global/node_modules/parcel/src/builtins/bundle-url.js"}],"../../../../../../.config/yarn/global/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -361,5 +388,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../../../../.config/yarn/global/node_modules/parcel/src/builtins/hmr-runtime.js","main.js"], null)
-//# sourceMappingURL=/main.1f19ae8e.js.map
+},{}]},{},["../../../../../../.config/yarn/global/node_modules/parcel/src/builtins/hmr-runtime.js"], null)
+//# sourceMappingURL=/index.js.map

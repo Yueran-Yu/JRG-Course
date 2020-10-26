@@ -154,6 +154,122 @@ window.dom = {
     }
 
     return array;
+  },
+  //read and write attributes
+  attr: function attr(node, name, value) {
+    // overload
+    if (arguments.length === 3) {
+      node.setAttribute(name, value);
+    } else if (arguments.length === 2) {
+      return node.getAttribute(name);
+    }
+  },
+  text: function text(node, content) {
+    //adapt
+    if (arguments.length === 2) {
+      if ('innerText' in node) {
+        node.innerText = content;
+      } else {
+        node.textContent = content;
+      }
+    } else if (arguments.length === 1) {
+      if ('innerText' in node) {
+        return node.innerText;
+      } else {
+        return node.textContent;
+      }
+    }
+  },
+  html: function html(node, content) {
+    if (arguments.length === 2) {
+      node.innerHTML = content;
+    } else if (arguments.length === 1) {
+      return node.innerHTML;
+    }
+  },
+  style: function style(node, name, value) {
+    if (arguments.length === 3) {
+      // dom.style(div, 'color', 'red')
+      node.style[name] = value;
+    } else if (arguments.length === 2) {
+      if (typeof name === 'string') {
+        // dom.style(div, 'color')
+        return node.style[name];
+      } else if (name instanceof Object) {
+        // dom.style(test, {border: '4px solid red', color:'green'})
+        var object = name;
+
+        for (var key in object) {
+          node.style[key] = object[key];
+        }
+      }
+    }
+  },
+  class: {
+    add: function add(node, className) {
+      node.classList.add(className);
+    },
+    remove: function remove(node, className) {
+      node.classList.remove(className);
+    },
+    has: function has(node, className) {
+      return node.classList.contains(className);
+    }
+  },
+  on: function on(node, eventName, fn) {
+    node.addEventListener(eventName, fn);
+  },
+  off: function off(node, eventName, fn) {
+    node.removeEventListener(eventName, fn);
+  },
+  find: function find(selector, scope) {
+    return (scope || document).querySelectorAll(selector);
+  },
+  parent: function parent(node) {
+    return node.parentNode;
+  },
+  children: function children(node) {
+    return node.children;
+  },
+  siblings: function siblings(node) {
+    return Array.from(node.parentNode.children).filter(function (n) {
+      return n !== node;
+    });
+  },
+  next: function next(node) {
+    var x = node.nextSibling;
+
+    while (x && x.nodeType === 3) {
+      x = x.nextSibling;
+    }
+
+    return x;
+  },
+  previous: function previous(node) {
+    var x = node.previousSibling;
+
+    while (x && x.nodeType === 3) {
+      x = x.previousSibling;
+    }
+
+    return x;
+  },
+  each: function each(nodes, fn) {
+    for (var i = 0; i < nodes.length; i++) {
+      fn.call(null, nodes[i]);
+    }
+  },
+  index: function index(node) {
+    var list = dom.children(node.parentNode);
+    var i;
+
+    for (i = 0; i < list.length; i++) {
+      if (list[i] === node) {
+        break;
+      }
+    }
+
+    return i;
   }
 };
 },{}],"../../../../../../.config/yarn/global/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
