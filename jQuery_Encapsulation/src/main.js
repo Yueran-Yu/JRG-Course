@@ -27,3 +27,8 @@ const y = jQuery('.test').parent().print()
 
 
 // x.each((element, i) => {console.log(element)})
+
+const $div = $('<div>1</div>')
+console.log($div)
+
+// $div.appendTo(document.body)
