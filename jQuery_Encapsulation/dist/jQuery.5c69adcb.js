@@ -130,8 +130,6 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-// 1 core skill: closure
-// 2 core skill: 链式操作
 window.jQuery = function (selectorOrArray) {
   var elements;
 
@@ -139,22 +137,11 @@ window.jQuery = function (selectorOrArray) {
     elements = document.querySelectorAll(selectorOrArray);
   } else if (selectorOrArray instanceof Array) {
     elements = selectorOrArray;
-  } // api can manipulate elements
-  // v 1.0
-  // const api = {
-  //   addClass(className) {
-  //     for (let i = 0; i < elements.length; i++) {
-  //       elements[i].classList.add(className)
-  //     }
-  //     return this
-  //   }
-  // }
-  // return api
-  // v  2.0
-
+  }
 
   return {
-    addClass: function addClass(className) {
+    oldApi: selectorOrArray.oldApi,
+    "addClass": function addClass(className) {
       for (var i = 0; i < elements.length; i++) {
         elements[i].classList.add(className);
       }
@@ -162,20 +149,21 @@ window.jQuery = function (selectorOrArray) {
       return this;
     },
     find: function find(selector) {
-      var array = [];
+      var arr = [];
+      console.log(elements);
 
       for (var i = 0; i < elements.length; i++) {
-        var elements2 = Array.from(elements[i].querySelectorAll(selector));
-        array = array.concat(elements2);
+        var subElements = Array.from(elements[i].querySelectorAll(selector));
+        arr = arr.concat(subElements);
       }
 
-      array.oldApi = this; // 'this' equals api2=>find(selector)
-
-      return jQuery(array);
+      console.log(arr);
+      arr.oldApi = this;
+      console.log("==== \u8FD9\u91CC\u7684this\u8FD4\u56DE\u7684\u662F \u539F\u6765\u7684 api \u6574\u4E2A\u5BF9\u8C61.\n                   \u4E3A\u5565\u662F\u539F\u6765\u7684\u5462\uFF1F\u56E0\u4E3A\u64CD\u4F5C\u5230\u6B64\uFF0C\u6211\u4EEC\u5E76\u6CA1\u6709 \u8FD4\u56DE \u65B0\u7684 api \u7684\u7ED3\u679C\uFF0C\n                   \u65B0\u7684 api \u7684\u7ED3\u679C \u770B\u4E0B\u9762 \u90A3\u4E2A return jQuery(arr),\n                   return \u5B8C\u4E86 \u8DF3\u51FA\u5FAA\u73AF\u4E4B\u540E\uFF0C\u8FD9\u4E2A api \u7684 \u7ED3\u679C \u624D\u662F \u6700\u65B0\u7684\uFF0C\n                   \u5728\u522B\u7684\u5730\u65B9 \u518D \u5F15\u7528 this \u7684\u65F6\u5019 api \u624D\u662F \u6700\u65B0\u64CD\u4F5C\u5B8C\u7684\u503C");
+      return jQuery(arr);
     },
-    oldApi: selectorOrArray.oldApi,
     end: function end() {
-      return this.oldApi; //this is  api
+      return this.oldApi;
     },
     each: function each(fn) {
       for (var i = 0; i < elements.length; i++) {
@@ -193,32 +181,42 @@ window.jQuery = function (selectorOrArray) {
       });
       return jQuery(arr);
     },
-    print: function print() {
-      console.log(elements);
-    },
     children: function children() {
       var arr = [];
       this.each(function (node) {
-        var _array;
-
-        return (_array = array).push.apply(_array, _toConsumableArray(node.children));
-      }); // equals array.push(node.children[0], node.children[1], node.children[2], node.children[3])
-
+        // think of it a replacement for Array.prototype.concat
+        // const numbers1 = [1, 2, 3, 4, 5];
+        // const numbers2 = [ ...numbers1, 1, 2, 6,7,8];
+        // this will be [1, 2, 3, 4, 5, 1, 2, 6, 7, 8]
+        // a parent node may has many children, so the children will be stored as an array
+        arr.push.apply(arr, _toConsumableArray(node.children));
+      });
       return jQuery(arr);
     },
-    appendTo: function appendTo(node) {
-      if (node instanceof Element) {
-        this.each(function (el) {
-          return node.appendChild(el);
-        }); //遍历elements, 对每个el进行node.appendChild 操作
-      } else if (node.jQuery === true) {
-        this.each(function (el) {
-          return node.get(0).appendChild(el);
-        }); //遍历elements, 对每个 el进行 node.get(0).appendChild(el)操作
-      }
+    print: function print() {
+      console.log(elements);
     }
   };
-};
+}; // function hello() {
+//   return {
+//     "b": 890,
+//     "c": function () {
+//       return this
+//     },
+//     d(hello) {
+//       console.log(hello)
+//       return this
+//     }
+//   }
+// }
+// console.log(hello())
+// obj.fn(p1)
+// obj.fn.call(obj,p1)
+//  equal to
+// const obj = hello()
+// const p1 = 'fly high~!!!!!'
+// console.log(obj.d(p1))
+// console.log(obj.d.call(obj, p1))
 },{}],"../../../../../../.config/yarn/global/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -247,7 +245,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62958" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65080" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

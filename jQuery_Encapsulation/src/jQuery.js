@@ -1,62 +1,39 @@
-// 1 core skill: closure
-// 2 core skill: 链式操作
-
-window.$ = window.jQuery = function (selectorOrArrayOrTemplate) {
+window.jQuery = function (selectorOrArray) {
   let elements
-  if (typeof selectorOrArrayOrTemplate === 'string') {
-    if(selectorOrArrayOrTemplate[0] === '<'){
-      // create div
-      elements=[createElement(selectorOrArrayOrTemplate)]
-    }else{
-      elements = document.querySelectorAll(selectorOrArrayOrTemplate)
-    }
-  } else if (selectorOrArrayOrTemplate instanceof Array) {
-    elements = selectorOrArrayOrTemplate
+  if (typeof selectorOrArray === 'string') {
+    elements = document.querySelectorAll(selectorOrArray)
+  } else if (selectorOrArray instanceof Array) {
+    elements = selectorOrArray
   }
 
-  function createElement(string){
-    const container = document.createElement("template")
-    container.innerHTML = string.trim()
-    return container.content.firstChild
-  }
-  // api can manipulate elements
-  // v 1.0
-  // const api = {
-  //   addClass(className) {
-  //     for (let i = 0; i < elements.length; i++) {
-  //       elements[i].classList.add(className)
-  //     }
-  //     return this
-  //   }
-  // }
-  // return api
-
-
-  // v  2.0
   return {
-    jquery:true,
-    elements: elements,
-    get(index){
-      return elements[index]
-    },
-    addClass(className) {
+    oldApi: selectorOrArray.oldApi,
+
+    "addClass": function (className) {
       for (let i = 0; i < elements.length; i++) {
         elements[i].classList.add(className)
       }
       return this
     },
     find(selector) {
-      let array = []
+      let arr = []
+      console.log(elements)
       for (let i = 0; i < elements.length; i++) {
-        const elements2 = Array.from(elements[i].querySelectorAll(selector))
-        array = array.concat(elements2)
+        const subElements = Array.from(elements[i].querySelectorAll(selector))
+        arr = arr.concat(subElements)
       }
-      array.oldApi = this // 'this' equals api2=>find(selector)
-      return jQuery(array)
+      console.log(arr)
+      arr.oldApi = this
+
+      console.log(`==== 这里的this返回的是 原来的 api 整个对象.
+                   为啥是原来的呢？因为操作到此，我们并没有 返回 新的 api 的结果，
+                   新的 api 的结果 看下面 那个 return jQuery(arr),
+                   return 完了 跳出循环之后，这个 api 的 结果 才是 最新的，
+                   在别的地方 再 引用 this 的时候 api 才是 最新操作完的值`)
+      return jQuery(arr)
     },
-    oldApi: selectorOrArray.oldApi,
     end() {
-      return this.oldApi //this is  api
+      return this.oldApi
     },
     each(fn) {
       for (let i = 0; i < elements.length; i++) {
@@ -66,40 +43,51 @@ window.$ = window.jQuery = function (selectorOrArrayOrTemplate) {
     },
     parent() {
       const arr = []
-      this.each((node) => {
+      this.each(node => {
         if (arr.indexOf(node.parentNode) === -1) {
           arr.push(node.parentNode)
         }
       })
       return jQuery(arr)
     },
-    print() {
-      console.log(elements)
-    },
-    children(){
+    children() {
       const arr = []
-      this.each((node)=> array.push(...node.children))
-      // equals array.push(node.children[0], node.children[1], node.children[2], node.children[3])
-
+      this.each(node => {
+        // think of it a replacement for Array.prototype.concat
+        // const numbers1 = [1, 2, 3, 4, 5];
+        // const numbers2 = [ ...numbers1, 1, 2, 6,7,8];
+        // this will be [1, 2, 3, 4, 5, 1, 2, 6, 7, 8]
+        // a parent node may has many children, so the children will be stored as an array
+        arr.push(...node.children)
+      })
       return jQuery(arr)
     },
-    appendTo(node){
-      if(node instanceof Element){
-        this.each((el => node.appendChild(el))) //遍历elements, 对每个el进行node.appendChild 操作
-      }else if(node.jQuery === true){
-        this.each(el=> node.get(0).appendChild(el)) //遍历elements, 对每个 el进行 node.get(0).appendChild(el)操作
-      }
-    },
-    append(children){
-      if(children instanceof Element){
-        this.get(0).appendChild(children)
-      }else if(children instanceof HTMLAllCollection){
-        for(let i =0; i < children.length; i++){
-          this.get(0).appendChild(children[i])
-        }
-      }else if(children.jquery === true){
-        children.each(node => this.get(0).appendChild(node))
-      }
+    print() {
+      console.log(elements)
     }
   }
 }
+
+// function hello() {
+//   return {
+//     "b": 890,
+//     "c": function () {
+//       return this
+//     },
+//     d(hello) {
+//       console.log(hello)
+//       return this
+//     }
+//   }
+// }
+
+
+// console.log(hello())
+// obj.fn(p1)
+// obj.fn.call(obj,p1)
+//  equal to
+// const obj = hello()
+// const p1 = 'fly high~!!!!!'
+// console.log(obj.d(p1))
+// console.log(obj.d.call(obj, p1))
+

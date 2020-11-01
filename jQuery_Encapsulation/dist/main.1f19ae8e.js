@@ -118,25 +118,16 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"main.js":[function(require,module,exports) {
-/* const api = jQuery('.test') // not return elements, return api object
- api.addClass('red')  // 'this'  equals api
- .addClass('blue')
- .addClass('green')  //traverse the elements and add 'red' class
-*/
-//  obj.fn(p1) // when in a function 'this' equals obj
-//  obj.fn.call(obj, p1)
-// const api1 = jQuery('.test')
-// const api2 = api1.find('.child').addClass('red')
-// api1.addClass('green')
-// jQuery('.test')
-// .find('.child')
-// .addClass('red')
-// .addClass('green')
-// .end()
-// .addClass('blue')
-// const x = jQuery('.test').find('.child')
-var y = jQuery('.test').parent().print(); // console.log(x)
-// x.each((element, i) => {console.log(element)})
+var x1 = jQuery('.test').addClass('red').find('.child');
+console.log('-------------------------------------');
+console.log(x1);
+var x2 = x1.addClass('blue');
+console.log('##############################');
+console.log(x2); // x1.each((div, i)=>console.log(div))
+
+x1.parent().print();
+jQuery('.test').parent().print();
+jQuery('.test').children().print();
 },{}],"../../../../../../.config/yarn/global/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -165,7 +156,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62958" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65080" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
