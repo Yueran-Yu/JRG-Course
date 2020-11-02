@@ -130,73 +130,122 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-window.jQuery = function (selectorOrArray) {
+window.$ = window.jQuery = function (selectorOrArrayOrTemplate) {
   var elements;
 
-  if (typeof selectorOrArray === 'string') {
-    elements = document.querySelectorAll(selectorOrArray);
-  } else if (selectorOrArray instanceof Array) {
-    elements = selectorOrArray;
+  if (selectorOrArrayOrTemplate[0] === "<") {
+    elements = [createElement(selectorOrArrayOrTemplate)];
+  } else if (typeof selectorOrArrayOrTemplate === 'string') {
+    elements = document.querySelectorAll(selectorOrArrayOrTemplate);
+  } else if (selectorOrArrayOrTemplate instanceof Array) {
+    elements = selectorOrArrayOrTemplate;
   }
 
-  return {
-    oldApi: selectorOrArray.oldApi,
-    "addClass": function addClass(className) {
-      for (var i = 0; i < elements.length; i++) {
-        elements[i].classList.add(className);
-      }
+  function createElement(string) {
+    var container = document.createElement('template');
+    container.innerHTML = string.trim();
+    return container.content.firstChild;
+  } // api 可以操作elements
 
-      return this;
-    },
-    find: function find(selector) {
-      var arr = [];
-      console.log(elements);
 
-      for (var i = 0; i < elements.length; i++) {
-        var subElements = Array.from(elements[i].querySelectorAll(selector));
-        arr = arr.concat(subElements);
-      }
+  var api = Object.create(jQuery.prototype); // 创建一个 object, 这个 object的  __proto__ 为括号里的东西， const api = {__proto__: jQuery.prototype}
 
-      console.log(arr);
-      arr.oldApi = this;
-      console.log("==== \u8FD9\u91CC\u7684this\u8FD4\u56DE\u7684\u662F \u539F\u6765\u7684 api \u6574\u4E2A\u5BF9\u8C61.\n                   \u4E3A\u5565\u662F\u539F\u6765\u7684\u5462\uFF1F\u56E0\u4E3A\u64CD\u4F5C\u5230\u6B64\uFF0C\u6211\u4EEC\u5E76\u6CA1\u6709 \u8FD4\u56DE \u65B0\u7684 api \u7684\u7ED3\u679C\uFF0C\n                   \u65B0\u7684 api \u7684\u7ED3\u679C \u770B\u4E0B\u9762 \u90A3\u4E2A return jQuery(arr),\n                   return \u5B8C\u4E86 \u8DF3\u51FA\u5FAA\u73AF\u4E4B\u540E\uFF0C\u8FD9\u4E2A api \u7684 \u7ED3\u679C \u624D\u662F \u6700\u65B0\u7684\uFF0C\n                   \u5728\u522B\u7684\u5730\u65B9 \u518D \u5F15\u7528 this \u7684\u65F6\u5019 api \u624D\u662F \u6700\u65B0\u64CD\u4F5C\u5B8C\u7684\u503C");
-      return jQuery(arr);
-    },
-    end: function end() {
-      return this.oldApi;
-    },
-    each: function each(fn) {
-      for (var i = 0; i < elements.length; i++) {
-        fn.call(null, elements[i], i);
-      }
+  Object.assign(api, {
+    elements: elements,
+    oldApi: selectorOrArrayOrTemplate.oldApi
+  }); // api.elements = elements
+  // api.oldApi = selectorOrArrayOrTemplate.oldApi
 
-      return this;
-    },
-    parent: function parent() {
-      var arr = [];
-      this.each(function (node) {
-        if (arr.indexOf(node.parentNode) === -1) {
-          arr.push(node.parentNode);
-        }
-      });
-      return jQuery(arr);
-    },
-    children: function children() {
-      var arr = [];
-      this.each(function (node) {
-        // think of it a replacement for Array.prototype.concat
-        // const numbers1 = [1, 2, 3, 4, 5];
-        // const numbers2 = [ ...numbers1, 1, 2, 6,7,8];
-        // this will be [1, 2, 3, 4, 5, 1, 2, 6, 7, 8]
-        // a parent node may has many children, so the children will be stored as an array
-        arr.push.apply(arr, _toConsumableArray(node.children));
-      });
-      return jQuery(arr);
-    },
-    print: function print() {
-      console.log(elements);
+  return api;
+};
+
+jQuery.fn = jQuery.prototype = {
+  constructor: jQuery,
+  jquery: true,
+  "addClass": function addClass(className) {
+    for (var i = 0; i < this.elements.length; i++) {
+      this.elements[i].classList.add(className);
     }
-  };
+
+    return this;
+  },
+  get: function get(index) {
+    return this.elements[index];
+  },
+  appendTo: function appendTo(node) {
+    if (node instanceof Element) {
+      this.each(function (el) {
+        return node.appendChild(el);
+      });
+    } else if (node.jquery === true) {
+      this.each(function (el) {
+        return node.get(0).appendChild(el);
+      });
+    }
+  },
+  append: function append(children) {
+    var _this = this;
+
+    if (children instanceof Element) {
+      this.get(0).appendChild(children);
+    } else if (children instanceof HTMLCollection) {
+      for (var i = 0; i < children.length; i++) {
+        this.get(0).appendChild(children[i]);
+      }
+    } else if (children.jquery === true) {
+      children.each(function (node) {
+        return _this.get(0).appendChild(node);
+      });
+    }
+  },
+  find: function find(selector) {
+    var arr = [];
+    console.log(this.elements);
+
+    for (var i = 0; i < this.elements.length; i++) {
+      var subElements = Array.from(this.elements[i].querySelectorAll(selector));
+      arr = arr.concat(subElements);
+    }
+
+    console.log(arr);
+    arr.oldApi = this;
+    console.log("==== \u8FD9\u91CC\u7684this\u8FD4\u56DE\u7684\u662F \u539F\u6765\u7684 api \u6574\u4E2A\u5BF9\u8C61.\n                 \u4E3A\u5565\u662F\u539F\u6765\u7684\u5462\uFF1F\u56E0\u4E3A\u64CD\u4F5C\u5230\u6B64\uFF0C\u6211\u4EEC\u5E76\u6CA1\u6709 \u8FD4\u56DE \u65B0\u7684 api \u7684\u7ED3\u679C\uFF0C\n                 \u65B0\u7684 api \u7684\u7ED3\u679C \u770B\u4E0B\u9762 \u90A3\u4E2A return jQuery(arr),\n                 return \u5B8C\u4E86 \u8DF3\u51FA\u5FAA\u73AF\u4E4B\u540E\uFF0C\u8FD9\u4E2A api \u7684 \u7ED3\u679C \u624D\u662F \u6700\u65B0\u7684\uFF0C\n                 \u5728\u522B\u7684\u5730\u65B9 \u518D \u5F15\u7528 this \u7684\u65F6\u5019 api \u624D\u662F \u6700\u65B0\u64CD\u4F5C\u5B8C\u7684\u503C");
+    return jQuery(arr);
+  },
+  end: function end() {
+    return this.oldApi;
+  },
+  parent: function parent() {
+    var arr = [];
+    this.each(function (node) {
+      if (arr.indexOf(node.parentNode) === -1) {
+        arr.push(node.parentNode);
+      }
+    });
+    return jQuery(arr);
+  },
+  children: function children() {
+    var arr = [];
+    this.each(function (node) {
+      // think of it a replacement for Array.prototype.concat
+      // const numbers1 = [1, 2, 3, 4, 5];
+      // const numbers2 = [ ...numbers1, 1, 2, 6,7,8];
+      // this will be [1, 2, 3, 4, 5, 1, 2, 6, 7, 8]
+      // a parent node may has many children, so the children will be stored as an array
+      arr.push.apply(arr, _toConsumableArray(node.children));
+    });
+    return jQuery(arr);
+  },
+  print: function print() {
+    console.log(this.elements);
+  },
+  each: function each(fn) {
+    for (var i = 0; i < this.elements.length; i++) {
+      fn.call(null, this.elements[i], i);
+    }
+
+    return this;
+  }
 }; // function hello() {
 //   return {
 //     "b": 890,
@@ -245,7 +294,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65080" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61731" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
