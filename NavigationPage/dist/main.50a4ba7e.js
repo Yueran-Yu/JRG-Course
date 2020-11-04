@@ -123,10 +123,10 @@ var $lastLi = $siteList.find('li.lastLi');
 var x = localStorage.getItem('x');
 var xObject = JSON.parse(x);
 var hashMap = xObject || [{
-  logo: 'A',
+  logo: 'B',
   url: 'https://www.bilibili.com'
 }, {
-  logo: 'B',
+  logo: 'A',
   url: 'https://www.acfun.cn'
 }];
 
@@ -192,4 +192,4 @@ $(document).on('keypress', function (e) {
   }
 });
 },{}]},{},["epB2"], null)
-//# sourceMappingURL=https://yueran-yu.github.io/JRG-Course/NavigationPage/dist/main.c2c1210f.js.map
+//# sourceMappingURL=/main.50a4ba7e.js.map
