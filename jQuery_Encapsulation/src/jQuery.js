@@ -22,12 +22,12 @@ window.$ = window.jQuery = function (selectorOrArrayOrTemplate) {
     elements: elements,
     oldApi: selectorOrArrayOrTemplate.oldApi
   })
-
   // api.elements = elements
   // api.oldApi = selectorOrArrayOrTemplate.oldApi
   return api
 }
 
+//一下所有的 this都指的是 api
 jQuery.fn = jQuery.prototype = {
   constructor: jQuery,
   jquery: true,
