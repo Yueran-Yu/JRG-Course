@@ -176,7 +176,21 @@ window.onbeforeunload = function () {
   console.log('Page will close.');
   var string = JSON.stringify(hashMap);
   localStorage.setItem('x', string);
-};
+}; // document.addEventListener()
+
+
+$(document).on('keypress', function (e) {
+  // console.log(e.key)
+  // const key = e.key
+  // advanced assign value
+  var key = e.key;
+
+  for (var i = 0; i < hashMap.length; i++) {
+    if (key === hashMap[i].logo.toLowerCase()) {
+      window.open(hashMap[i].url);
+    }
+  }
+});
 },{}],"../../../../../../.config/yarn/global/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';

@@ -73,3 +73,17 @@ window.onbeforeunload = () => {
   const string = JSON.stringify(hashMap)
   localStorage.setItem('x',string)
 }
+
+// document.addEventListener()
+$(document).on('keypress', (e)=>{
+  // console.log(e.key)
+
+  // const key = e.key
+  // advanced assign value
+  const {key} = e
+  for(let i = 0; i < hashMap.length; i++){
+    if(key === hashMap[i].logo.toLowerCase()){
+      window.open(hashMap[i].url)
+    }
+  }
+})
