@@ -5,11 +5,11 @@ const xObject = JSON.parse(x)
 
 const hashMap = xObject || [
   {
-    logo: 'A',
+    logo: 'B',
     url: 'https://www.bilibili.com'
   },
   {
-    logo: 'B',
+    logo: 'A',
     url: 'https://www.acfun.cn'
   }
 ]
