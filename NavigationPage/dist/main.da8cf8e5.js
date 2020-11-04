@@ -124,10 +124,10 @@ var x = localStorage.getItem('x');
 var xObject = JSON.parse(x);
 var hashMap = xObject || [{
   logo: 'B',
-  url: 'https://www.bilibili.com'
+  url: 'https://www.baidu.com'
 }, {
-  logo: 'A',
-  url: 'https://www.acfun.cn'
+  logo: 'G',
+  url: 'https://www.google.cn'
 }];
 
 var removeStringPart = function removeStringPart(url) {
@@ -192,4 +192,4 @@ $(document).on('keypress', function (e) {
   }
 });
 },{}]},{},["epB2"], null)
-//# sourceMappingURL=main.50a4ba7e.js.map
+//# sourceMappingURL=main.da8cf8e5.js.map

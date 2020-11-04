@@ -6,11 +6,11 @@ const xObject = JSON.parse(x)
 const hashMap = xObject || [
   {
     logo: 'B',
-    url: 'https://www.bilibili.com'
+    url: 'https://www.baidu.com'
   },
   {
-    logo: 'A',
-    url: 'https://www.acfun.cn'
+    logo: 'G',
+    url: 'https://www.google.cn'
   }
 ]
 const removeStringPart = (url) => {
