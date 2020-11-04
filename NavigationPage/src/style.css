@@ -69,7 +69,7 @@ But when you give the background color to a body, the background color will spre
   margin: 20px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .siteList li {
@@ -86,7 +86,9 @@ But when you give the background color to a body, the background color will spre
   border: 1px solid #ddd;
   border-radius: 4px;
   padding: 20px 0;
+  position: relative;
 }
+
 
 .siteList .site > .logo {
   width: 64px;
@@ -133,4 +135,13 @@ But when you give the background color to a body, the background color will spre
   margin-top: 4px;
 }
 
-
+.siteList .site > .close {
+  position: absolute;
+  top:5px;
+  right:5px;
+  background-color: rgba(200, 209, 209, 0.212);
+  padding:3px;
+  font-size:0.6rem;
+  border-radius: 5px;
+  color: #535353;
+}

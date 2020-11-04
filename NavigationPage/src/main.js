@@ -6,56 +6,70 @@ const xObject = JSON.parse(x)
 const hashMap = xObject || [
   {
     logo: 'A',
-    logoType: 'Text',
-    url: 'https://www.bilibili.com/'
+    url: 'https://www.bilibili.com'
   },
   {
-    logo: './img/bilibili.png',
-    logoType: 'image',
-    url: 'https://www.acfun.cn/'
+    logo: 'B',
+    url: 'https://www.acfun.cn'
   }
 ]
+const removeStringPart = (url) => {
+  return url.replace('https://', '')
+    .replace('http://', '')
+    .replace('www.', '')
+    .replace(/\/.*/, '') // delete all content start with '/'
+}
 
 const render = () => {
   $siteList.find('li:not(.lastLi)').remove()
-  hashMap.forEach(li => {
+  hashMap.forEach((li,index) => {
+    console.log(index)
     const $li = $(`<li>
-                  <a href="${li.url}">
                    <div class="site">
-                   <div class="logo">${li.url[12].toUpperCase()}</div>
-                   <div class="link">${li.url}</div>
+                   <div class="logo">${li.logo}</div>
+                   <div class="link">${removeStringPart(li.url)}</div>
+                   <div class="close">Remove</div>
                    </div>
-                   </a>
                    </li>`).insertBefore($lastLi)
+      // this event is used to replace  <a></a> tag, a tag control area is too wide.
+     $li.on('click', (e)=> {
+     window.open(li.url)
+    })
+     $li.on('click', '.close', (e)=>{
+       e.stopPropagation()
+       console.log(e.target)
+       hashMap.splice(index, 1)
+       render()
+     })
   })
 }
-
+// need to prevent bubbling of the Remove Button
 
 $('.addButton')
   .on('click', () => {
     let url = window.prompt('Please enter the website you wan to add:')
     // if we can't find the address start with http then add
-    if (url.indexOf('http://wwww.') !== 0) {
+    if (url.indexOf('http://wwww.') === 0
+    || url.indexOf('https://wwww.') === 0
+    || url.indexOf('https://') === 0) {
+       url
+    } else {
       url = 'https://www.' + url
     }
 
+    console.log(url)
+    console.log(removeStringPart(url))
     hashMap.push({
-      logo: url[12].toUpperCase(),
-      logoType: 'text',
+      logo: removeStringPart(url)[0].toUpperCase(),
       url: url
     })
     render()
   })
 
-  render()
+render()
 
-  window.onbeforeunload = () => {
-    console.log('Page will close.')
-    const string = JSON.stringify(hashMap)
-    // console.log(typeof hashMap)
-    // console.log(hashMap)
-    // console.log(typeof string)
-    // console.log(string)
-
-    localStorage.setItem('x',string)
-  }
+window.onbeforeunload = () => {
+  console.log('Page will close.')
+  const string = JSON.stringify(hashMap)
+  localStorage.setItem('x',string)
+}

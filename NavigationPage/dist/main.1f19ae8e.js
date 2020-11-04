@@ -124,31 +124,48 @@ var x = localStorage.getItem('x');
 var xObject = JSON.parse(x);
 var hashMap = xObject || [{
   logo: 'A',
-  logoType: 'Text',
-  url: 'https://www.bilibili.com/'
+  url: 'https://www.bilibili.com'
 }, {
-  logo: './img/bilibili.png',
-  logoType: 'image',
-  url: 'https://www.acfun.cn/'
+  logo: 'B',
+  url: 'https://www.acfun.cn'
 }];
+
+var removeStringPart = function removeStringPart(url) {
+  return url.replace('https://', '').replace('http://', '').replace('www.', '').replace(/\/.*/, ''); // delete all content start with '/'
+};
 
 var render = function render() {
   $siteList.find('li:not(.lastLi)').remove();
-  hashMap.forEach(function (li) {
-    var $li = $("<li>\n                  <a href=\"".concat(li.url, "\">\n                   <div class=\"site\">\n                   <div class=\"logo\">").concat(li.url[12].toUpperCase(), "</div>\n                   <div class=\"link\">").concat(li.url, "</div>\n                   </div>\n                   </a>\n                   </li>")).insertBefore($lastLi);
+  hashMap.forEach(function (li, index) {
+    console.log(index);
+    var $li = $("<li>\n                   <div class=\"site\">\n                   <div class=\"logo\">".concat(li.logo, "</div>\n                   <div class=\"link\">").concat(removeStringPart(li.url), "</div>\n                   <div class=\"close\">Remove</div>\n                   </div>\n                   </li>")).insertBefore($lastLi); // this event is used to replace  <a></a> tag, a tag control area is too wide.
+
+    $li.on('click', function (e) {
+      window.open(li.url);
+    });
+    $li.on('click', '.close', function (e) {
+      e.stopPropagation();
+      console.log(e.target);
+      hashMap.splice(index, 1);
+      render();
+    });
   });
-};
+}; // need to prevent bubbling of the Remove Button
+
 
 $('.addButton').on('click', function () {
   var url = window.prompt('Please enter the website you wan to add:'); // if we can't find the address start with http then add
 
-  if (url.indexOf('http://wwww.') !== 0) {
+  if (url.indexOf('http://wwww.') === 0 || url.indexOf('https://wwww.') === 0 || url.indexOf('https://') === 0) {
+    url;
+  } else {
     url = 'https://www.' + url;
   }
 
+  console.log(url);
+  console.log(removeStringPart(url));
   hashMap.push({
-    logo: url[12].toUpperCase(),
-    logoType: 'text',
+    logo: removeStringPart(url)[0].toUpperCase(),
     url: url
   });
   render();
@@ -157,11 +174,7 @@ render();
 
 window.onbeforeunload = function () {
   console.log('Page will close.');
-  var string = JSON.stringify(hashMap); // console.log(typeof hashMap)
-  // console.log(hashMap)
-  // console.log(typeof string)
-  // console.log(string)
-
+  var string = JSON.stringify(hashMap);
   localStorage.setItem('x', string);
 };
 },{}],"../../../../../../.config/yarn/global/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
@@ -192,7 +205,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50226" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65335" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
