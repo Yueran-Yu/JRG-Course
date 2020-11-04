@@ -127,7 +127,7 @@ var hashMap = xObject || [{
   url: 'https://www.baidu.com'
 }, {
   logo: 'G',
-  url: 'https://www.google.cn'
+  url: 'https://www.google.ca'
 }];
 
 var removeStringPart = function removeStringPart(url) {
@@ -192,4 +192,4 @@ $(document).on('keypress', function (e) {
   }
 });
 },{}]},{},["epB2"], null)
-//# sourceMappingURL=main.da8cf8e5.js.map
+//# sourceMappingURL=main.29d65de5.js.map

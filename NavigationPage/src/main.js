@@ -10,7 +10,7 @@ const hashMap = xObject || [
   },
   {
     logo: 'G',
-    url: 'https://www.google.cn'
+    url: 'https://www.google.ca'
   }
 ]
 const removeStringPart = (url) => {
