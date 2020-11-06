@@ -23,7 +23,13 @@ var server = http.createServer(function (request, response) {
   if (path === '/index.html') {
     response.statusCode = 200
     response.setHeader('Content-Type', 'text/html;charset=utf-8')
-    response.write(fs.readFileSync('public/index.html'))
+    let string = fs.readFileSync('public/index.html').toString()
+    console.log(string)
+    const page1 = fs.readFileSync('db/page1.json').toString()
+    const array = JSON.parse(page1)
+    const newPage = array.map(item => `<li>${item.id}</li>`).join('')
+    string = string.replace('{{replaceContent}}', `<ul id="listContainer">${newPage}</ul>`)
+    response.write(string)
     response.end()
   } else if (path === '/main.js') {
     response.statusCode = 200
@@ -45,7 +51,32 @@ var server = http.createServer(function (request, response) {
     response.setHeader('Content-Type', 'text/html;charset=utf-8')
     response.write(fs.readFileSync('public/h.html'))
     response.end()
-  } else {
+  } else if (path === '/x.xml') {
+    response.statusCode = 200
+    response.setHeader('Content-Type', 'text/xml;charset=utf-8')
+    response.write(fs.readFileSync('public/x.xml'))
+    response.end()
+  } else if (path === '/j.json') {
+    response.statusCode = 200
+    response.setHeader('Content-Type', 'text/json;charset=utf-8')
+    response.write(fs.readFileSync('public/j.json'))
+    response.end()
+  } else if (path === '/page1') {
+    response.statusCode = 200
+    response.setHeader('Content-Type', 'text/json;charset=utf-8')
+    response.write(fs.readFileSync('db/page1.json'))
+    response.end()
+  }else if (path === '/page2') {
+    response.statusCode = 200
+    response.setHeader('Content-Type', 'text/json;charset=utf-8')
+    response.write(fs.readFileSync('db/page2.json'))
+    response.end()
+  }else if (path === '/page3') {
+    response.statusCode = 200
+    response.setHeader('Content-Type', 'text/json;charset=utf-8')
+    response.write(fs.readFileSync('db/page3.json'))
+    response.end()
+  }else {
     response.statusCode = 404
     response.setHeader('Content-Type', 'text/html;charset=utf-8')
     response.write(`The path you entered is not exist. 你输入的路径不存在对应的内容`)
