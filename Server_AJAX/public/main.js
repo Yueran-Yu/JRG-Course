@@ -96,6 +96,8 @@ getNextPage.onclick = ()=>{
       }
     }
   }
-  n++
+  if( n <=3){
+    n++
+  }
   request.send()
 }
