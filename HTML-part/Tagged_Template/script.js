@@ -186,8 +186,8 @@ console.log(friends1) // result: (6) ["john", "petter", "bob", "susan", "anna",
 
 
 // Spread and copy an object
-const person2 = {name: 'john', job: "developer"}
-const newPerson2 = {...person2, city: "chicago", name: 'peter'}
+const person2 = { name: 'john', job: "developer" }
+const newPerson2 = { ...person2, city: "chicago", name: 'peter' }
 console.log(person2)  //result: {name: "john", job: "developer"}
 console.log(newPerson2);  // result: {name: "peter", job: "developer", city: "chicago"}
 
@@ -198,7 +198,7 @@ const text = [...headings].map(item => `<span>${item.textContent}</span>`).join(
 console.log(text)
 result.innerHTML = text
 
-const numbers2 = [23,45,66,88,577]
+const numbers2 = [23, 45, 66, 88, 577]
 console.log(Math.max(...numbers2));
 
 const personJ = ['John', 'sanders']
@@ -217,25 +217,25 @@ console.log(first, third, rest);
 
 
 // objects
-const person3 = {name: 'john', lastName: 'smith', job: 'developer'}
-const {job, ...rest1} = person3
-console.log(job,rest1);
+const person3 = { name: 'john', lastName: 'smith', job: 'developer' }
+const { job, ...rest1 } = person3
+console.log(job, rest1);
 
 // ...scores gathering the rest of the parameters
-                         // collection operator
-const getAverage = (name, ...scores) =>{
+// collection operator
+const getAverage = (name, ...scores) => {
   // console.log(name);
   // console.log(scores);
   let total = 0
-  for(const s of scores){
+  for (const s of scores) {
     total += s
   }
-  console.log(`${name}'s average score is ${total/ scores.length}`);
+  console.log(`${name}'s average score is ${total / scores.length}`);
 }
 
-const testScores = [67,95,67,78]
-getAverage(person3.name, 67,95,67,78)
-                          //spread operator, instead of passing it as an array, you pass it as each individual item
+const testScores = [67, 95, 67, 78]
+getAverage(person3.name, 67, 95, 67, 78)
+//spread operator, instead of passing it as an array, you pass it as each individual item
 getAverage(person3.name, ...testScores)
 
 // Array.of and Array.from - NOT OF THE PROTOTYPE
@@ -255,9 +255,21 @@ console.log(fr); // (5) ["hello", 45, false, "thanks", "daniel"]
 const udemy1 = "udemy"
 console.log(Array.from(udemy1));
 
-function countTotal(){
+function countTotal() {
   // console.log(arguments);
-  console.log(Array.from(arguments).reduce((total,curr) => {return total += curr}, 0));
+  console.log(Array.from(arguments).reduce((total, curr) => { return total += curr }, 0));
 }
 
-countTotal(45,56,78)
+countTotal(45, 56, 78)
+
+const p = document.querySelectorAll('p')
+let newText = Array.from(p)
+newText = newText.map(item => `<span>${item.textContent}</span>`).join(' ')
+result1.innerHTML = newText
+
+// const text1 = Array.from(document.querySelectorAll('p'), (item) => console.log(item))
+
+// Array.from  has  a second argument
+const text1 = Array.from(document.querySelectorAll('p'), (item) => {return `<span>${item.textContent}</span>`}).join(' ')
+
+second.innerHTML = text1
