@@ -273,3 +273,44 @@ result1.innerHTML = newText
 const text1 = Array.from(document.querySelectorAll('p'), (item) => {return `<span>${item.textContent}</span>`}).join(' ')
 
 second.innerHTML = text1
+
+// find = gets specific item
+// findIndex = get index of the item
+// every = every item in the array
+// some - at least one item
+
+const people1 = [
+  {id: 1, name: 'john'},
+  {id: 2, name: 'peter'},
+  {id: 3, name: 'anna'},
+]
+
+// filter returns an array
+const anna1 = people1.filter(person => person.name === 'anna')
+console.log(anna1);  // result: [{…}]
+console.log(anna1[0].name);
+console.log(anna1[0].id);
+
+// find returns a single item
+const anna2 = people1.find(person => person.name === 'anna')
+console.log(anna2); // {id: 3, name: "anna"}
+
+const personIndex = people1.findIndex(item => item.id === 3)
+console.log(personIndex);
+const newPeople1 = people1.slice(0, personIndex)
+console.log(newPeople1);
+// result:
+// (2) [{…}, {…}]
+// 0: {id: 1, name: "john"}
+// 1: {id: 2, name: "peter"}
+// length: 2
+// __proto__: Array(0)
+
+const grades = ['A', 'B', 'A', 'B', 'C', 'B', ]
+const goodGrades = ['A', 'B', 'A', 'B']
+// const allGoodGrades = grades.every(grade => grade !== 'C')
+const allGoodGrades = goodGrades.every(grade => grade !== 'C')
+console.log(allGoodGrades);
+
+const onBadGrade = grades.some(grade => grade === 'C')
+console.log(onBadGrade);
