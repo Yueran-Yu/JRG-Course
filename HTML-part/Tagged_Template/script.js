@@ -242,6 +242,16 @@ getAverage(person3.name, ...testScores)
 // from = returns Array Object from any object with a length property or an iterable object
 //from turns array-like/ish into array - string, nodeList, Set
 
+const example = ['one', 'two', 'three']
+console.log(example); //script.js:246 (3) ["one", "two", "three"]
+console.log(example.map); // ƒ map() { [native code] } script.js:248
+console.log(example.from); // undefined
+console.log(example.of); // undefined
+
+const fr = Array.of('hello', 45, false, 'thanks', 'daniel')
+console.log(fr); // (5) ["hello", 45, false, "thanks", "daniel"]
+
+
 const udemy1 = "udemy"
 console.log(Array.from(udemy1));
 
