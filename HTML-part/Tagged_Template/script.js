@@ -191,4 +191,49 @@ const newPerson2 = {...person2, city: "chicago", name: 'peter'}
 console.log(person2)  //result: {name: "john", job: "developer"}
 console.log(newPerson2);  // result: {name: "peter", job: "developer", city: "chicago"}
 
+//
 
+const headings = document.querySelectorAll('h1')
+const text = [...headings].map(item => `<span>${item.textContent}</span>`).join('')
+console.log(text)
+result.innerHTML = text
+
+const numbers2 = [23,45,66,88,577]
+console.log(Math.max(...numbers2));
+
+const personJ = ['John', 'sanders']
+const sayHello1 = (name, lastName) => {
+  console.log(`Hello ${name} ${lastName}`);
+}
+
+sayHello1(...personJ)
+
+
+// rest operator
+// array
+const fruits1 = ['apple', 'orange', 'lemon', 'banana', 'peach']
+const [first, , third, ...rest] = fruits1
+console.log(first, third, rest);
+
+
+// objects
+const person3 = {name: 'john', lastName: 'smith', job: 'developer'}
+const {job, ...rest1} = person3
+console.log(job,rest1);
+
+// ...scores gathering the rest of the parameters
+                         // collection operator
+const getAverage = (name, ...scores) =>{
+  // console.log(name);
+  // console.log(scores);
+  let total = 0
+  for(const s of scores){
+    total += s
+  }
+  console.log(`${name}'s average score is ${total/ scores.length}`);
+}
+
+const testScores = [67,95,67,78]
+getAverage(person3.name, 67,95,67,78)
+                          //spread operator, instead of passing it as an array, you pass it as each individual item
+getAverage(person3.name, ...testScores)
