@@ -237,3 +237,17 @@ const testScores = [67,95,67,78]
 getAverage(person3.name, 67,95,67,78)
                           //spread operator, instead of passing it as an array, you pass it as each individual item
 getAverage(person3.name, ...testScores)
+
+// Array.of and Array.from - NOT OF THE PROTOTYPE
+// from = returns Array Object from any object with a length property or an iterable object
+//from turns array-like/ish into array - string, nodeList, Set
+
+const udemy1 = "udemy"
+console.log(Array.from(udemy1));
+
+function countTotal(){
+  // console.log(arguments);
+  console.log(Array.from(arguments).reduce((total,curr) => {return total += curr}, 0));
+}
+
+countTotal(45,56,78)
