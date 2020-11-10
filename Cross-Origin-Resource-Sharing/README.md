@@ -1,5 +1,4 @@
-## Test CORS and JSONP (For  MAC)
-
+## Test CORS and JSONP
 ### 1. Install **node-dev**
 >Run ```yarn global add node-dev```
 
@@ -12,7 +11,7 @@
 > #### Under the folder **frank.com**
 > Run ```node-dev server.js 9999```
 
-### 4. Modify Hosts file
+### 4. Modify Hosts file (For  MAC)
 > (1) Launch **Terminal**, type ```sudo nano/private/etc/hosts``` and press **Return**, then enter your admin password to execute it.
 >
 > (2) You are now in the ```Nano Editor```. Use the arrow keys on your keyboard and navigate to the bottom of the file, add two lines.
@@ -22,20 +21,7 @@
 > (3) Press ```Control-O``` to save the file.
 
 
-## Test CORS and JSONP (For  Windows)
-### 1. Install **node-dev**
->Run ```yarn global add node-dev```
-
-### 2. Run **qq.com**
-> #### Under the folder **qq.com**
-> Run ```node-dev server.js 8888```
-
-
-### 3. Run **frank.com**
-> #### Under the folder **frank.com**
-> Run ```node-dev server.js 9999```
-
-### 4. Modify Hosts file
+### 5. Modify Hosts file (For  Windows)
 > (1) Click ```Start``` type ```notepad```, right click it and select ```Run as Administrator```
 >
 > (2) Click ```File``` tab then select ```Open```, go to your system root folder, most commonly ```C:\Windows``` and navigate to ```System32\drivers\etc```, on the right conner select ```All files(**)```, select  ```hosts``` file
