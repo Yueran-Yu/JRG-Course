@@ -33,6 +33,35 @@
 > ```qq.com:8888/index.html```  replace ```localhost:8888/index.html```
 >
 > ```frank.com:9999/index.html``` replace ```localhost:9999/index.html```
+>
+
+## 记录一次错误
+> 1. 源代码连接: https://github.com/Yueran-Yu/JRG-Course/tree/master/Cross-Origin-Resource-Sharing
+> 2. 运行步骤写在 README.md 里面了
+> 3. 问题： 我按照你视频里的代码敲了 window.xxx({{data}})，但是  visual code 一直 有报错提示，
+>
+>> 在 qq.com>public>friends.js 文件里 写window.xxx = {{data}}
+>>
+>>在 frank.com>public>frank.js 里写 script.onload = () =>{console.log(window.xxx);}
+>>
+>> 这两句一起在的时候，console 有结果，vs code 运行也有结果，但是 还是有错误提示的波浪线在  {{data}}  这里，
+>>
+
+>> 在 qq.com>public>friends.js 文件里 写成方法  window.xxx({{data}})
+>>
+>> 在 frank.com>public>frank.js 里写 window.xxx = (data) => {console.log(data)}
+>>
+>> 这两句一起在的时候，console 显示有错误 Uncaught SyntaxError: Unexpected token ':'， {{data}}  这里一直错
+> 4. 期待结果： {{data}}  应该能通过运行的啊
+
+###  单行注释  多行注释  对 运行 json 文件的影响
+> <img src="./img/JSONP_ERROR1.png" alt="JSONP_ERROR1">
+> <img src="./img/JSONP_ERROR2.png" alt="JSONP_ERROR2">
+> <img src="./img/JSONP_ERROR3.png" alt="JSONP_ERROR3">
+
+### 这条错误记录显示 没有点进去查看
+> <img src="./img/JSONP_ERROR4.png" alt="JSONP_ERROR4">
+>
 
 
 

@@ -1,10 +1,9 @@
 const script = document.createElement('script')
 script.src = 'http://qq.com:8888/friends.js'
-
+document.body.appendChild(script)
 // script.onload = () =>{
 //   console.log(window.xxx);
 // }
-document.body.appendChild(script)
 
 window.xxx = (data) => {
   console.log(data)
