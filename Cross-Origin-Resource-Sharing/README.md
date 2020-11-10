@@ -29,7 +29,7 @@
 >
 > (3) Go to the bottom of the file and add the desired IP followed by the host name (or domain name). Save the file and you are all set.
 
-#### Once you have change the hosts file and  run ```node-dev server.js``` fro each folder(frank.com and qq.com), you can replace the URL in the Browser correspondingly.
+#### Once you have change the hosts file and  run ```node-dev server.js``` for each folder(frank.com and qq.com), you can replace the URL in the Browser correspondingly.
 > ```qq.com:8888/index.html```  replace ```localhost:8888/index.html```
 >
 > ```frank.com:9999/index.html``` replace ```localhost:9999/index.html```
