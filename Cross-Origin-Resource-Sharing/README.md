@@ -59,7 +59,7 @@
 > <img src="./img/JSONP_ERROR2.png" alt="JSONP_ERROR2">
 > <img src="./img/JSONP_ERROR3.png" alt="JSONP_ERROR3">
 
-### 这条错误记录显示 没有点进去查看
+### 这条错误记录显示 没有点进去查看, 然后就错过了一次自己发现bug 解决bug的机会
 > <img src="./img/JSONP_ERROR4.png" alt="JSONP_ERROR4">
 >
 
