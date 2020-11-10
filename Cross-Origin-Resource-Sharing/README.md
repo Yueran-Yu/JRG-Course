@@ -16,6 +16,7 @@
 >
 > (2) You are now in the ```Nano Editor```. Use the arrow keys on your keyboard and navigate to the bottom of the file, add two lines.
 > > ```127.0.0.1    qq.com```
+>
 > > ```127.0.0.1    frank.com```
 >
 > (3) Press ```Control-O``` to save the file.
