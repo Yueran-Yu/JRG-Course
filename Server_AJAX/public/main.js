@@ -28,7 +28,7 @@ getJS.onclick = () => {
 
 getHTML.onclick = () => {
   const request = new XMLHttpRequest()
-
+  request.open('GET', '/h.html')
   request.onreadystatechange = () => {
     console.log(request.readyState)
     if (request.readyState === XMLHttpRequest.DONE) {
@@ -42,7 +42,7 @@ getHTML.onclick = () => {
       }
     }
   }
-  request.open('GET', '/h.html')
+
   request.send()
 }
 getXML.onclick = () => {

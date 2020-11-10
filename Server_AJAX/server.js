@@ -8,7 +8,7 @@ if (!port) {
   process.exit(1)
 }
 
-var server = http.createServer(function (request, response) {
+  var server = http.createServer(function (request, response) {
   var parsedUrl = url.parse(request.url, true)
   var pathWithQuery = request.url
   var queryString = ''
