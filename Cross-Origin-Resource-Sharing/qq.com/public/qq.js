@@ -4,8 +4,6 @@ request.onreadystatechange = () => {
   if(request.readyState === 4 && request.status === 200){
     console.log(request.response)
     const random = Math.random()
-
   }
 }
-
 request.send()

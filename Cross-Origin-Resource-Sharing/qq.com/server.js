@@ -34,20 +34,30 @@ var server = http.createServer(function(request, response){
   } else if(path === '/friends.json'){
     response.statusCode = 200
     response.setHeader('Content-Type', 'text/json;charset=utf-8')
-    console.log(request.headers['referer'])
     response.setHeader('Access-Control-Allow-Origin', 'http://frank.com:9999')
     response.write(fs.readFileSync('./public/friends.json'))
     response.end()
-  } else if(path === '/friends.js'){
-    response.statusCode = 200
-    response.setHeader('Content-Type', 'text/javascript;charset=utf-8')
-    response.setHeader('Access-Control-Allow-Origin', 'http://frank.com:9999')
-    const str = fs.readFileSync('./public/friends.js').toString()
-    const data = fs.readFileSync('./public/friends.json').toString()
-    const string2 = str.replace('{{data}}',data)
-    response.write(string2)
-    response.end()
-  } else {
+  }  else if(path === '/friends.js'){
+    if(request.headers['referer'].indexOf('http://frank.com:9999') === 0){
+      response.statusCode = 200
+      console.log("Here is ==========");
+      console.log(query.callback);
+
+      const randomNum = query.callback
+      response.setHeader('Content-Type', 'text/javascript;charset=utf-8')
+      // const str = fs.readFileSync('./public/friends.js').toString()
+      const str = `window['{{xxx}}']( {data} )`
+      const data = fs.readFileSync('./public/friends.json').toString()
+      const string2 = str.replace('{data}',data).replace('{{xxx}}',randomNum)
+      response.write(string2)
+      response.end()
+    }else{
+      response.statusCode = 404
+      response.end()
+    }
+ }
+
+else {
     response.statusCode = 404
     response.setHeader('Content-Type', 'text/html;charset=utf-8')
     response.write(`你输入的路径不存在对应的内容`)

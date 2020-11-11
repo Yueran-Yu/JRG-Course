@@ -1,6 +1,11 @@
-// function
-window.xxx({{data}})
+// use random as a property
+window['{{xxx}}']( {data} )
 
-/* window.xxx = {{data}} */
+// function
+// window.xxx({data})
+
+/*
+window.xxx = {{data}}
+*/
 // window.yyy = `<xml></xml>`
-// this is the use of JSONP
+// you can use JSONP in this style
