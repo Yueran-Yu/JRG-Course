@@ -1,0 +1,12 @@
+body{
+  color:green;
+}
+
+h2{
+  color:blue;
+}
+
+img{
+  max-width: 80%;
+  max-height: 50%;
+}
