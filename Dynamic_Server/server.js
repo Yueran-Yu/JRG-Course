@@ -20,7 +20,43 @@ var server = http.createServer(function (request, response) {
   /******** 从这里开始看，上面不要看 ************/
   console.log('有个傻子发请求过来啦！路径（带查询参数）为：' + pathWithQuery)
 
-  if (path === '/register' && method === 'POST') {
+  if (path === '/home.html') {
+    response.setHeader('Content-Type', 'text/html; charset=UTF-8')
+    response.statusCode = 200
+    response.end()
+
+  } else if (path === '/signIn' && method === 'POST') {
+    response.setHeader('Content-Type', 'text/html; charset=UTF-8')
+    const dbUserArray = JSON.parse(fs.readFileSync('./db/users.json'))
+    const array = []
+    // get data from the webpage form
+    request.on('data', chunk => {
+      array.push(chunk);
+    })
+
+    // process the data from the webpage
+    request.on('end', () => {
+      // Buffer: change a machine language to a human read language
+      // <Buffer 7b 22 6e 61 6d 65 22 3a 22 72 74 79 75 77 65 72 22 2c 22 70 61 73 73 77 6f 72 64 22 3a 22 31 31 31 31 31 22 7d>    equal to    {"name":"rtyuwer","password":"121212"}
+
+
+      // webpage entered data
+      const string = Buffer.concat(array).toString()
+      const obj = JSON.parse(string)
+      console.log(obj);
+      const user = dbUserArray.find((userData) => userData.name === obj.name && userData.password === obj.password)
+      if (user === undefined) {
+        response.statusCode = 400
+        response.setHeader('Content-Type', 'text/json; charset=utf-8')
+        response.end(`{"errorCode" : 4001}`)
+      } else {
+        response.statusCode = 200
+        response.setHeader('Set-Cookie', 'loggedIn = 1')
+        response.end()
+      }
+    })
+  }
+  else if (path === '/register' && method === 'POST') {
     response.setHeader('Content-Type', 'text/html; charset=utf-8')
     const userArray = JSON.parse(fs.readFileSync('./db/users.json'))
     const array = []
@@ -41,7 +77,7 @@ var server = http.createServer(function (request, response) {
       }
 
       userArray.push(newUser)
-      fs.writeFileSync('./db/users.json',JSON.stringify(userArray))
+      fs.writeFileSync('./db/users.json', JSON.stringify(userArray))
 
       response.end('Done')
     })

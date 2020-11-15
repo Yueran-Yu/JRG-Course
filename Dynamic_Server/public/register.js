@@ -10,9 +10,10 @@ $form.on('submit', (e) => {
     contentType: 'text/json;charset=UTF-8',
     data: JSON.stringify({ name, password })
   }).then(
-    ()=>{alert('Register Successfully.'),
-        location.href = '/signIn.html'},
-    ()=>{'Register Failed.',
-    location.href = '/register.html'})
+    () => {
+      alert('Register Successfully.')
+      location.href = '/signIn.html'
+    },
+    () => {})
 })
 
