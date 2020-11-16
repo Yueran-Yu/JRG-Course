@@ -22,8 +22,37 @@ var server = http.createServer(function (request, response) {
 
   if (path === '/home.html') {
     response.setHeader('Content-Type', 'text/html; charset=UTF-8')
-    response.statusCode = 200
-    response.end()
+    const cookie = request.headers['cookie']
+    // here cookie is a string
+
+    let userId
+    try {
+      userId = cookie.split(';').filter(s => s.indexOf('user_id=') >= 0)[0].split('=')[1]
+    } catch (error) {
+      console.log(error);
+    }
+
+    if (userId) {
+      response.statusCode = 200
+      const homeHtml = fs.readFileSync('./public/home.html').toString()
+      const userArray = JSON.parse(fs.readFileSync('./db/users.json'))
+      const user = userArray.find(user => user.id.toString() === userId)
+      let string
+
+      if (user) {
+        string = homeHtml.replace('Hello, {{user}}', `Hello, ${user.name}`)
+      } else {
+        string = homeHtml.replace('Hello, {{user}}', "Please Log In")
+      }
+      response.write(string)
+      response.end()
+    } else {
+      response.statusCode = 200
+      const homeHtml = fs.readFileSync('./public/home.html').toString()
+      const string = homeHtml.replace('Hello, {{user}}', "Please Log In")
+      response.write(string)
+      response.end()
+    }
 
   } else if (path === '/signIn' && method === 'POST') {
     response.setHeader('Content-Type', 'text/html; charset=UTF-8')
@@ -39,7 +68,6 @@ var server = http.createServer(function (request, response) {
       // Buffer: change a machine language to a human read language
       // <Buffer 7b 22 6e 61 6d 65 22 3a 22 72 74 79 75 77 65 72 22 2c 22 70 61 73 73 77 6f 72 64 22 3a 22 31 31 31 31 31 22 7d>    equal to    {"name":"rtyuwer","password":"121212"}
 
-
       // webpage entered data
       const string = Buffer.concat(array).toString()
       const obj = JSON.parse(string)
@@ -51,7 +79,7 @@ var server = http.createServer(function (request, response) {
         response.end(`{"errorCode" : 4001}`)
       } else {
         response.statusCode = 200
-        response.setHeader('Set-Cookie', 'loggedIn = 1')
+        response.setHeader('Set-Cookie', `user_id=${user.id}; HttpOnly`)
         response.end()
       }
     })
@@ -109,6 +137,7 @@ var server = http.createServer(function (request, response) {
     response.write(content)
     response.end()
   }
+  response.end()
   /******** 代码结束，下面不要看 ************/
 })
 
