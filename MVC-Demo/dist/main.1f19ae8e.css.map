@@ -1,0 +1,1 @@
+{"version":3,"sources":["app1.css","reset.css"],"names":[],"mappings":"AAAA;AACA;AACA;AACA;AACA;AACA;AACA;ACNA;AACA;AACA;AACA","file":"main.1f19ae8e.css","sourceRoot":"../src","sourcesContent":["#app1{\n    border:1px solid red;\n    width:50vw;\n    height: 50vh;\n}\n#app1 .output{}\n#app1 .actions{}","*{\n    margin:0;\n    padding:0;\n}"]}

@@ -117,41 +117,90 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"js_resume.js":[function(require,module,exports) {
-var html = document.querySelector('#html');
-var style = document.querySelector('#style');
-var n = 0;
-var str1 = "\n/* Hello, I'm a new front-ender.\n * Currently I am looking for a job~!\n * I will show you the css and html of my resume content.\n **/\n\n#div1{\n  border: 1px solid black;\n  width: 200px;\n  height:200px;\n}\n\n/* Then I will change the div1 into a yinyang picture\n * First, change a div into a circle\n **/\n#div1{\n  border-radius: 50%;\n  box-shadow: 0 0 3px rgba(0,0,0,0.5)\n  border:none;\n}\n\n/*\nSeparate the circle half black, half white by add the pseudo-element\n**/\n#div1{\nbackground: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(0,0,2,1) 50%, rgba(255,255,255,1) 50%, rgba(255,255,255,0) 100%);\n}\n\n/* add one eye inside the each part*/\n#div1::before{\nwidth:100px;\nheight:100px;\ntop:0;\nleft:50%;\nbackground: #fff;\ntransform:translateX(-50%);\nborder-radius:50%;\nbackground: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 25%, rgba(255,255,255,1) 25%, rgba(255,255,255,1) 100%, rgba(255,255,255,0) 100%);\n}\n\n#div1::after{\n  width:100px;\n  height:100px;\n  bottom:0;\n  left:50%;\n  background: #000;\n  transform:translateX(-50%);\n  border-radius:50%;\n  background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 25%, rgba(0,0,0,1) 25%, rgba(0,0,0,1) 100%);\n  }\n";
-var str2 = ''; // console.log(`string length is:${str.length}`)
-// str1 = str1.replace(/\n/g, "<br>")
+})({"../../../../../../.config/yarn/global/node_modules/parcel/src/builtins/bundle-url.js":[function(require,module,exports) {
+var bundleURL = null;
 
-var step = function step() {
-  setTimeout(function () {
-    if (str1[n] === "\n") {
-      // if str1 contains '\n'
-      str2 += '<br>';
-    } else if (str1[n] === " ") {
-      str2 += "&nbsp;";
-    } else {
-      // if str1 does not contains '\n'
-      str2 += str1[n];
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
+  }
+
+  return bundleURL;
+}
+
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
+  try {
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
+
+    if (matches) {
+      return getBaseURL(matches[0]);
+    }
+  }
+
+  return '/';
+}
+
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
+}
+
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],"../../../../../../.config/yarn/global/node_modules/parcel/src/builtins/css-loader.js":[function(require,module,exports) {
+var bundle = require('./bundle-url');
+
+function updateLink(link) {
+  var newLink = link.cloneNode();
+
+  newLink.onload = function () {
+    link.remove();
+  };
+
+  newLink.href = link.href.split('?')[0] + '?' + Date.now();
+  link.parentNode.insertBefore(newLink, link.nextSibling);
+}
+
+var cssTimeout = null;
+
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
+  }
+
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+
+    for (var i = 0; i < links.length; i++) {
+      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
+        updateLink(links[i]);
+      }
     }
 
-    html.innerHTML = str2;
-    style.innerHTML = str1.substring(0, n);
-    window.scrollTo(0, 9999);
-    html.scrollTo(0, 9999);
+    cssTimeout = null;
+  }, 50);
+}
 
-    if (n < str1.length - 1) {
-      // if n is not the last one, continue to add 1
-      n += 1;
-      step();
-    }
-  }, 10);
-};
+module.exports = reloadCSS;
+},{"./bundle-url":"../../../../../../.config/yarn/global/node_modules/parcel/src/builtins/bundle-url.js"}],"app1.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
 
-step();
-},{}],"../../../../../../.config/yarn/global/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../../../../../../.config/yarn/global/node_modules/parcel/src/builtins/css-loader.js"}],"reset.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../../../../../../.config/yarn/global/node_modules/parcel/src/builtins/css-loader.js"}],"main.js":[function(require,module,exports) {
+"use strict";
+
+require("./app1.css");
+
+require("./reset.css");
+},{"./app1.css":"app1.css","./reset.css":"reset.css"}],"../../../../../../.config/yarn/global/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -179,7 +228,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57460" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65366" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -355,5 +404,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../../../../.config/yarn/global/node_modules/parcel/src/builtins/hmr-runtime.js","js_resume.js"], null)
-//# sourceMappingURL=/js_resume.b624ec64.js.map
+},{}]},{},["../../../../../../.config/yarn/global/node_modules/parcel/src/builtins/hmr-runtime.js","main.js"], null)
+//# sourceMappingURL=/main.1f19ae8e.js.map
