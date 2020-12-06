@@ -25,6 +25,6 @@
 #app2 .tab-content > li.active{
  display: block;
  border:1px solid grey;
- height:45vh;
+ height:44vh;
  background-color: aliceblue;
 }
