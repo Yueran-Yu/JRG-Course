@@ -1,3 +1,4 @@
+import './app1.css'
 import $ from 'jquery'
 
 const $btn1 = $('#add1')
