@@ -2,20 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0b139a91-efcc-4ebd-9760-2f89b3707c47" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app1.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reset.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JS_Resume/.cache/14/92c2c411ce0822a9e424452f304579.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JS_Resume/.cache/14/92c2c411ce0822a9e424452f304579.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JS_Resume/.cache/23/9f7d2a8db14eefa0b97bb6b77b82c3.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JS_Resume/.cache/23/9f7d2a8db14eefa0b97bb6b77b82c3.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JS_Resume/.cache/29/76bfde24ef9bef291a0bea2c6f6514.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JS_Resume/.cache/29/76bfde24ef9bef291a0bea2c6f6514.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JS_Resume/dist/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../JS_Resume/dist/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JS_Resume/dist/js_resume.b624ec64.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JS_Resume/dist/js_resume.b624ec64.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JS_Resume/dist/js_resume.b624ec64.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/../JS_Resume/dist/js_resume.b624ec64.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JS_Resume/dist/js_resume.ba5f9d82.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JS_Resume/dist/js_resume.ba5f9d82.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JS_Resume/dist/style.f48196e4.css" beforeDir="false" afterPath="$PROJECT_DIR$/../JS_Resume/dist/style.f48196e4.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app1.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app2.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app2.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app3.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app4.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/global.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dist/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/main.1f19ae8e.css" beforeDir="false" afterPath="$PROJECT_DIR$/dist/main.1f19ae8e.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/main.1f19ae8e.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/dist/main.1f19ae8e.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/main.1f19ae8e.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/main.1f19ae8e.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/main.1f19ae8e.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/dist/main.1f19ae8e.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reset.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/reset.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +67,7 @@
       <updated>1607193433783</updated>
       <workItem from="1607193435523" duration="3223000" />
       <workItem from="1607205323425" duration="196000" />
-      <workItem from="1607205540865" duration="1344000" />
+      <workItem from="1607205540865" duration="8581000" />
     </task>
     <servers />
   </component>
