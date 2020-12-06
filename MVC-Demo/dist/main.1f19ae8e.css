@@ -21,21 +21,21 @@ body > .page > section{
 }
 
 #app2 .tab-bar{
- border:3px solid black;
+ border:1px dashed black;
  display: flex;
 }
 
 #app2 .tab-bar > li{
- border:3px solid grey;
+ padding:10px;
  width: 50%;
  text-align: center;
 }
 
 #app2 .tab-bar > li.selected{
- background: rgb(253,221,155);
- color: blueviolet;
+ background: rgb(37, 114, 196);
+ color: #dddddd;
  font-weight: bold;
- font-size:1.2rem;
+ font-size:1.5rem;
 }
 
 #app2 .tab-content > li{
@@ -43,25 +43,27 @@ body > .page > section{
 }
 #app2 .tab-content > li.active{
  display: block;
+ border:1px solid grey;
+ height:45vh;
+ background-color: aliceblue;
 }
 #app3{
 
 }
 
 #app3 .square{
-    border:1px solid grey;
-    width: 15vw;
-    height:15vw;
-    margin-top:10vw;
-    margin-left: 10vw;
-    transition:transform 1s;
+    width: 10vw;
+    height:10vw;
+    margin-top:5vw;
+    margin-left: 5vw;
+    background-color: burlywood;
+    transition:transform 2s;
 }
 
 #app3 .square.active{
     transform: translateX(15vw);
 }
 #app4 {
-
 }
 
 @keyframes change {
@@ -75,8 +77,8 @@ body > .page > section{
 }
 
 #app4 .circle {
-    width: 30vw;
-    height: 30vw;
+    width: 20vw;
+    height: 20vw;
     border-radius: 50%;
 }
 
