@@ -1,4 +1,5 @@
 #app2{
+ background-color:aliceblue ;
 }
 
 #app2 .tab-bar{
@@ -22,9 +23,7 @@
 #app2 .tab-content > li{
  display: none;
 }
+
 #app2 .tab-content > li.active{
  display: block;
- border:1px solid grey;
- height:44vh;
- background-color: aliceblue;
 }

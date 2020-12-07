@@ -11289,37 +11289,69 @@ var _jquery = _interopRequireDefault(require("jquery"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var $btn1 = (0, _jquery.default)('#add1');
-var $btn2 = (0, _jquery.default)('#minus1');
-var $btn3 = (0, _jquery.default)('#mul2');
-var $btn4 = (0, _jquery.default)('#divide2');
-var $number = (0, _jquery.default)('#number');
-var n = localStorage.getItem('n');
-$number.text(n || 100);
-$btn1.on('click', function () {
-  var n = parseInt($number.text());
-  n += 1;
-  localStorage.setItem('n', n);
-  $number.text(n);
-});
-$btn2.on('click', function () {
-  var n = parseInt($number.text());
-  n -= 1;
-  localStorage.setItem('n', n);
-  $number.text(n);
-});
-$btn3.on('click', function () {
-  var n = parseInt($number.text());
-  n *= 2;
-  localStorage.setItem('n', n);
-  $number.text(n);
-});
-$btn4.on('click', function () {
-  var n = parseInt($number.text());
-  n /= 2;
-  localStorage.setItem('n', n);
-  $number.text(n);
-});
+// put all the data relevant actions to "Model"
+var model = {
+  // initialize data
+  data: {
+    n: parseInt(localStorage.getItem('n'))
+  }
+}; // put all the view relevant actions to "View"
+
+var view = {
+  // initialize html
+  html: "<section id=\"app1\">\n        <div class=\"output\">\n            <span id=\"number\">{{n}}</span>\n        </div>\n        <div class=\"actions\">\n            <button id=\"add1\">+1</button>\n            <button id=\"minus1\">-1</button>\n            <button id=\"mul2\">*2</button>\n            <button id=\"divide2\">\xF72</button>\n        </div>\n    </section>",
+  update: function update() {
+    // render data to page
+    controller.ui.number.text(model.data.n || 100);
+  },
+  render: function render() {
+    (0, _jquery.default)(view.html.replace('{{n}}', model.data.n)).appendTo((0, _jquery.default)('body>.page'));
+  }
+}; // the remaining actions to "Controller"
+
+var controller = {
+  init: function init() {
+    controller.ui = {
+      // the important elements
+      btn1: (0, _jquery.default)('#add1'),
+      btn2: (0, _jquery.default)('#minus1'),
+      btn3: (0, _jquery.default)('#mul2'),
+      btn4: (0, _jquery.default)('#divide2'),
+      number: (0, _jquery.default)('#number')
+    };
+    controller.bindEvents();
+  },
+  bindEvents: function bindEvents() {
+    // bind the event to certain action
+    controller.ui.btn1.on('click', function () {
+      var n = parseInt(controller.ui.number.text());
+      n += 1;
+      localStorage.setItem('n', n);
+      controller.ui.number.text(n);
+    });
+    controller.ui.btn2.on('click', function () {
+      var n = parseInt(controller.ui.number.text());
+      n -= 1;
+      localStorage.setItem('n', n);
+      controller.ui.number.text(n);
+    });
+    controller.ui.btn3.on('click', function () {
+      var n = parseInt(controller.ui.number.text());
+      n *= 2;
+      localStorage.setItem('n', n);
+      controller.ui.number.text(n);
+    });
+    controller.ui.btn4.on('click', function () {
+      var n = parseInt(controller.ui.number.text());
+      n /= 2;
+      localStorage.setItem('n', n);
+      controller.ui.number.text(n);
+    });
+  }
+}; //the first time render html
+
+view.render();
+controller.init();
 },{"./app1.css":"app1.css","jquery":"../node_modules/jquery/dist/jquery.js"}],"app2.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
@@ -11332,17 +11364,24 @@ require("./app2.css");
 
 var _jquery = _interopRequireDefault(require("jquery"));
 
+var _localStorage$getItem;
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var html = "<section id=\"app2\">\n        <ol class=\"tab-bar\">\n            <li>Column 1</li>\n            <li>Column 2</li>\n        </ol>\n        <ol class=\"tab-content\">\n            <li>Content 1</li>\n            <li>Content 2</li>\n        </ol>\n    </section>";
+var $element = (0, _jquery.default)(html).appendTo((0, _jquery.default)('.page'));
 var $tabBar = (0, _jquery.default)('#app2 .tab-bar');
 var $tabContent = (0, _jquery.default)('#app2 .tab-content');
+var localKey = 'app2.index';
+var $currentIndex = (_localStorage$getItem = localStorage.getItem(localKey)) !== null && _localStorage$getItem !== void 0 ? _localStorage$getItem : 0;
 $tabBar.on('click', 'li', function (e) {
   var $li = (0, _jquery.default)(e.currentTarget);
   $li.addClass('selected').siblings().removeClass('selected');
   var index = $li.index();
+  localStorage.setItem(localKey, index);
   $tabContent.children().eq(index).addClass('active').siblings().removeClass('active');
 });
-$tabBar.children().eq(0).trigger('click');
+$tabBar.children().eq($currentIndex).trigger('click');
 },{"./app2.css":"app2.css","jquery":"../node_modules/jquery/dist/jquery.js"}],"app3.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
@@ -11357,9 +11396,26 @@ var _jquery = _interopRequireDefault(require("jquery"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var html = "<section id=\"app3\">\n        <div class=\"square\"></div>\n    </section>";
+var $element = (0, _jquery.default)(html).appendTo((0, _jquery.default)('.page'));
 var $square = (0, _jquery.default)('#app3 .square');
+var localKey = 'app3.active'; // 'no' and 'undefined' are false, only 'yes' is true, so we only need to check if the localKey is 'yes'
+
+var active = localStorage.getItem(localKey) === 'yes'; // if(active){
+//     $square.addClass('active')
+// }else{
+//     $square.removeClass('active')
+// }
+
+$square.toggleClass('active', active);
 $square.on('click', function () {
-  $square.toggleClass('active');
+  if ($square.hasClass('active')) {
+    $square.removeClass('active');
+    localStorage.setItem('app3.active', 'no');
+  } else {
+    $square.addClass('active');
+    localStorage.setItem('app3.active', 'yes');
+  }
 });
 },{"./app3.css":"app3.css","jquery":"../node_modules/jquery/dist/jquery.js"}],"app4.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
@@ -11375,6 +11431,8 @@ var _jquery = _interopRequireDefault(require("jquery"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var html = " <section id=\"app4\">\n        <div class=\"circle\"></div>\n    </section>";
+var $element = (0, _jquery.default)(html).appendTo((0, _jquery.default)('.page'));
 var $circle = (0, _jquery.default)('#app4 .circle');
 $circle.on('mouseenter', function () {
   $circle.addClass('active');
@@ -11428,7 +11486,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65257" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49228" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
