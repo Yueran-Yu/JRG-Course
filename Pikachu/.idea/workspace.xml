@@ -5,11 +5,7 @@
       <change beforePath="$PROJECT_DIR$/../MVC-Demo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../MVC-Demo/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../MVC-Demo/dist/main.1f19ae8e.js" beforeDir="false" afterPath="$PROJECT_DIR$/../MVC-Demo/dist/main.1f19ae8e.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../MVC-Demo/dist/main.1f19ae8e.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/../MVC-Demo/dist/main.1f19ae8e.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.cache/bf/fe97db57fe063d08ac006e34947a04.json" beforeDir="false" afterPath="$PROJECT_DIR$/.cache/bf/fe97db57fe063d08ac006e34947a04.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/style.e308ff8e.css" beforeDir="false" afterPath="$PROJECT_DIR$/dist/style.e308ff8e.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/style.e308ff8e.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/dist/style.e308ff8e.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +47,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1607968322059</updated>
-      <workItem from="1607968323182" duration="18721000" />
+      <workItem from="1607968323182" duration="19625000" />
     </task>
     <servers />
   </component>
