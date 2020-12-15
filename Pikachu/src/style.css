@@ -23,6 +23,32 @@
     z-index: 3;
 }
 
+@keyframes sway {
+   0%{
+       transform: rotate(45deg);
+   }
+
+    32%{
+        transform: rotate(50deg);
+    }
+
+    58%{
+        transform: rotate(45deg);
+    }
+
+    82%{
+        transform: rotate(40deg);
+    }
+
+    100%{
+        transform: rotate(45deg);
+    }
+}
+
+.nose:hover{
+    animation:sway 400ms infinite;
+}
+
 .eye {
     border: 2px solid black;
     width: 64px;
