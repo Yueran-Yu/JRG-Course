@@ -139,55 +139,57 @@ var time = 0;
 demo.innerText = _css.default.substr(0, n);
 demo2.innerHTML = _css.default.substr(0, n);
 
+var commonPlay = function commonPlay() {
+  return setInterval(printContent, time);
+};
+
+var pause = function pause() {
+  window.clearInterval(id);
+};
+
 var printContent = function printContent() {
   n += 1;
 
   if (n > _css.default.length) {
-    window.clearInterval(disPlayContent);
+    pause();
     return;
   }
 
   demo.innerText = _css.default.substr(0, n);
   demo2.innerHTML = _css.default.substr(0, n);
   demo.scrollTop = demo.scrollHeight;
-};
+}; //
+// let disPlayContent = setInterval(() => {
+//     printContent()
+// }, time)
 
-var disPlayContent = setInterval(function () {
-  printContent();
-}, time);
 
-pause.onclick = function () {
-  window.clearInterval(disPlayContent);
+var id = commonPlay();
+
+pauseBtn.onclick = function () {
+  pause();
 };
 
 play.onclick = function () {
-  disPlayContent = setInterval(function () {
-    printContent();
-  }, time);
+  id = commonPlay();
 };
 
 btnSlow.onclick = function () {
-  clearInterval(disPlayContent);
+  clearInterval(id);
   time = 1000;
-  disPlayContent = setInterval(function () {
-    printContent();
-  }, time);
+  id = commonPlay();
 };
 
 btnMedium.onclick = function () {
-  window.clearInterval(disPlayContent);
+  pause();
   time = 200;
-  disPlayContent = setInterval(function () {
-    printContent();
-  }, time);
+  id = commonPlay();
 };
 
 btnFast.onclick = function () {
-  window.clearInterval(disPlayContent);
+  pause();
   time = 0;
-  disPlayContent = setInterval(function () {
-    printContent();
-  }, time);
+  id = commonPlay();
 };
 
 var here = function here(a) {
@@ -205,6 +207,10 @@ console.log(y("s")); // y==================
 console.log("here===============");
 console.log(here("s")); // test.js:69 here===============
 // This is result I want. + s
+
+/*
+* Here is the result: y function is equal to here function
+* */
 },{"./css":"css.js"}],"../../../../../.config/yarn/global/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';

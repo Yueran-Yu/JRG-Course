@@ -4,54 +4,56 @@ let n = 1
 let time = 0
 demo.innerText = str.substr(0, n)
 demo2.innerHTML = str.substr(0, n)
+let commonPlay = ()=>{
+    return setInterval(printContent, time)
+}
+
+let pause = ()=>{
+    window.clearInterval(id)
+}
 
 const printContent = () => {
     n += 1
     if (n > str.length) {
-        window.clearInterval(disPlayContent)
+        pause()
         return
     }
     demo.innerText = str.substr(0, n)
     demo2.innerHTML = str.substr(0, n)
     demo.scrollTop = demo.scrollHeight;
 }
+//
+// let disPlayContent = setInterval(() => {
+//     printContent()
+// }, time)
 
-let disPlayContent = setInterval(() => {
-    printContent()
-}, time)
 
-pause.onclick = () => {
-    window.clearInterval(disPlayContent)
+let id = commonPlay()
+
+pauseBtn.onclick = () => {
+    pause()
 }
 
 play.onclick = () => {
-    disPlayContent = setInterval(() => {
-        printContent()
-    }, time)
+    id = commonPlay()
 }
 
 btnSlow.onclick = () => {
-    clearInterval(disPlayContent)
+    clearInterval(id)
     time = 1000
-    disPlayContent = setInterval(() => {
-        printContent()
-    }, time)
+    id = commonPlay()
 }
 
 btnMedium.onclick = () => {
-    window.clearInterval(disPlayContent)
+    pause()
     time = 200
-    disPlayContent = setInterval(() => {
-        printContent()
-    }, time)
+    id = commonPlay()
 }
 
 btnFast.onclick = () => {
-    window.clearInterval(disPlayContent)
+    pause()
     time = 0
-    disPlayContent = setInterval(() => {
-        printContent()
-    }, time)
+    id = commonPlay()
 }
 
 const here = (a)=> {
@@ -70,4 +72,9 @@ console.log("here===============")
 console.log(here("s"))
 // test.js:69 here===============
 // This is result I want. + s
+
+
+/*
+* Here is the result: y function is equal to here function
+* */
 
