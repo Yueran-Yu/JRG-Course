@@ -2,20 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2dbe1fa0-99de-4ae1-af75-1908458986ef" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/css.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/css.16d824bf.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/css.16d824bf.js.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../MVC-Demo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../MVC-Demo/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../MVC-Demo/dist/main.1f19ae8e.js" beforeDir="false" afterPath="$PROJECT_DIR$/../MVC-Demo/dist/main.1f19ae8e.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../MVC-Demo/dist/main.1f19ae8e.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/../MVC-Demo/dist/main.1f19ae8e.js.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Pikachu/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Pikachu/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.cache/29/76bfde24ef9bef291a0bea2c6f6514.json" beforeDir="false" afterPath="$PROJECT_DIR$/.cache/29/76bfde24ef9bef291a0bea2c6f6514.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.cache/76/1fb606ee220823b09c0909202b685c.json" beforeDir="false" afterPath="$PROJECT_DIR$/.cache/76/1fb606ee220823b09c0909202b685c.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.cache/fd/39c27d5771863ebb9eb2c1bc6a4b8e.json" beforeDir="false" afterPath="$PROJECT_DIR$/.cache/fd/39c27d5771863ebb9eb2c1bc6a4b8e.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/test.e98b79dd.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/test.e98b79dd.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/test.e98b79dd.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/dist/test.e98b79dd.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/test.html" beforeDir="false" afterPath="$PROJECT_DIR$/dist/test.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/test.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/test.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -56,6 +52,16 @@
       <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
+  <component name="RunManager">
+    <configuration name="test.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/src/test.js" working-dir="$PROJECT_DIR$/src">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Node.js.test.js" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -66,7 +72,7 @@
       <updated>1607968322059</updated>
       <workItem from="1607968323182" duration="19760000" />
       <workItem from="1608085732094" duration="700000" />
-      <workItem from="1608087374327" duration="16219000" />
+      <workItem from="1608087374327" duration="20160000" />
     </task>
     <servers />
   </component>
