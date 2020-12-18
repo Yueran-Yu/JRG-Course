@@ -139,7 +139,7 @@ var time = 0;
 demo.innerText = _css.default.substr(0, n);
 demo2.innerHTML = _css.default.substr(0, n);
 
-function printContent() {
+var printContent = function printContent() {
   n += 1;
 
   if (n > _css.default.length) {
@@ -150,7 +150,7 @@ function printContent() {
   demo.innerText = _css.default.substr(0, n);
   demo2.innerHTML = _css.default.substr(0, n);
   demo.scrollTop = demo.scrollHeight;
-}
+};
 
 var disPlayContent = setInterval(function () {
   printContent();
@@ -170,7 +170,10 @@ btnSlow.onclick = function () {
   console.log("Here is slow");
   window.clearInterval(disPlayContent);
   time = 1000;
-  disPlayContent = setInterval(printContent), time;
+  disPlayContent = setInterval(function () {
+    printContent();
+    console.log(time);
+  }), time;
 };
 
 btnMedium.onclick = function () {

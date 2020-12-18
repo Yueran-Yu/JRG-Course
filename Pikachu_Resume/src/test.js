@@ -5,7 +5,7 @@ let time = 0
 demo.innerText = str.substr(0, n)
 demo2.innerHTML = str.substr(0, n)
 
-function printContent(){
+const printContent = ()=>{
     n += 1
     if (n > str.length) {
         window.clearInterval(disPlayContent)
@@ -26,8 +26,10 @@ btnSlow.onclick = ()=>{
     console.log("Here is slow")
     window.clearInterval(disPlayContent)
     time = 1000
-    disPlayContent = setInterval( printContent
-
+    disPlayContent = setInterval(()=> {
+        printContent()
+            console.log(time)
+    }
         ),time}
 
 
