@@ -13,7 +13,7 @@ const html = `<section id="app2">
         </ol>
     </section>`
 
-const $element = $(html).appendTo($('.page'))
+const $element = $(html).appendTo($('body>.page'))
 const $tabBar = $('#app2 .tab-bar')
 const $tabContent = $('#app2 .tab-content')
 const localKey = 'app2.index'
@@ -22,7 +22,9 @@ const $currentIndex = localStorage.getItem(localKey) ?? 0
 $tabBar.on('click', 'li', (e) => {
     const $li = $(e.currentTarget)
     $li.addClass('selected')
-        .siblings().removeClass('selected')
+        .siblings()
+        .removeClass('selected')
+
     const index = $li.index()
     localStorage.setItem(localKey, index)
     $tabContent
