@@ -136,11 +136,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var demo = document.querySelector('#demo');
 var demo2 = document.querySelector('#demo2');
-var pauseBtn = document.querySelector('#pauseBtn');
-var playBtn = document.querySelector('#playBtn');
-var btnSlow = document.querySelector('#btnSlow');
-var btnMedium = document.querySelector('#btnMedium');
-var btnFast = document.querySelector('#btnFast');
 var n = 1;
 var time = 0;
 var id;
@@ -148,7 +143,21 @@ var player = {
   init: function init() {
     demo.innerText = _css.default.substr(0, n);
     demo2.innerHTML = _css.default.substr(0, n);
-    id = player.play();
+    player.play();
+    player.bindEvent();
+  },
+  bindEvent: function bindEvent() {
+    var hasTable = {
+      '#pauseBtn': player.pause,
+      '#playBtn': player.play,
+      '#btnSlow': player.slow,
+      '#btnMedium': player.medium,
+      '#btnFast': player.fast
+    };
+
+    for (var key in hasTable) {
+      document.querySelector(key).onclick = hasTable[key];
+    }
   },
   printContent: function printContent() {
     n += 1;
@@ -163,40 +172,28 @@ var player = {
     demo.scrollTop = demo.scrollHeight;
   },
   play: function play() {
-    return setInterval(player.printContent, time);
+    id = setInterval(player.printContent, time);
   },
   pause: function pause() {
     window.clearInterval(id);
   },
   slow: function slow() {
     clearInterval(id);
-    time = 1000;
-    id = player.play();
+    time = 800;
+    player.play();
   },
   medium: function medium() {
     player.pause();
     time = 200;
-    id = player.play();
+    player.play();
   },
   fast: function fast() {
     player.pause();
     time = 0;
-    id = player.play();
+    player.play();
   }
 };
 player.init();
-
-pauseBtn.onclick = function () {
-  player.pause();
-};
-
-playBtn.onclick = function () {
-  id = player.play();
-};
-
-btnSlow.onclick = player.slow;
-btnMedium.onclick = player.medium;
-btnFast.onclick = player.fast;
 
 var here = function here(a) {
   console.log("This is result I want. + ".concat(a));

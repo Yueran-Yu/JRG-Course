@@ -3,12 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="2dbe1fa0-99de-4ae1-af75-1908458986ef" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.cache/76/1fb606ee220823b09c0909202b685c.json" beforeDir="false" afterPath="$PROJECT_DIR$/.cache/76/1fb606ee220823b09c0909202b685c.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.cache/fd/39c27d5771863ebb9eb2c1bc6a4b8e.json" beforeDir="false" afterPath="$PROJECT_DIR$/.cache/fd/39c27d5771863ebb9eb2c1bc6a4b8e.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/test.e98b79dd.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/test.e98b79dd.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/test.e98b79dd.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/dist/test.e98b79dd.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/test.html" beforeDir="false" afterPath="$PROJECT_DIR$/dist/test.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/test.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/test.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -69,7 +66,7 @@
       <updated>1607968322059</updated>
       <workItem from="1607968323182" duration="19760000" />
       <workItem from="1608085732094" duration="700000" />
-      <workItem from="1608087374327" duration="24025000" />
+      <workItem from="1608087374327" duration="25271000" />
     </task>
     <servers />
   </component>
