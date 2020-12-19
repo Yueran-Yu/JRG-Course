@@ -2,66 +2,68 @@ import str from './css'
 
 const demo = document.querySelector('#demo')
 const demo2 = document.querySelector('#demo2')
-
-let n = 1
-let time = 0
 let id
 
 const player = {
+    id:undefined,
+    n:1,
+    time:0,
     init: () => {
-        demo.innerText = str.substr(0, n)
-        demo2.innerHTML = str.substr(0, n)
+        demo.innerText = str.substr(0, player.n)
+        demo2.innerHTML = str.substr(0, player.n)
         player.play()
-        player.bindEvent()
+        player.bindEvents()
     },
-    bindEvent: () => {
-        const hasTable = {
-            '#pauseBtn': player.pause,
-            '#playBtn': player.play,
-            '#btnSlow': player.slow,
-            '#btnMedium': player.medium,
-            '#btnFast': player.fast
+    events:{
+        '#pauseBtn':'pause',
+        '#playBtn':'play',
+        '#btnSlow':'slow',
+        '#btnMedium':'medium',
+        '#btnFast':'fast'
+    },
+    bindEvents: () =>{
+        for(let key in player.events){
+            if(player.events.hasOwnProperty(key)){
+                const value = player.events[key]
+                document.querySelector(key).onclick = player[value]
+            }
         }
-
-        for (let key in hasTable) {
-            document.querySelector(key).onclick = hasTable[key]
-        }
-
     },
     printContent: () => {
-        n += 1
-        if (n > str.length) {
+        player.n += 1
+        if (player.n > str.length) {
             player.pause()
             return
         }
-        demo.innerText = str.substr(0, n)
-        demo2.innerHTML = str.substr(0, n)
+        demo.innerText = str.substr(0, player.n)
+        demo2.innerHTML = str.substr(0, player.n)
         demo.scrollTop = demo.scrollHeight;
     },
     play: () => {
-        id = setInterval(player.printContent, time)
+        player.id = setInterval(player.printContent, player.time)
     },
     pause: () => {
-        window.clearInterval(id)
+        window.clearInterval(player.id)
     },
     slow: () => {
-        clearInterval(id)
-        time = 800
+        player.pause()
+        player.time = 800
         player.play()
     },
     medium: () => {
         player.pause()
-        time = 200
+        player.time = 200
         player.play()
     },
     fast: () => {
         player.pause()
-        time = 0
+        player.time = 0
         player.play()
     }
 }
 
 player.init()
+
 
 const here = (a) => {
     console.log(`This is result I want. + ${a}`)

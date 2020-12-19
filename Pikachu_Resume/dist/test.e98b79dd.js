@@ -136,60 +136,63 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var demo = document.querySelector('#demo');
 var demo2 = document.querySelector('#demo2');
-var n = 1;
-var time = 0;
 var id;
 var player = {
+  id: undefined,
+  n: 1,
+  time: 0,
   init: function init() {
-    demo.innerText = _css.default.substr(0, n);
-    demo2.innerHTML = _css.default.substr(0, n);
+    demo.innerText = _css.default.substr(0, player.n);
+    demo2.innerHTML = _css.default.substr(0, player.n);
     player.play();
-    player.bindEvent();
+    player.bindEvents();
   },
-  bindEvent: function bindEvent() {
-    var hasTable = {
-      '#pauseBtn': player.pause,
-      '#playBtn': player.play,
-      '#btnSlow': player.slow,
-      '#btnMedium': player.medium,
-      '#btnFast': player.fast
-    };
-
-    for (var key in hasTable) {
-      document.querySelector(key).onclick = hasTable[key];
+  events: {
+    '#pauseBtn': 'pause',
+    '#playBtn': 'play',
+    '#btnSlow': 'slow',
+    '#btnMedium': 'medium',
+    '#btnFast': 'fast'
+  },
+  bindEvents: function bindEvents() {
+    for (var key in player.events) {
+      if (player.events.hasOwnProperty(key)) {
+        var value = player.events[key];
+        document.querySelector(key).onclick = player[value];
+      }
     }
   },
   printContent: function printContent() {
-    n += 1;
+    player.n += 1;
 
-    if (n > _css.default.length) {
+    if (player.n > _css.default.length) {
       player.pause();
       return;
     }
 
-    demo.innerText = _css.default.substr(0, n);
-    demo2.innerHTML = _css.default.substr(0, n);
+    demo.innerText = _css.default.substr(0, player.n);
+    demo2.innerHTML = _css.default.substr(0, player.n);
     demo.scrollTop = demo.scrollHeight;
   },
   play: function play() {
-    id = setInterval(player.printContent, time);
+    player.id = setInterval(player.printContent, player.time);
   },
   pause: function pause() {
-    window.clearInterval(id);
+    window.clearInterval(player.id);
   },
   slow: function slow() {
-    clearInterval(id);
-    time = 800;
+    player.pause();
+    player.time = 800;
     player.play();
   },
   medium: function medium() {
     player.pause();
-    time = 200;
+    player.time = 200;
     player.play();
   },
   fast: function fast() {
     player.pause();
-    time = 0;
+    player.time = 0;
     player.play();
   }
 };
