@@ -134,18 +134,20 @@ var _css = _interopRequireDefault(require("./css"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var demo = document.querySelector('#demo');
-var demo2 = document.querySelector('#demo2');
 var id;
 var player = {
   id: undefined,
   n: 1,
   time: 0,
+  ui: {
+    demo: document.querySelector('#demo'),
+    demo2: document.querySelector('#demo2')
+  },
   init: function init() {
-    demo.innerText = _css.default.substr(0, player.n);
-    demo2.innerHTML = _css.default.substr(0, player.n);
-    player.play();
+    player.ui.demo.innerText = _css.default.substr(0, player.n);
+    player.ui.demo2.innerHTML = _css.default.substr(0, player.n);
     player.bindEvents();
+    player.play();
   },
   events: {
     '#pauseBtn': 'pause',
@@ -170,9 +172,9 @@ var player = {
       return;
     }
 
-    demo.innerText = _css.default.substr(0, player.n);
-    demo2.innerHTML = _css.default.substr(0, player.n);
-    demo.scrollTop = demo.scrollHeight;
+    player.ui.demo.innerText = _css.default.substr(0, player.n);
+    player.ui.demo2.innerHTML = _css.default.substr(0, player.n);
+    player.ui.demo.scrollTop = player.ui.demo.scrollHeight;
   },
   play: function play() {
     player.id = setInterval(player.printContent, player.time);

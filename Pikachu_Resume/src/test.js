@@ -1,18 +1,21 @@
 import str from './css'
 
-const demo = document.querySelector('#demo')
-const demo2 = document.querySelector('#demo2')
+
 let id
 
 const player = {
     id:undefined,
     n:1,
     time:0,
+    ui:{
+        demo: document.querySelector('#demo'),
+        demo2 :document.querySelector('#demo2')
+    },
     init: () => {
-        demo.innerText = str.substr(0, player.n)
-        demo2.innerHTML = str.substr(0, player.n)
-        player.play()
+        player.ui.demo.innerText = str.substr(0, player.n)
+        player.ui.demo2.innerHTML = str.substr(0, player.n)
         player.bindEvents()
+        player.play()
     },
     events:{
         '#pauseBtn':'pause',
@@ -35,9 +38,9 @@ const player = {
             player.pause()
             return
         }
-        demo.innerText = str.substr(0, player.n)
-        demo2.innerHTML = str.substr(0, player.n)
-        demo.scrollTop = demo.scrollHeight;
+        player.ui.demo.innerText = str.substr(0, player.n)
+        player.ui.demo2.innerHTML = str.substr(0, player.n)
+        player.ui.demo.scrollTop = player.ui.demo.scrollHeight;
     },
     play: () => {
         player.id = setInterval(player.printContent, player.time)
