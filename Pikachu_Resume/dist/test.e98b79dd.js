@@ -134,63 +134,69 @@ var _css = _interopRequireDefault(require("./css"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var demo = document.querySelector('#demo');
+var demo2 = document.querySelector('#demo2');
+var pauseBtn = document.querySelector('#pauseBtn');
+var playBtn = document.querySelector('#playBtn');
+var btnSlow = document.querySelector('#btnSlow');
+var btnMedium = document.querySelector('#btnMedium');
+var btnFast = document.querySelector('#btnFast');
 var n = 1;
 var time = 0;
-demo.innerText = _css.default.substr(0, n);
-demo2.innerHTML = _css.default.substr(0, n);
+var id;
+var player = {
+  init: function init() {
+    demo.innerText = _css.default.substr(0, n);
+    demo2.innerHTML = _css.default.substr(0, n);
+    id = player.play();
+  },
+  printContent: function printContent() {
+    n += 1;
 
-var commonPlay = function commonPlay() {
-  return setInterval(printContent, time);
-};
+    if (n > _css.default.length) {
+      player.pause();
+      return;
+    }
 
-var pause = function pause() {
-  window.clearInterval(id);
-};
-
-var printContent = function printContent() {
-  n += 1;
-
-  if (n > _css.default.length) {
-    pause();
-    return;
+    demo.innerText = _css.default.substr(0, n);
+    demo2.innerHTML = _css.default.substr(0, n);
+    demo.scrollTop = demo.scrollHeight;
+  },
+  play: function play() {
+    return setInterval(player.printContent, time);
+  },
+  pause: function pause() {
+    window.clearInterval(id);
+  },
+  slow: function slow() {
+    clearInterval(id);
+    time = 1000;
+    id = player.play();
+  },
+  medium: function medium() {
+    player.pause();
+    time = 200;
+    id = player.play();
+  },
+  fast: function fast() {
+    player.pause();
+    time = 0;
+    id = player.play();
   }
-
-  demo.innerText = _css.default.substr(0, n);
-  demo2.innerHTML = _css.default.substr(0, n);
-  demo.scrollTop = demo.scrollHeight;
-}; //
-// let disPlayContent = setInterval(() => {
-//     printContent()
-// }, time)
-
-
-var id = commonPlay();
+};
+player.init();
 
 pauseBtn.onclick = function () {
-  pause();
+  player.pause();
 };
 
-play.onclick = function () {
-  id = commonPlay();
+playBtn.onclick = function () {
+  id = player.play();
 };
 
-btnSlow.onclick = function () {
-  clearInterval(id);
-  time = 1000;
-  id = commonPlay();
-};
-
-btnMedium.onclick = function () {
-  pause();
-  time = 200;
-  id = commonPlay();
-};
-
-btnFast.onclick = function () {
-  pause();
-  time = 0;
-  id = commonPlay();
-};
+btnSlow.onclick = player.slow;
+btnMedium.onclick = player.medium;
+btnFast.onclick = player.fast;
 
 var here = function here(a) {
   console.log("This is result I want. + ".concat(a));

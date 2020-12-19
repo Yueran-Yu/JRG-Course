@@ -1,62 +1,72 @@
 import str from './css'
 
+const demo = document.querySelector('#demo')
+const demo2 = document.querySelector('#demo2')
+const pauseBtn = document.querySelector('#pauseBtn')
+const playBtn = document.querySelector('#playBtn')
+const btnSlow = document.querySelector('#btnSlow')
+const btnMedium = document.querySelector('#btnMedium')
+const btnFast = document.querySelector('#btnFast')
+
 let n = 1
 let time = 0
-demo.innerText = str.substr(0, n)
-demo2.innerHTML = str.substr(0, n)
-let commonPlay = ()=>{
-    return setInterval(printContent, time)
-}
+let id
 
-let pause = ()=>{
-    window.clearInterval(id)
-}
-
-const printContent = () => {
-    n += 1
-    if (n > str.length) {
-        pause()
-        return
+const player = {
+    init: () => {
+        demo.innerText = str.substr(0, n)
+        demo2.innerHTML = str.substr(0, n)
+        id = player.play()
+    },
+    printContent: () => {
+        n += 1
+        if (n > str.length) {
+            player.pause()
+            return
+        }
+        demo.innerText = str.substr(0, n)
+        demo2.innerHTML = str.substr(0, n)
+        demo.scrollTop = demo.scrollHeight;
+    },
+    play: () => {
+        return setInterval(player.printContent, time)
+    },
+    pause: () => {
+        window.clearInterval(id)
+    },
+    slow: () => {
+        clearInterval(id)
+        time = 1000
+        id = player.play()
+    },
+    medium: () => {
+        player.pause()
+        time = 200
+        id = player.play()
+    },
+    fast: () => {
+        player.pause()
+        time = 0
+        id = player.play()
     }
-    demo.innerText = str.substr(0, n)
-    demo2.innerHTML = str.substr(0, n)
-    demo.scrollTop = demo.scrollHeight;
 }
-//
-// let disPlayContent = setInterval(() => {
-//     printContent()
-// }, time)
 
-
-let id = commonPlay()
+player.init()
 
 pauseBtn.onclick = () => {
-    pause()
+    player.pause()
 }
 
-play.onclick = () => {
-    id = commonPlay()
+playBtn.onclick = () => {
+    id = player.play()
 }
 
-btnSlow.onclick = () => {
-    clearInterval(id)
-    time = 1000
-    id = commonPlay()
-}
+btnSlow.onclick = player.slow
+btnMedium.onclick = player.medium
+btnFast.onclick = player.fast
 
-btnMedium.onclick = () => {
-    pause()
-    time = 200
-    id = commonPlay()
-}
 
-btnFast.onclick = () => {
-    pause()
-    time = 0
-    id = commonPlay()
-}
-
-const here = (a)=> {
+const here = (a) => {
     console.log(`This is result I want. + ${a}`)
 }
 
