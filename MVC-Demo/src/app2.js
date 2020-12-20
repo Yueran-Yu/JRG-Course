@@ -3,12 +3,11 @@ import $ from 'jquery'
 
 const eventBus = $(window)
 
-
+const localKey = 'app2.index'
 const m = {
     // initialize data
-    localKey:'app2.index',
     data: {
-        currentIndex:localStorage.getItem(m.localKey) ?? 0
+        currentIndex:localStorage.getItem(localKey) ?? 0
     },
     create() {
     },
@@ -24,12 +23,10 @@ const m = {
 }
 
 
-
-
-
-
-
-const html = `<section id="app2">
+const v = {
+    // initialize html
+    el: null,
+    html: `<div>
         <ol class="tab-bar">
             <li>Column 1</li>
             <li>Column 2</li>
@@ -38,9 +35,17 @@ const html = `<section id="app2">
             <li>Content 1</li>
             <li>Content 2</li>
         </ol>
-    </section>`
+    </div>`,
+    init(container) {
+        v.el = $(container)
+    },
+    render(n) {
+        if (v.el.children.length !== 0) v.el.empty()
+        $(v.html).appendTo(v.el)
+    }
+}
 
-const $element = $(html).appendTo($('body>.page'))
+
 const $tabBar = $('#app2 .tab-bar')
 const $tabContent = $('#app2 .tab-content')
 

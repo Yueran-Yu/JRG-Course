@@ -11395,11 +11395,11 @@ var _localStorage$getItem;
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var eventBus = (0, _jquery.default)(window);
+var localKey = 'app2.index';
 var m = {
   // initialize data
-  localKey: 'app2.index',
   data: {
-    currentIndex: (_localStorage$getItem = localStorage.getItem(m.localKey)) !== null && _localStorage$getItem !== void 0 ? _localStorage$getItem : 0
+    currentIndex: (_localStorage$getItem = localStorage.getItem(localKey)) !== null && _localStorage$getItem !== void 0 ? _localStorage$getItem : 0
   },
   create: function create() {},
   delete: function _delete() {},
@@ -11410,8 +11410,18 @@ var m = {
   },
   get: function get() {}
 };
-var html = "<section id=\"app2\">\n        <ol class=\"tab-bar\">\n            <li>Column 1</li>\n            <li>Column 2</li>\n        </ol>\n        <ol class=\"tab-content\">\n            <li>Content 1</li>\n            <li>Content 2</li>\n        </ol>\n    </section>";
-var $element = (0, _jquery.default)(html).appendTo((0, _jquery.default)('body>.page'));
+var v = {
+  // initialize html
+  el: null,
+  html: "<div>\n        <ol class=\"tab-bar\">\n            <li>Column 1</li>\n            <li>Column 2</li>\n        </ol>\n        <ol class=\"tab-content\">\n            <li>Content 1</li>\n            <li>Content 2</li>\n        </ol>\n    </div>",
+  init: function init(container) {
+    v.el = (0, _jquery.default)(container);
+  },
+  render: function render(n) {
+    if (v.el.children.length !== 0) v.el.empty();
+    (0, _jquery.default)(v.html).appendTo(v.el);
+  }
+};
 var $tabBar = (0, _jquery.default)('#app2 .tab-bar');
 var $tabContent = (0, _jquery.default)('#app2 .tab-content');
 $tabBar.on('click', 'li', function (e) {
