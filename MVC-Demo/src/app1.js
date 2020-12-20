@@ -1,12 +1,22 @@
 import './app1.css'
 import $ from 'jquery'
 
+const eventBus = $(window)
 // put all the data relevant actions to "Model"
 const m = {
     // initialize data
-
     data: {
         n: parseInt(localStorage.getItem('n')) || 100
+    },
+    create() {
+    },
+    delete() {
+    },
+    update(data) {
+        Object.assign(m.data, data)
+        eventBus.trigger('m:updated')
+    },
+    get() {
     }
 }
 
@@ -26,24 +36,11 @@ const v = {
         </div>
     </div>`,
     init(container) {
-        v.container = $(container)
-        v.render()
+        v.el = $(container)
     },
-    update() {
-        // render data to page
-        c.ui.number.text(m.data.n)
-    },
-    render() {
-        if (v.el === null) {
-            v.el = $(v.html.replace('{{n}}', (m.data.n).toString())).appendTo(v.container)
-        } else {
-            const newEl = $(v.html.replace('{{n}}', (m.data.n).toString()))
-            v.el.replaceWith(newEl)
-            console.log(v.el)
-            v.el = newEl
-            console.log(v.el)
-        }
-
+    render(n) {
+        if (v.el.children.length !== 0) v.el.empty()
+        $(v.html.replace('{{n}}', (n).toString())).appendTo(v.el)
     }
 }
 
@@ -54,37 +51,41 @@ const c = {
     // 如果render还没执行但先取了element的id，那id的值就是null
     init(container) {
         v.init(container)
-        c.ui = {
-            // the important elements
-            number: $('#number')
-        }
-        c.bindEvents()
+        v.render(m.data.n) // view = render(data)
+        c.autoBindEvents()
+        eventBus.on('m:updated', () => {
+            localStorage.setItem('n', (m.data.n).toString())
+            v.render(m.data.n)
+        })
     },
-    bindEvents() {
-        // bind the event to certain action
-        v.container.on('click','#add1', () => {
-            m.data.n += 1
-            localStorage.setItem('n', (m.data.n).toString())
-            v.render()
-        })
+    events: {
+        'click #add1': 'add',
+        'click #minus1': 'minus',
+        'click #mul2': 'mul',
+        'click #divide2': 'divide'
+    },
+    add() {
+        m.update({n: m.data.n + 1})
+    },
+    minus() {
+        m.update({n: m.data.n - 1})
+    },
+    mul() {
+        m.update({n: m.data.n * 2})
+    },
+    divide() {
+        m.update({n: m.data.n / 2})
+    },
+    autoBindEvents() {
+        for (let key in c.events) {
+            const value = c[c.events[key]]
+            const spaceIndex = key.indexOf(' ')
+            const click = key.slice(0, spaceIndex)
+            const actionBtn = key.slice(spaceIndex + 1)
+            console.log(click, actionBtn, value)
+            v.el.on(click, actionBtn, value)
 
-        v.container.on('click','#minus1', () => {
-            m.data.n -= 1
-            localStorage.setItem('n', (m.data.n).toString())
-            v.render()
-        })
-
-        v.container.on('click','#mul2', () => {
-            m.data.n *= 2
-            localStorage.setItem('n', (m.data.n).toString())
-            v.render()
-        })
-
-        v.container.on('click','#divide2', () => {
-            m.data.n /= 2
-            localStorage.setItem('n', (m.data.n).toString())
-            v.render()
-        })
+        }
     }
 }
 

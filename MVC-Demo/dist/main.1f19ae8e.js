@@ -11294,12 +11294,20 @@ var _jquery = _interopRequireDefault(require("jquery"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// put all the data relevant actions to "Model"
+var eventBus = (0, _jquery.default)(window); // put all the data relevant actions to "Model"
+
 var m = {
   // initialize data
   data: {
     n: parseInt(localStorage.getItem('n')) || 100
-  }
+  },
+  create: function create() {},
+  delete: function _delete() {},
+  update: function update(data) {
+    Object.assign(m.data, data);
+    eventBus.trigger('m:updated');
+  },
+  get: function get() {}
 }; // put all the v relevant actions to "View"
 
 var v = {
@@ -11307,23 +11315,11 @@ var v = {
   el: null,
   html: "<div>\n        <div class=\"output\">\n            <span id=\"number\">{{n}}</span>\n        </div>\n        <div class=\"actions\">\n            <button id=\"add1\">+1</button>\n            <button id=\"minus1\">-1</button>\n            <button id=\"mul2\">*2</button>\n            <button id=\"divide2\">\xF72</button>\n        </div>\n    </div>",
   init: function init(container) {
-    v.container = (0, _jquery.default)(container);
-    v.render();
+    v.el = (0, _jquery.default)(container);
   },
-  update: function update() {
-    // render data to page
-    c.ui.number.text(m.data.n);
-  },
-  render: function render() {
-    if (v.el === null) {
-      v.el = (0, _jquery.default)(v.html.replace('{{n}}', m.data.n.toString())).appendTo(v.container);
-    } else {
-      var newEl = (0, _jquery.default)(v.html.replace('{{n}}', m.data.n.toString()));
-      v.el.replaceWith(newEl);
-      console.log(v.el);
-      v.el = newEl;
-      console.log(v.el);
-    }
+  render: function render(n) {
+    if (v.el.children.length !== 0) v.el.empty();
+    (0, _jquery.default)(v.html.replace('{{n}}', n.toString())).appendTo(v.el);
   }
 }; // the remaining actions to "Controller"
 
@@ -11333,34 +11329,49 @@ var c = {
   // 如果render还没执行但先取了element的id，那id的值就是null
   init: function init(container) {
     v.init(container);
-    c.ui = {
-      // the important elements
-      number: (0, _jquery.default)('#number')
-    };
-    c.bindEvents();
+    v.render(m.data.n); // view = render(data)
+
+    c.autoBindEvents();
+    eventBus.on('m:updated', function () {
+      localStorage.setItem('n', m.data.n.toString());
+      v.render(m.data.n);
+    });
   },
-  bindEvents: function bindEvents() {
-    // bind the event to certain action
-    v.container.on('click', '#add1', function () {
-      m.data.n += 1;
-      localStorage.setItem('n', m.data.n.toString());
-      v.render();
+  events: {
+    'click #add1': 'add',
+    'click #minus1': 'minus',
+    'click #mul2': 'mul',
+    'click #divide2': 'divide'
+  },
+  add: function add() {
+    m.update({
+      n: m.data.n + 1
     });
-    v.container.on('click', '#minus1', function () {
-      m.data.n -= 1;
-      localStorage.setItem('n', m.data.n.toString());
-      v.render();
+  },
+  minus: function minus() {
+    m.update({
+      n: m.data.n - 1
     });
-    v.container.on('click', '#mul2', function () {
-      m.data.n *= 2;
-      localStorage.setItem('n', m.data.n.toString());
-      v.render();
+  },
+  mul: function mul() {
+    m.update({
+      n: m.data.n * 2
     });
-    v.container.on('click', '#divide2', function () {
-      m.data.n /= 2;
-      localStorage.setItem('n', m.data.n.toString());
-      v.render();
+  },
+  divide: function divide() {
+    m.update({
+      n: m.data.n / 2
     });
+  },
+  autoBindEvents: function autoBindEvents() {
+    for (var key in c.events) {
+      var value = c[c.events[key]];
+      var spaceIndex = key.indexOf(' ');
+      var click = key.slice(0, spaceIndex);
+      var actionBtn = key.slice(spaceIndex + 1);
+      console.log(click, actionBtn, value);
+      v.el.on(click, actionBtn, value);
+    }
   }
 }; //the first time render html
 // c.init()
