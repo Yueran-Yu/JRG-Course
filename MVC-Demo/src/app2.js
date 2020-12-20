@@ -1,6 +1,33 @@
 import './app2.css'
 import $ from 'jquery'
 
+const eventBus = $(window)
+
+
+const m = {
+    // initialize data
+    localKey:'app2.index',
+    data: {
+        currentIndex:localStorage.getItem(m.localKey) ?? 0
+    },
+    create() {
+    },
+    delete() {
+    },
+    update(data) {
+        Object.assign(m.data, data)
+        eventBus.trigger('m:updated')
+        localStorage.setItem('index', m.data.currentIndex)
+    },
+    get() {
+    }
+}
+
+
+
+
+
+
 
 const html = `<section id="app2">
         <ol class="tab-bar">
@@ -16,8 +43,7 @@ const html = `<section id="app2">
 const $element = $(html).appendTo($('body>.page'))
 const $tabBar = $('#app2 .tab-bar')
 const $tabContent = $('#app2 .tab-content')
-const localKey = 'app2.index'
-const $currentIndex = localStorage.getItem(localKey) ?? 0
+
 
 $tabBar.on('click', 'li', (e) => {
     const $li = $(e.currentTarget)

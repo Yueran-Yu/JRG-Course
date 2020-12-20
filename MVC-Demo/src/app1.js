@@ -15,6 +15,7 @@ const m = {
     update(data) {
         Object.assign(m.data, data)
         eventBus.trigger('m:updated')
+        localStorage.setItem('n', (m.data.n).toString())
     },
     get() {
     }
@@ -54,7 +55,6 @@ const c = {
         v.render(m.data.n) // view = render(data)
         c.autoBindEvents()
         eventBus.on('m:updated', () => {
-            localStorage.setItem('n', (m.data.n).toString())
             v.render(m.data.n)
         })
     },

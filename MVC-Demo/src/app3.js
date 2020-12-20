@@ -1,6 +1,7 @@
 import './app3.css'
 import $ from 'jquery'
 
+const eventBus = $(window)
 const html = `<section id="app3">
         <div class="square"></div>
     </section>`

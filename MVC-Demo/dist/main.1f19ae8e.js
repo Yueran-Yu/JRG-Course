@@ -11306,6 +11306,7 @@ var m = {
   update: function update(data) {
     Object.assign(m.data, data);
     eventBus.trigger('m:updated');
+    localStorage.setItem('n', m.data.n.toString());
   },
   get: function get() {}
 }; // put all the v relevant actions to "View"
@@ -11333,7 +11334,6 @@ var c = {
 
     c.autoBindEvents();
     eventBus.on('m:updated', function () {
-      localStorage.setItem('n', m.data.n.toString());
       v.render(m.data.n);
     });
   },
@@ -11394,12 +11394,26 @@ var _localStorage$getItem;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var eventBus = (0, _jquery.default)(window);
+var m = {
+  // initialize data
+  localKey: 'app2.index',
+  data: {
+    currentIndex: (_localStorage$getItem = localStorage.getItem(m.localKey)) !== null && _localStorage$getItem !== void 0 ? _localStorage$getItem : 0
+  },
+  create: function create() {},
+  delete: function _delete() {},
+  update: function update(data) {
+    Object.assign(m.data, data);
+    eventBus.trigger('m:updated');
+    localStorage.setItem('index', m.data.currentIndex);
+  },
+  get: function get() {}
+};
 var html = "<section id=\"app2\">\n        <ol class=\"tab-bar\">\n            <li>Column 1</li>\n            <li>Column 2</li>\n        </ol>\n        <ol class=\"tab-content\">\n            <li>Content 1</li>\n            <li>Content 2</li>\n        </ol>\n    </section>";
 var $element = (0, _jquery.default)(html).appendTo((0, _jquery.default)('body>.page'));
 var $tabBar = (0, _jquery.default)('#app2 .tab-bar');
 var $tabContent = (0, _jquery.default)('#app2 .tab-content');
-var localKey = 'app2.index';
-var $currentIndex = (_localStorage$getItem = localStorage.getItem(localKey)) !== null && _localStorage$getItem !== void 0 ? _localStorage$getItem : 0;
 $tabBar.on('click', 'li', function (e) {
   var $li = (0, _jquery.default)(e.currentTarget);
   $li.addClass('selected').siblings().removeClass('selected');
@@ -11422,6 +11436,7 @@ var _jquery = _interopRequireDefault(require("jquery"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var eventBus = (0, _jquery.default)(window);
 var html = "<section id=\"app3\">\n        <div class=\"square\"></div>\n    </section>";
 var $element = (0, _jquery.default)(html).appendTo((0, _jquery.default)('body>.page'));
 var $square = (0, _jquery.default)('#app3 .square');
@@ -11457,6 +11472,7 @@ var _jquery = _interopRequireDefault(require("jquery"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var eventBus = (0, _jquery.default)(window);
 var html = "<section id=\"app4\">\n        <div class=\"circle\"></div>\n    </section>";
 var $element = (0, _jquery.default)(html).appendTo((0, _jquery.default)('body>.page'));
 var $circle = (0, _jquery.default)('#app4 .circle');
