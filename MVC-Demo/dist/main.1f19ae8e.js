@@ -11283,6 +11283,11 @@ return jQuery;
 },{"process":"../../../../../.config/yarn/global/node_modules/process/browser.js"}],"app1.js":[function(require,module,exports) {
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
 require("./app1.css");
 
 var _jquery = _interopRequireDefault(require("jquery"));
@@ -11290,68 +11295,78 @@ var _jquery = _interopRequireDefault(require("jquery"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // put all the data relevant actions to "Model"
-var model = {
+var m = {
   // initialize data
   data: {
-    n: parseInt(localStorage.getItem('n'))
+    n: parseInt(localStorage.getItem('n')) || 100
   }
-}; // put all the view relevant actions to "View"
+}; // put all the v relevant actions to "View"
 
-var view = {
+var v = {
   // initialize html
-  html: "<section id=\"app1\">\n        <div class=\"output\">\n            <span id=\"number\">{{n}}</span>\n        </div>\n        <div class=\"actions\">\n            <button id=\"add1\">+1</button>\n            <button id=\"minus1\">-1</button>\n            <button id=\"mul2\">*2</button>\n            <button id=\"divide2\">\xF72</button>\n        </div>\n    </section>",
+  el: null,
+  html: "<div>\n        <div class=\"output\">\n            <span id=\"number\">{{n}}</span>\n        </div>\n        <div class=\"actions\">\n            <button id=\"add1\">+1</button>\n            <button id=\"minus1\">-1</button>\n            <button id=\"mul2\">*2</button>\n            <button id=\"divide2\">\xF72</button>\n        </div>\n    </div>",
+  init: function init(container) {
+    v.container = (0, _jquery.default)(container);
+    v.render();
+  },
   update: function update() {
     // render data to page
-    controller.ui.number.text(model.data.n || 100);
+    c.ui.number.text(m.data.n);
   },
   render: function render() {
-    (0, _jquery.default)(view.html.replace('{{n}}', model.data.n)).appendTo((0, _jquery.default)('body>.page'));
+    if (v.el === null) {
+      v.el = (0, _jquery.default)(v.html.replace('{{n}}', m.data.n.toString())).appendTo(v.container);
+    } else {
+      var newEl = (0, _jquery.default)(v.html.replace('{{n}}', m.data.n.toString()));
+      v.el.replaceWith(newEl);
+      console.log(v.el);
+      v.el = newEl;
+      console.log(v.el);
+    }
   }
 }; // the remaining actions to "Controller"
 
-var controller = {
-  init: function init() {
-    controller.ui = {
+var c = {
+  //这个初始化方法为了避免，element的id在 v.render() 方法之前执行，
+  // render方法是为了 append html到  body>.page上去的，
+  // 如果render还没执行但先取了element的id，那id的值就是null
+  init: function init(container) {
+    v.init(container);
+    c.ui = {
       // the important elements
-      btn1: (0, _jquery.default)('#add1'),
-      btn2: (0, _jquery.default)('#minus1'),
-      btn3: (0, _jquery.default)('#mul2'),
-      btn4: (0, _jquery.default)('#divide2'),
       number: (0, _jquery.default)('#number')
     };
-    controller.bindEvents();
+    c.bindEvents();
   },
   bindEvents: function bindEvents() {
     // bind the event to certain action
-    controller.ui.btn1.on('click', function () {
-      var n = parseInt(controller.ui.number.text());
-      n += 1;
-      localStorage.setItem('n', n);
-      controller.ui.number.text(n);
+    v.container.on('click', '#add1', function () {
+      m.data.n += 1;
+      localStorage.setItem('n', m.data.n.toString());
+      v.render();
     });
-    controller.ui.btn2.on('click', function () {
-      var n = parseInt(controller.ui.number.text());
-      n -= 1;
-      localStorage.setItem('n', n);
-      controller.ui.number.text(n);
+    v.container.on('click', '#minus1', function () {
+      m.data.n -= 1;
+      localStorage.setItem('n', m.data.n.toString());
+      v.render();
     });
-    controller.ui.btn3.on('click', function () {
-      var n = parseInt(controller.ui.number.text());
-      n *= 2;
-      localStorage.setItem('n', n);
-      controller.ui.number.text(n);
+    v.container.on('click', '#mul2', function () {
+      m.data.n *= 2;
+      localStorage.setItem('n', m.data.n.toString());
+      v.render();
     });
-    controller.ui.btn4.on('click', function () {
-      var n = parseInt(controller.ui.number.text());
-      n /= 2;
-      localStorage.setItem('n', n);
-      controller.ui.number.text(n);
+    v.container.on('click', '#divide2', function () {
+      m.data.n /= 2;
+      localStorage.setItem('n', m.data.n.toString());
+      v.render();
     });
   }
 }; //the first time render html
+// c.init()
 
-view.render();
-controller.init();
+var _default = c;
+exports.default = _default;
 },{"./app1.css":"app1.css","jquery":"../node_modules/jquery/dist/jquery.js"}],"app2.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
@@ -11369,7 +11384,7 @@ var _localStorage$getItem;
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var html = "<section id=\"app2\">\n        <ol class=\"tab-bar\">\n            <li>Column 1</li>\n            <li>Column 2</li>\n        </ol>\n        <ol class=\"tab-content\">\n            <li>Content 1</li>\n            <li>Content 2</li>\n        </ol>\n    </section>";
-var $element = (0, _jquery.default)(html).appendTo((0, _jquery.default)('.page'));
+var $element = (0, _jquery.default)(html).appendTo((0, _jquery.default)('body>.page'));
 var $tabBar = (0, _jquery.default)('#app2 .tab-bar');
 var $tabContent = (0, _jquery.default)('#app2 .tab-content');
 var localKey = 'app2.index';
@@ -11397,7 +11412,7 @@ var _jquery = _interopRequireDefault(require("jquery"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var html = "<section id=\"app3\">\n        <div class=\"square\"></div>\n    </section>";
-var $element = (0, _jquery.default)(html).appendTo((0, _jquery.default)('.page'));
+var $element = (0, _jquery.default)(html).appendTo((0, _jquery.default)('body>.page'));
 var $square = (0, _jquery.default)('#app3 .square');
 var localKey = 'app3.active'; // 'no' and 'undefined' are false, only 'yes' is true, so we only need to check if the localKey is 'yes'
 
@@ -11431,8 +11446,8 @@ var _jquery = _interopRequireDefault(require("jquery"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var html = " <section id=\"app4\">\n        <div class=\"circle\"></div>\n    </section>";
-var $element = (0, _jquery.default)(html).appendTo((0, _jquery.default)('.page'));
+var html = "<section id=\"app4\">\n        <div class=\"circle\"></div>\n    </section>";
+var $element = (0, _jquery.default)(html).appendTo((0, _jquery.default)('body>.page'));
 var $circle = (0, _jquery.default)('#app4 .circle');
 $circle.on('mouseenter', function () {
   $circle.addClass('active');
@@ -11449,7 +11464,7 @@ module.hot.accept(reloadCSS);
 
 require("./global.css");
 
-require("./app1.js");
+var _app = _interopRequireDefault(require("./app1.js"));
 
 require("./app2.js");
 
@@ -11458,6 +11473,12 @@ require("./app3.js");
 require("./app4.js");
 
 require("./reset.css");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+document.querySelector('img').remove();
+
+_app.default.init('#app1');
 },{"./global.css":"global.css","./app1.js":"app1.js","./app2.js":"app2.js","./app3.js":"app3.js","./app4.js":"app4.js","./reset.css":"reset.css"}],"../../../../../.config/yarn/global/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -11486,7 +11507,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52569" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50398" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
