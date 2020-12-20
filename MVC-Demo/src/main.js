@@ -6,3 +6,6 @@ import './app4.js'
 import './reset.css'
 document.querySelector('img').remove()
 c.init('#app1')
+c.init('#app2')
+c.init('#app3')
+c.init('#app4')

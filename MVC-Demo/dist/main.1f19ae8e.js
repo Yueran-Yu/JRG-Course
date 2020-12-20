@@ -11386,6 +11386,11 @@ module.hot.accept(reloadCSS);
 },{"_css_loader":"../../../../../.config/yarn/global/node_modules/parcel/src/builtins/css-loader.js"}],"app2.js":[function(require,module,exports) {
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
 require("./app2.css");
 
 var _jquery = _interopRequireDefault(require("jquery"));
@@ -11417,9 +11422,38 @@ var v = {
   init: function init(container) {
     v.el = (0, _jquery.default)(container);
   },
-  render: function render(n) {
+  render: function render() {
     if (v.el.children.length !== 0) v.el.empty();
     (0, _jquery.default)(v.html).appendTo(v.el);
+  }
+};
+var c = {
+  init: function init(container) {
+    v.init(container);
+    v.render(); // view = render(data)
+
+    c.autoBindEvents();
+    eventBus.on('m:updated', function () {
+      v.render();
+    });
+  },
+  events: {
+    'click tab-bar li': 'x'
+  },
+  x: function x() {
+    m.update({
+      n: m.data.n + 1
+    });
+  },
+  autoBindEvents: function autoBindEvents() {
+    for (var key in c.events) {
+      var value = c[c.events[key]];
+      var spaceIndex = key.indexOf(' ');
+      var click = key.slice(0, spaceIndex);
+      var actionBtn = key.slice(spaceIndex + 1);
+      console.log(click, actionBtn, value);
+      v.el.on(click, actionBtn, value);
+    }
   }
 };
 var $tabBar = (0, _jquery.default)('#app2 .tab-bar');
@@ -11432,6 +11466,8 @@ $tabBar.on('click', 'li', function (e) {
   $tabContent.children().eq(index).addClass('active').siblings().removeClass('active');
 });
 $tabBar.children().eq($currentIndex).trigger('click');
+var _default = c;
+exports.default = _default;
 },{"./app2.css":"app2.css","jquery":"../node_modules/jquery/dist/jquery.js"}],"app3.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
@@ -11516,6 +11552,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 document.querySelector('img').remove();
 
 _app.default.init('#app1');
+
+_app.default.init('#app2');
+
+_app.default.init('#app3');
+
+_app.default.init('#app4');
 },{"./global.css":"global.css","./app1.js":"app1.js","./app2.js":"app2.js","./app3.js":"app3.js","./app4.js":"app4.js","./reset.css":"reset.css"}],"../../../../../.config/yarn/global/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
