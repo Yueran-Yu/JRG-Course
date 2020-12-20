@@ -11369,7 +11369,6 @@ var c = {
       var spaceIndex = key.indexOf(' ');
       var click = key.slice(0, spaceIndex);
       var actionBtn = key.slice(spaceIndex + 1);
-      console.log(click, actionBtn, value);
       v.el.on(click, actionBtn, value);
     }
   }
@@ -11395,7 +11394,7 @@ require("./app2.css");
 
 var _jquery = _interopRequireDefault(require("jquery"));
 
-var _localStorage$getItem;
+var _parseInt;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -11404,46 +11403,50 @@ var localKey = 'app2.index';
 var m = {
   // initialize data
   data: {
-    currentIndex: (_localStorage$getItem = localStorage.getItem(localKey)) !== null && _localStorage$getItem !== void 0 ? _localStorage$getItem : 0
+    currentIndex: (_parseInt = parseInt(localStorage.getItem(localKey))) !== null && _parseInt !== void 0 ? _parseInt : 0
   },
   create: function create() {},
   delete: function _delete() {},
   update: function update(data) {
     Object.assign(m.data, data);
     eventBus.trigger('m:updated');
-    localStorage.setItem('index', m.data.currentIndex);
+    localStorage.setItem('index', m.data.currentIndex.toString());
   },
   get: function get() {}
 };
 var v = {
   // initialize html
   el: null,
-  html: "<div>\n        <ol class=\"tab-bar\">\n            <li>Column 1</li>\n            <li>Column 2</li>\n        </ol>\n        <ol class=\"tab-content\">\n            <li>Content 1</li>\n            <li>Content 2</li>\n        </ol>\n    </div>",
+  html: function html(index) {
+    return "<div>\n       <ol class=\"tab-bar\">\n            <li class=\"".concat(index === 0 ? 'selected' : '', "\" data-index=\"0\">Column 1</li>\n            <li class=\"").concat(index === 1 ? 'selected' : '', "\" data-index=\"1\">Column 2</li>\n        </ol>\n        <ol class=\"tab-content\">\n            <li class=\"").concat(index === 0 ? 'active' : '', "\" >Content 1</li>\n            <li class=\"").concat(index === 1 ? 'active' : '', "\" >Content 2</li>\n        </ol>\n    </div>");
+  },
   init: function init(container) {
     v.el = (0, _jquery.default)(container);
   },
-  render: function render() {
+  render: function render(index) {
     if (v.el.children.length !== 0) v.el.empty();
-    (0, _jquery.default)(v.html).appendTo(v.el);
+    (0, _jquery.default)(v.html(index)).appendTo(v.el);
   }
 };
 var c = {
   init: function init(container) {
     v.init(container);
-    v.render(); // view = render(data)
+    v.render(m.data.currentIndex); // view = render(data)
 
     c.autoBindEvents();
     eventBus.on('m:updated', function () {
-      v.render();
+      v.render(m.data.currentIndex);
     });
   },
   events: {
-    'click tab-bar li': 'x'
+    'click .tab-bar li': 'x'
   },
-  x: function x() {
+  x: function x(e) {
+    var index = parseInt(e.currentTarget.dataset.index);
     m.update({
-      n: m.data.n + 1
+      currentIndex: index
     });
+    console.log("x");
   },
   autoBindEvents: function autoBindEvents() {
     for (var key in c.events) {
@@ -11455,17 +11458,22 @@ var c = {
       v.el.on(click, actionBtn, value);
     }
   }
-};
-var $tabBar = (0, _jquery.default)('#app2 .tab-bar');
-var $tabContent = (0, _jquery.default)('#app2 .tab-content');
-$tabBar.on('click', 'li', function (e) {
-  var $li = (0, _jquery.default)(e.currentTarget);
-  $li.addClass('selected').siblings().removeClass('selected');
-  var index = $li.index();
-  localStorage.setItem(localKey, index);
-  $tabContent.children().eq(index).addClass('active').siblings().removeClass('active');
-});
-$tabBar.children().eq($currentIndex).trigger('click');
+}; // const $tabBar = $('#app2 .tab-bar')
+// const $tabContent = $('#app2 .tab-content')
+// $tabBar.on('click', 'li', (e) => {
+//     const $li = $(e.currentTarget)
+//     $li.addClass('selected')
+//         .siblings()
+//         .removeClass('selected')
+//
+//     const index = $li.index()
+//     localStorage.setItem(localKey, index)
+//     $tabContent
+//         .children().eq(index).addClass('active')
+//         .siblings().removeClass('active')
+// })
+// $tabBar.children().eq($currentIndex).trigger('click')
+
 var _default = c;
 exports.default = _default;
 },{"./app2.css":"app2.css","jquery":"../node_modules/jquery/dist/jquery.js"}],"app3.css":[function(require,module,exports) {
@@ -11539,7 +11547,7 @@ require("./global.css");
 
 var _app = _interopRequireDefault(require("./app1.js"));
 
-require("./app2.js");
+var _app2 = _interopRequireDefault(require("./app2.js"));
 
 require("./app3.js");
 
@@ -11553,7 +11561,7 @@ document.querySelector('img').remove();
 
 _app.default.init('#app1');
 
-_app.default.init('#app2');
+_app2.default.init('#app2');
 
 _app.default.init('#app3');
 

@@ -82,7 +82,6 @@ const c = {
             const spaceIndex = key.indexOf(' ')
             const click = key.slice(0, spaceIndex)
             const actionBtn = key.slice(spaceIndex + 1)
-            console.log(click, actionBtn, value)
             v.el.on(click, actionBtn, value)
 
         }

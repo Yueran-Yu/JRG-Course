@@ -7,7 +7,7 @@ const localKey = 'app2.index'
 const m = {
     // initialize data
     data: {
-        currentIndex:localStorage.getItem(localKey) ?? 0
+        currentIndex: parseInt(localStorage.getItem(localKey)) ?? 0
     },
     create() {
     },
@@ -16,7 +16,7 @@ const m = {
     update(data) {
         Object.assign(m.data, data)
         eventBus.trigger('m:updated')
-        localStorage.setItem('index', m.data.currentIndex)
+        localStorage.setItem('index', (m.data.currentIndex).toString())
     },
     get() {
     }
@@ -26,22 +26,24 @@ const m = {
 const v = {
     // initialize html
     el: null,
-    html: `<div>
-        <ol class="tab-bar">
-            <li>Column 1</li>
-            <li>Column 2</li>
+    html: (index) => {
+        return `<div>
+       <ol class="tab-bar">
+            <li class="${index === 0 ? 'selected' : ''}" data-index="0">Column 1</li>
+            <li class="${index === 1 ? 'selected' : ''}" data-index="1">Column 2</li>
         </ol>
         <ol class="tab-content">
-            <li>Content 1</li>
-            <li>Content 2</li>
+            <li class="${index === 0 ? 'active' : ''}" >Content 1</li>
+            <li class="${index === 1 ? 'active' : ''}" >Content 2</li>
         </ol>
-    </div>`,
+    </div>`
+    },
     init(container) {
         v.el = $(container)
     },
-    render() {
+    render(index) {
         if (v.el.children.length !== 0) v.el.empty()
-        $(v.html).appendTo(v.el)
+        $(v.html(index)).appendTo(v.el)
     }
 }
 
@@ -49,17 +51,19 @@ const v = {
 const c = {
     init(container) {
         v.init(container)
-        v.render() // view = render(data)
+        v.render(m.data.currentIndex) // view = render(data)
         c.autoBindEvents()
         eventBus.on('m:updated', () => {
-            v.render()
+            v.render(m.data.currentIndex)
         })
     },
     events: {
-        'click tab-bar li': 'x'
+        'click .tab-bar li': 'x'
     },
-    x() {
-        m.update({n: m.data.n + 1})
+    x(e) {
+      const index = parseInt(e.currentTarget.dataset.index)
+        m.update({currentIndex: index})
+        console.log("x")
     },
     autoBindEvents() {
         for (let key in c.events) {
@@ -75,25 +79,24 @@ const c = {
 }
 
 
-
-const $tabBar = $('#app2 .tab-bar')
-const $tabContent = $('#app2 .tab-content')
-
-
-$tabBar.on('click', 'li', (e) => {
-    const $li = $(e.currentTarget)
-    $li.addClass('selected')
-        .siblings()
-        .removeClass('selected')
-
-    const index = $li.index()
-    localStorage.setItem(localKey, index)
-    $tabContent
-        .children().eq(index).addClass('active')
-        .siblings().removeClass('active')
-})
-
-$tabBar.children().eq($currentIndex).trigger('click')
+// const $tabBar = $('#app2 .tab-bar')
+// const $tabContent = $('#app2 .tab-content')
 
 
-export default  c
+// $tabBar.on('click', 'li', (e) => {
+//     const $li = $(e.currentTarget)
+//     $li.addClass('selected')
+//         .siblings()
+//         .removeClass('selected')
+//
+//     const index = $li.index()
+//     localStorage.setItem(localKey, index)
+//     $tabContent
+//         .children().eq(index).addClass('active')
+//         .siblings().removeClass('active')
+// })
+
+// $tabBar.children().eq($currentIndex).trigger('click')
+
+
+export default c
