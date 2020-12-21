@@ -9,14 +9,13 @@ const m = new Model({
     data:
         {
             n: parseInt(localStorage.getItem('n')) || 100
-        }
+        },
+    update(data){
+        Object.assign(m.data, data)
+        eventBus.trigger('m:updated')
+        localStorage.setItem('n', (m.data.n).toString())
+    }
 })
-
-m.update = (data) => {
-    Object.assign(m.data, data)
-    eventBus.trigger('m:updated')
-    localStorage.setItem('n', (m.data.n).toString())
-}
 
 // put all the v relevant actions to "View"
 const v = {

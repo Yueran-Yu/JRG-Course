@@ -11296,9 +11296,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 var Model = /*#__PURE__*/function () {
   function Model(options) {
+    var _this = this;
+
     _classCallCheck(this, Model);
 
-    this.data = options.data;
+    ['data', 'update', 'create', 'delete', 'get'].forEach(function (key) {
+      if (key in options) {
+        _this[key] = options[key];
+      }
+    });
   }
 
   _createClass(Model, [{
@@ -11350,15 +11356,13 @@ var eventBus = (0, _jquery.default)(window); // put all the data relevant action
 var m = new _Mode.default({
   data: {
     n: parseInt(localStorage.getItem('n')) || 100
+  },
+  update: function update(data) {
+    Object.assign(m.data, data);
+    eventBus.trigger('m:updated');
+    localStorage.setItem('n', m.data.n.toString());
   }
-});
-
-m.update = function (data) {
-  Object.assign(m.data, data);
-  eventBus.trigger('m:updated');
-  localStorage.setItem('n', m.data.n.toString());
-}; // put all the v relevant actions to "View"
-
+}); // put all the v relevant actions to "View"
 
 var v = {
   // initialize html
@@ -11443,13 +11447,17 @@ require("./app2.css");
 
 var _jquery = _interopRequireDefault(require("jquery"));
 
+var _Mode = _interopRequireDefault(require("./base/Mode"));
+
+var _Mode2 = _interopRequireDefault(require("./base/Mode.js"));
+
 var _parseInt;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var eventBus = (0, _jquery.default)(window);
 var localKey = 'app2.index';
-var m = {
+var m = new _Mode2.default({
   // initialize data
   data: {
     currentIndex: (_parseInt = parseInt(localStorage.getItem(localKey))) !== null && _parseInt !== void 0 ? _parseInt : 0
@@ -11462,7 +11470,7 @@ var m = {
     localStorage.setItem('index', m.data.currentIndex.toString());
   },
   get: function get() {}
-};
+});
 var v = {
   // initialize html
   el: null,
@@ -11495,7 +11503,6 @@ var c = {
     m.update({
       currentIndex: index
     });
-    console.log("x");
   },
   autoBindEvents: function autoBindEvents() {
     for (var key in c.events) {
@@ -11503,7 +11510,6 @@ var c = {
       var spaceIndex = key.indexOf(' ');
       var click = key.slice(0, spaceIndex);
       var actionBtn = key.slice(spaceIndex + 1);
-      console.log(click, actionBtn, value);
       v.el.on(click, actionBtn, value);
     }
   }
@@ -11525,7 +11531,7 @@ var c = {
 
 var _default = c;
 exports.default = _default;
-},{"./app2.css":"app2.css","jquery":"../node_modules/jquery/dist/jquery.js"}],"reset.css":[function(require,module,exports) {
+},{"./app2.css":"app2.css","jquery":"../node_modules/jquery/dist/jquery.js","./base/Mode":"base/Mode.js","./base/Mode.js":"base/Mode.js"}],"reset.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);

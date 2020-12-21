@@ -1,10 +1,12 @@
 import './app2.css'
 import $ from 'jquery'
+import Mode from "./base/Mode";
+import Model from "./base/Mode.js";
 
 const eventBus = $(window)
 
 const localKey = 'app2.index'
-const m = {
+const m = new Model({
     // initialize data
     data: {
         currentIndex: parseInt(localStorage.getItem(localKey)) ?? 0
@@ -20,7 +22,7 @@ const m = {
     },
     get() {
     }
-}
+})
 
 const v = {
     // initialize html
@@ -62,7 +64,6 @@ const c = {
     x(e) {
       const index = parseInt(e.currentTarget.dataset.index)
         m.update({currentIndex: index})
-        console.log("x")
     },
     autoBindEvents() {
         for (let key in c.events) {
@@ -70,7 +71,6 @@ const c = {
             const spaceIndex = key.indexOf(' ')
             const click = key.slice(0, spaceIndex)
             const actionBtn = key.slice(spaceIndex + 1)
-            console.log(click, actionBtn, value)
             v.el.on(click, actionBtn, value)
 
         }
