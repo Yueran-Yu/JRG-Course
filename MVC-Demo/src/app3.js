@@ -31,3 +31,5 @@ $square.on('click', () => {
         localStorage.setItem('app3.active', 'yes')
     }
 })
+
+export default c

@@ -12,3 +12,5 @@ $circle.on('mouseenter', () => {
     $circle.addClass('active')
 }).on('mouseleave', () =>
     $circle.removeClass('active'))
+
+export default c

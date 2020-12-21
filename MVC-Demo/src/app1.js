@@ -1,24 +1,21 @@
 import './app1.css'
 import $ from 'jquery'
+import Model from "./base/Mode.js";
+
 
 const eventBus = $(window)
 // put all the data relevant actions to "Model"
-const m = {
-    // initialize data
-    data: {
-        n: parseInt(localStorage.getItem('n')) || 100
-    },
-    create() {
-    },
-    delete() {
-    },
-    update(data) {
-        Object.assign(m.data, data)
-        eventBus.trigger('m:updated')
-        localStorage.setItem('n', (m.data.n).toString())
-    },
-    get() {
-    }
+const m = new Model({
+    data:
+        {
+            n: parseInt(localStorage.getItem('n')) || 100
+        }
+})
+
+m.update = (data) => {
+    Object.assign(m.data, data)
+    eventBus.trigger('m:updated')
+    localStorage.setItem('n', (m.data.n).toString())
 }
 
 // put all the v relevant actions to "View"
@@ -26,7 +23,7 @@ const v = {
     // initialize html
     el: null,
     html: `<div>
-        <div class="output">
+        <div class="output"> 
             <span id="number">{{n}}</span>
         </div>
         <div class="actions">
@@ -44,6 +41,7 @@ const v = {
         $(v.html.replace('{{n}}', (n).toString())).appendTo(v.el)
     }
 }
+
 
 // the remaining actions to "Controller"
 const c = {
@@ -90,6 +88,5 @@ const c = {
 
 //the first time render html
 // c.init()
-
 export default c
 

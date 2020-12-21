@@ -11280,7 +11280,56 @@ if ( typeof noGlobal === "undefined" ) {
 return jQuery;
 } );
 
-},{"process":"../../../../../.config/yarn/global/node_modules/process/browser.js"}],"app1.js":[function(require,module,exports) {
+},{"process":"../../../../../.config/yarn/global/node_modules/process/browser.js"}],"base/Mode.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Model = /*#__PURE__*/function () {
+  function Model(options) {
+    _classCallCheck(this, Model);
+
+    this.data = options.data;
+  }
+
+  _createClass(Model, [{
+    key: "create",
+    value: function create() {
+      console && console.error && console.error("You haven't implement Create"); //optional chaining operator
+      // console?.error?.("You haven't implement Create")
+    }
+  }, {
+    key: "delete",
+    value: function _delete() {
+      console && console.error && console.error("You haven't implement delete");
+    }
+  }, {
+    key: "update",
+    value: function update(data) {
+      console && console.error && console.error("You haven't implement update");
+    }
+  }, {
+    key: "get",
+    value: function get() {
+      console && console.error && console.error("You haven't implement get");
+    }
+  }]);
+
+  return Model;
+}();
+
+var _default = Model;
+exports.default = _default;
+},{}],"app1.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11292,29 +11341,29 @@ require("./app1.css");
 
 var _jquery = _interopRequireDefault(require("jquery"));
 
+var _Mode = _interopRequireDefault(require("./base/Mode.js"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var eventBus = (0, _jquery.default)(window); // put all the data relevant actions to "Model"
 
-var m = {
-  // initialize data
+var m = new _Mode.default({
   data: {
     n: parseInt(localStorage.getItem('n')) || 100
-  },
-  create: function create() {},
-  delete: function _delete() {},
-  update: function update(data) {
-    Object.assign(m.data, data);
-    eventBus.trigger('m:updated');
-    localStorage.setItem('n', m.data.n.toString());
-  },
-  get: function get() {}
+  }
+});
+
+m.update = function (data) {
+  Object.assign(m.data, data);
+  eventBus.trigger('m:updated');
+  localStorage.setItem('n', m.data.n.toString());
 }; // put all the v relevant actions to "View"
+
 
 var v = {
   // initialize html
   el: null,
-  html: "<div>\n        <div class=\"output\">\n            <span id=\"number\">{{n}}</span>\n        </div>\n        <div class=\"actions\">\n            <button id=\"add1\">+1</button>\n            <button id=\"minus1\">-1</button>\n            <button id=\"mul2\">*2</button>\n            <button id=\"divide2\">\xF72</button>\n        </div>\n    </div>",
+  html: "<div>\n        <div class=\"output\"> \n            <span id=\"number\">{{n}}</span>\n        </div>\n        <div class=\"actions\">\n            <button id=\"add1\">+1</button>\n            <button id=\"minus1\">-1</button>\n            <button id=\"mul2\">*2</button>\n            <button id=\"divide2\">\xF72</button>\n        </div>\n    </div>",
   init: function init(container) {
     v.el = (0, _jquery.default)(container);
   },
@@ -11377,7 +11426,7 @@ var c = {
 
 var _default = c;
 exports.default = _default;
-},{"./app1.css":"app1.css","jquery":"../node_modules/jquery/dist/jquery.js"}],"app2.css":[function(require,module,exports) {
+},{"./app1.css":"app1.css","jquery":"../node_modules/jquery/dist/jquery.js","./base/Mode.js":"base/Mode.js"}],"app2.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -11476,66 +11525,7 @@ var c = {
 
 var _default = c;
 exports.default = _default;
-},{"./app2.css":"app2.css","jquery":"../node_modules/jquery/dist/jquery.js"}],"app3.css":[function(require,module,exports) {
-var reloadCSS = require('_css_loader');
-
-module.hot.dispose(reloadCSS);
-module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../../.config/yarn/global/node_modules/parcel/src/builtins/css-loader.js"}],"app3.js":[function(require,module,exports) {
-"use strict";
-
-require("./app3.css");
-
-var _jquery = _interopRequireDefault(require("jquery"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var eventBus = (0, _jquery.default)(window);
-var html = "<section id=\"app3\">\n        <div class=\"square\"></div>\n    </section>";
-var $element = (0, _jquery.default)(html).appendTo((0, _jquery.default)('body>.page'));
-var $square = (0, _jquery.default)('#app3 .square');
-var localKey = 'app3.active'; // 'no' and 'undefined' are false, only 'yes' is true, so we only need to check if the localKey is 'yes'
-
-var active = localStorage.getItem(localKey) === 'yes'; // if(active){
-//     $square.addClass('active')
-// }else{
-//     $square.removeClass('active')
-// }
-
-$square.toggleClass('active', active);
-$square.on('click', function () {
-  if ($square.hasClass('active')) {
-    $square.removeClass('active');
-    localStorage.setItem('app3.active', 'no');
-  } else {
-    $square.addClass('active');
-    localStorage.setItem('app3.active', 'yes');
-  }
-});
-},{"./app3.css":"app3.css","jquery":"../node_modules/jquery/dist/jquery.js"}],"app4.css":[function(require,module,exports) {
-var reloadCSS = require('_css_loader');
-
-module.hot.dispose(reloadCSS);
-module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../../.config/yarn/global/node_modules/parcel/src/builtins/css-loader.js"}],"app4.js":[function(require,module,exports) {
-"use strict";
-
-require("./app4.css");
-
-var _jquery = _interopRequireDefault(require("jquery"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var eventBus = (0, _jquery.default)(window);
-var html = "<section id=\"app4\">\n        <div class=\"circle\"></div>\n    </section>";
-var $element = (0, _jquery.default)(html).appendTo((0, _jquery.default)('body>.page'));
-var $circle = (0, _jquery.default)('#app4 .circle');
-$circle.on('mouseenter', function () {
-  $circle.addClass('active');
-}).on('mouseleave', function () {
-  return $circle.removeClass('active');
-});
-},{"./app4.css":"app4.css","jquery":"../node_modules/jquery/dist/jquery.js"}],"reset.css":[function(require,module,exports) {
+},{"./app2.css":"app2.css","jquery":"../node_modules/jquery/dist/jquery.js"}],"reset.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -11549,24 +11539,19 @@ var _app = _interopRequireDefault(require("./app1.js"));
 
 var _app2 = _interopRequireDefault(require("./app2.js"));
 
-require("./app3.js");
-
-require("./app4.js");
-
 require("./reset.css");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// import b from './app3.js'
+// import d from './app4.js'
 document.querySelector('img').remove();
 
 _app.default.init('#app1');
 
-_app2.default.init('#app2');
-
-_app.default.init('#app3');
-
-_app.default.init('#app4');
-},{"./global.css":"global.css","./app1.js":"app1.js","./app2.js":"app2.js","./app3.js":"app3.js","./app4.js":"app4.js","./reset.css":"reset.css"}],"../../../../../.config/yarn/global/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+_app2.default.init('#app2'); // b.init('#app3')
+// d.init('#app4')
+},{"./global.css":"global.css","./app1.js":"app1.js","./app2.js":"app2.js","./reset.css":"reset.css"}],"../../../../../.config/yarn/global/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -11594,7 +11579,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50398" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52792" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

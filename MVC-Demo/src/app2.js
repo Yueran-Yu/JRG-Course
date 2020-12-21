@@ -22,7 +22,6 @@ const m = {
     }
 }
 
-
 const v = {
     // initialize html
     el: null,
