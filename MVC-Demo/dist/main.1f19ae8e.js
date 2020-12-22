@@ -11367,24 +11367,24 @@ var m = new _Mode.default({
 var v = {// initialize html
 }; // the remaining actions to "Controller"
 
-var c = {
+var view = {
   el: null,
   html: "<div>\n        <div class=\"output\"> \n            <span id=\"number\">{{n}}</span>\n        </div>\n        <div class=\"actions\">\n            <button id=\"add1\">+1</button>\n            <button id=\"minus1\">-1</button>\n            <button id=\"mul2\">*2</button>\n            <button id=\"divide2\">\xF72</button>\n        </div>\n    </div>",
   //这个初始化方法为了避免，element的id在 v.render() 方法之前执行，
   // render方法是为了 append html到  body>.page上去的，
   // 如果render还没执行但先取了element的id，那id的值就是null
   init: function init(container) {
-    c.el = (0, _jquery.default)(container);
-    c.render(m.data.n); // view = render(data)
+    view.el = (0, _jquery.default)(container);
+    view.render(m.data.n); // view = render(data)
 
-    c.autoBindEvents();
+    view.autoBindEvents();
     eventBus.on('m:updated', function () {
-      c.render(m.data.n);
+      view.render(m.data.n);
     });
   },
   render: function render(n) {
-    if (c.el.children.length !== 0) c.el.empty();
-    (0, _jquery.default)(c.html.replace('{{n}}', n.toString())).appendTo(c.el);
+    if (view.el.children.length !== 0) view.el.empty();
+    (0, _jquery.default)(view.html.replace('{{n}}', n.toString())).appendTo(view.el);
   },
   events: {
     'click #add1': 'add',
@@ -11413,18 +11413,18 @@ var c = {
     });
   },
   autoBindEvents: function autoBindEvents() {
-    for (var key in c.events) {
-      var value = c[c.events[key]];
+    for (var key in view.events) {
+      var value = view[view.events[key]];
       var spaceIndex = key.indexOf(' ');
       var click = key.slice(0, spaceIndex);
       var actionBtn = key.slice(spaceIndex + 1);
-      c.el.on(click, actionBtn, value);
+      view.el.on(click, actionBtn, value);
     }
   }
 }; //the first time render html
 // c.init()
 
-var _default = c;
+var _default = view;
 exports.default = _default;
 },{"./app1.css":"app1.css","jquery":"../node_modules/jquery/dist/jquery.js","./base/Mode.js":"base/Mode.js"}],"app2.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
@@ -11443,8 +11443,6 @@ require("./app2.css");
 
 var _jquery = _interopRequireDefault(require("jquery"));
 
-var _parseInt;
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var eventBus = (0, _jquery.default)(window);
@@ -11452,39 +11450,34 @@ var localKey = 'app2.index';
 var m = {
   // initialize data
   data: {
-    currentIndex: (_parseInt = parseInt(localStorage.getItem(localKey))) !== null && _parseInt !== void 0 ? _parseInt : 0
+    currentIndex: parseInt(localStorage.getItem(localKey)) || 0
   },
   create: function create() {},
   delete: function _delete() {},
   update: function update(data) {
     Object.assign(m.data, data);
     eventBus.trigger('m:updated');
-    localStorage.setItem('index', m.data.currentIndex.toString());
+    localStorage.setItem(localKey, m.data.currentIndex.toString());
   },
   get: function get() {}
 };
-var v = {
+var view = {
   // initialize html
   el: null,
   html: function html(index) {
     return "<div>\n       <ol class=\"tab-bar\">\n            <li class=\"".concat(index === 0 ? 'selected' : '', "\" data-index=\"0\">Column 1</li>\n            <li class=\"").concat(index === 1 ? 'selected' : '', "\" data-index=\"1\">Column 2</li>\n        </ol>\n        <ol class=\"tab-content\">\n            <li class=\"").concat(index === 0 ? 'active' : '', "\" >Content 1</li>\n            <li class=\"").concat(index === 1 ? 'active' : '', "\" >Content 2</li>\n        </ol>\n    </div>");
   },
-  init: function init(container) {
-    v.el = (0, _jquery.default)(container);
-  },
   render: function render(index) {
-    if (v.el.children.length !== 0) v.el.empty();
-    (0, _jquery.default)(v.html(index)).appendTo(v.el);
-  }
-};
-var c = {
+    if (view.el.children.length !== 0) view.el.empty();
+    (0, _jquery.default)(view.html(index)).appendTo(view.el);
+  },
   init: function init(container) {
-    v.init(container);
-    v.render(m.data.currentIndex); // view = render(data)
+    view.el = (0, _jquery.default)(container);
+    view.render(m.data.currentIndex); // view = render(data)
 
-    c.autoBindEvents();
+    view.autoBindEvents();
     eventBus.on('m:updated', function () {
-      v.render(m.data.currentIndex);
+      view.render(m.data.currentIndex);
     });
   },
   events: {
@@ -11497,12 +11490,12 @@ var c = {
     });
   },
   autoBindEvents: function autoBindEvents() {
-    for (var key in c.events) {
-      var value = c[c.events[key]];
+    for (var key in view.events) {
+      var value = view[view.events[key]];
       var spaceIndex = key.indexOf(' ');
       var click = key.slice(0, spaceIndex);
       var actionBtn = key.slice(spaceIndex + 1);
-      v.el.on(click, actionBtn, value);
+      view.el.on(click, actionBtn, value);
     }
   }
 }; // const $tabBar = $('#app2 .tab-bar')
@@ -11521,7 +11514,7 @@ var c = {
 // })
 // $tabBar.children().eq($currentIndex).trigger('click')
 
-var _default = c;
+var _default = view;
 exports.default = _default;
 },{"./app2.css":"app2.css","jquery":"../node_modules/jquery/dist/jquery.js"}],"reset.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');

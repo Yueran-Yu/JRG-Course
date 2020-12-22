@@ -7,7 +7,7 @@ const localKey = 'app2.index'
 const m = {
     // initialize data
     data: {
-        currentIndex: parseInt(localStorage.getItem(localKey)) ?? 0
+        currentIndex: parseInt(localStorage.getItem(localKey)) || 0
     },
     create() {
     },
@@ -16,13 +16,14 @@ const m = {
     update(data) {
         Object.assign(m.data, data)
         eventBus.trigger('m:updated')
-        localStorage.setItem('index', (m.data.currentIndex).toString())
+        localStorage.setItem(localKey, (m.data.currentIndex).toString())
     },
     get() {
     }
 }
 
-const v = {
+
+const view = {
     // initialize html
     el: null,
     html: (index) => {
@@ -37,23 +38,16 @@ const v = {
         </ol>
     </div>`
     },
-    init(container) {
-        v.el = $(container)
-    },
     render(index) {
-        if (v.el.children.length !== 0) v.el.empty()
-        $(v.html(index)).appendTo(v.el)
-    }
-}
-
-
-const c = {
+        if (view.el.children.length !== 0) view.el.empty()
+        $(view.html(index)).appendTo(view.el)
+    },
     init(container) {
-        v.init(container)
-        v.render(m.data.currentIndex) // view = render(data)
-        c.autoBindEvents()
+        view.el = $(container)
+        view.render(m.data.currentIndex) // view = render(data)
+        view.autoBindEvents()
         eventBus.on('m:updated', () => {
-            v.render(m.data.currentIndex)
+            view.render(m.data.currentIndex)
         })
     },
     events: {
@@ -64,12 +58,12 @@ const c = {
         m.update({currentIndex: index})
     },
     autoBindEvents() {
-        for (let key in c.events) {
-            const value = c[c.events[key]]
+        for (let key in view.events) {
+            const value = view[view.events[key]]
             const spaceIndex = key.indexOf(' ')
             const click = key.slice(0, spaceIndex)
             const actionBtn = key.slice(spaceIndex + 1)
-            v.el.on(click, actionBtn, value)
+            view.el.on(click, actionBtn, value)
 
         }
     }
@@ -96,4 +90,4 @@ const c = {
 // $tabBar.children().eq($currentIndex).trigger('click')
 
 
-export default c
+export default view

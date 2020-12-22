@@ -26,7 +26,7 @@ const v = {
 
 
 // the remaining actions to "Controller"
-const c = {
+const view = {
     el: null,
     html: `<div>
         <div class="output"> 
@@ -43,16 +43,16 @@ const c = {
     // render方法是为了 append html到  body>.page上去的，
     // 如果render还没执行但先取了element的id，那id的值就是null
     init(container) {
-        c.el = $(container)
-        c.render(m.data.n) // view = render(data)
-        c.autoBindEvents()
+        view.el = $(container)
+        view.render(m.data.n) // view = render(data)
+        view.autoBindEvents()
         eventBus.on('m:updated', () => {
-            c.render(m.data.n)
+            view.render(m.data.n)
         })
     },
     render(n) {
-        if (c.el.children.length !== 0) c.el.empty()
-        $(c.html.replace('{{n}}', (n).toString())).appendTo(c.el)
+        if (view.el.children.length !== 0) view.el.empty()
+        $(view.html.replace('{{n}}', (n).toString())).appendTo(view.el)
     },
     events: {
         'click #add1': 'add',
@@ -73,12 +73,12 @@ const c = {
         m.update({n: m.data.n / 2})
     },
     autoBindEvents() {
-        for (let key in c.events) {
-            const value = c[c.events[key]]
+        for (let key in view.events) {
+            const value = view[view.events[key]]
             const spaceIndex = key.indexOf(' ')
             const click = key.slice(0, spaceIndex)
             const actionBtn = key.slice(spaceIndex + 1)
-            c.el.on(click, actionBtn, value)
+            view.el.on(click, actionBtn, value)
 
         }
     }
@@ -86,5 +86,5 @@ const c = {
 
 //the first time render html
 // c.init()
-export default c
+export default view
 

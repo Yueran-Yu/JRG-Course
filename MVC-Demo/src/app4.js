@@ -13,4 +13,4 @@ $circle.on('mouseenter', () => {
 }).on('mouseleave', () =>
     $circle.removeClass('active'))
 
-export default c
+export default view

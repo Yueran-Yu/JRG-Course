@@ -32,4 +32,4 @@ $square.on('click', () => {
     }
 })
 
-export default c
+export default view
