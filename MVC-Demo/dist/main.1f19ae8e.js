@@ -11335,35 +11335,7 @@ var Model = /*#__PURE__*/function () {
 
 var _default = Model;
 exports.default = _default;
-},{}],"base/View.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _jquery = _interopRequireDefault(require("jquery"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var View = function View(_ref) {
-  var el = _ref.el,
-      html = _ref.html,
-      render = _ref.render;
-
-  _classCallCheck(this, View);
-
-  this.el = (0, _jquery.default)(el);
-  this.html = html;
-  this.render = render;
-};
-
-var _default = View;
-exports.default = _default;
-},{"jquery":"../node_modules/jquery/dist/jquery.js"}],"app1.js":[function(require,module,exports) {
+},{}],"app1.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11376,8 +11348,6 @@ require("./app1.css");
 var _jquery = _interopRequireDefault(require("jquery"));
 
 var _Mode = _interopRequireDefault(require("./base/Mode.js"));
-
-var _View = _interopRequireDefault(require("./base/View.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -11392,32 +11362,29 @@ var m = new _Mode.default({
     eventBus.trigger('m:updated');
     localStorage.setItem('n', m.data.n.toString());
   }
-}); // the remaining actions to "Controller"
+}); // put all the v relevant actions to "View"
+
+var v = {// initialize html
+}; // the remaining actions to "Controller"
 
 var c = {
+  el: null,
+  html: "<div>\n        <div class=\"output\"> \n            <span id=\"number\">{{n}}</span>\n        </div>\n        <div class=\"actions\">\n            <button id=\"add1\">+1</button>\n            <button id=\"minus1\">-1</button>\n            <button id=\"mul2\">*2</button>\n            <button id=\"divide2\">\xF72</button>\n        </div>\n    </div>",
   //这个初始化方法为了避免，element的id在 v.render() 方法之前执行，
   // render方法是为了 append html到  body>.page上去的，
   // 如果render还没执行但先取了element的id，那id的值就是null
-  v: null,
-  initV: function initV() {
-    // put all the v relevant actions to "View"
-    this.v = new _View.default({
-      el: c.container,
-      html: "<div>\n                    <div class=\"output\"> \n                        <span id=\"number\">{{n}}</span>\n                    </div>\n                    <div class=\"actions\">\n                        <button id=\"add1\">+1</button>\n                        <button id=\"minus1\">-1</button>\n                        <button id=\"mul2\">*2</button>\n                        <button id=\"divide2\">\xF72</button>\n                    </div>\n                </div>",
-      render: function render(n) {
-        if (c.v.el.children.length !== 0) c.v.el.empty();
-        (0, _jquery.default)(c.v.html.replace('{{n}}', n.toString())).appendTo(c.v.el);
-      }
-    });
-    c.v.render(m.data.n); // view = render(data)
-  },
   init: function init(container) {
-    c.container = container;
-    c.initV();
+    c.el = (0, _jquery.default)(container);
+    c.render(m.data.n); // view = render(data)
+
     c.autoBindEvents();
     eventBus.on('m:updated', function () {
-      c.v.render(m.data.n);
+      c.render(m.data.n);
     });
+  },
+  render: function render(n) {
+    if (c.el.children.length !== 0) c.el.empty();
+    (0, _jquery.default)(c.html.replace('{{n}}', n.toString())).appendTo(c.el);
   },
   events: {
     'click #add1': 'add',
@@ -11451,7 +11418,7 @@ var c = {
       var spaceIndex = key.indexOf(' ');
       var click = key.slice(0, spaceIndex);
       var actionBtn = key.slice(spaceIndex + 1);
-      c.v.el.on(click, actionBtn, value);
+      c.el.on(click, actionBtn, value);
     }
   }
 }; //the first time render html
@@ -11459,7 +11426,7 @@ var c = {
 
 var _default = c;
 exports.default = _default;
-},{"./app1.css":"app1.css","jquery":"../node_modules/jquery/dist/jquery.js","./base/Mode.js":"base/Mode.js","./base/View.js":"base/View.js"}],"app2.css":[function(require,module,exports) {
+},{"./app1.css":"app1.css","jquery":"../node_modules/jquery/dist/jquery.js","./base/Mode.js":"base/Mode.js"}],"app2.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);

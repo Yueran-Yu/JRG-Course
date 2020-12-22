@@ -1,7 +1,6 @@
 import './app1.css'
 import $ from 'jquery'
 import Model from "./base/Mode.js";
-import View from "./base/View.js";
 
 
 const eventBus = $(window)
@@ -11,49 +10,49 @@ const m = new Model({
         {
             n: parseInt(localStorage.getItem('n')) || 100
         },
-    update(data) {
+    update(data){
         Object.assign(m.data, data)
         eventBus.trigger('m:updated')
         localStorage.setItem('n', (m.data.n).toString())
     }
 })
 
+// put all the v relevant actions to "View"
+const v = {
+    // initialize html
+
+
+}
+
 
 // the remaining actions to "Controller"
 const c = {
+    el: null,
+    html: `<div>
+        <div class="output"> 
+            <span id="number">{{n}}</span>
+        </div>
+        <div class="actions">
+            <button id="add1">+1</button>
+            <button id="minus1">-1</button>
+            <button id="mul2">*2</button>
+            <button id="divide2">÷2</button>
+        </div>
+    </div>`,
     //这个初始化方法为了避免，element的id在 v.render() 方法之前执行，
     // render方法是为了 append html到  body>.page上去的，
     // 如果render还没执行但先取了element的id，那id的值就是null
-    v: null,
-    initV() {
-    // put all the v relevant actions to "View"
-        this.v = new View({
-            el: c.container,
-            html: `<div>
-                    <div class="output"> 
-                        <span id="number">{{n}}</span>
-                    </div>
-                    <div class="actions">
-                        <button id="add1">+1</button>
-                        <button id="minus1">-1</button>
-                        <button id="mul2">*2</button>
-                        <button id="divide2">÷2</button>
-                    </div>
-                </div>`,
-            render(n) {
-                if (c.v.el.children.length !== 0) c.v.el.empty()
-                $(c.v.html.replace('{{n}}', (n).toString())).appendTo(c.v.el)
-            }
-        })
-        c.v.render(m.data.n) // view = render(data)
-    },
     init(container) {
-        c.container = container
-        c.initV()
+        c.el = $(container)
+        c.render(m.data.n) // view = render(data)
         c.autoBindEvents()
         eventBus.on('m:updated', () => {
-            c.v.render(m.data.n)
+            c.render(m.data.n)
         })
+    },
+    render(n) {
+        if (c.el.children.length !== 0) c.el.empty()
+        $(c.html.replace('{{n}}', (n).toString())).appendTo(c.el)
     },
     events: {
         'click #add1': 'add',
@@ -79,7 +78,7 @@ const c = {
             const spaceIndex = key.indexOf(' ')
             const click = key.slice(0, spaceIndex)
             const actionBtn = key.slice(spaceIndex + 1)
-            c.v.el.on(click, actionBtn, value)
+            c.el.on(click, actionBtn, value)
 
         }
     }

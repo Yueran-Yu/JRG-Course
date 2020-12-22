@@ -6,8 +6,6 @@
       <change beforePath="$PROJECT_DIR$/dist/main.1f19ae8e.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/main.1f19ae8e.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/main.1f19ae8e.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/dist/main.1f19ae8e.js.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app1.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app1.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app2.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app2.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/base/View.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/View.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Pikachu_Resume/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Pikachu_Resume/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -62,7 +60,7 @@
       <workItem from="1607702143786" duration="2387000" />
       <workItem from="1607966318487" duration="1568000" />
       <workItem from="1608010664053" duration="3000" />
-      <workItem from="1608386911654" duration="34806000" />
+      <workItem from="1608386911654" duration="35831000" />
     </task>
     <servers />
   </component>
