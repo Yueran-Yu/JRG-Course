@@ -5,10 +5,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/main.1f19ae8e.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/main.1f19ae8e.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dist/main.1f19ae8e.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/dist/main.1f19ae8e.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app1.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app1.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app2.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app2.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app3.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app3.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app4.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app4.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/base/View.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/View.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Pikachu_Resume/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Pikachu_Resume/.idea/workspace.xml" afterDir="false" />
     </list>
@@ -19,9 +17,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
-  </component>
-  <component name="ProblemsViewState">
-    <option name="selectedIndex" value="1" />
   </component>
   <component name="ProjectId" id="1lFWggspybWhgY9gfYg1NnjjnKm" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -67,7 +62,7 @@
       <workItem from="1607702143786" duration="2387000" />
       <workItem from="1607966318487" duration="1568000" />
       <workItem from="1608010664053" duration="3000" />
-      <workItem from="1608386911654" duration="36866000" />
+      <workItem from="1608386911654" duration="41896000" />
     </task>
     <servers />
   </component>

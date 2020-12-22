@@ -11431,7 +11431,61 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../../.config/yarn/global/node_modules/parcel/src/builtins/css-loader.js"}],"app2.js":[function(require,module,exports) {
+},{"_css_loader":"../../../../../.config/yarn/global/node_modules/parcel/src/builtins/css-loader.js"}],"base/View.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _jquery = _interopRequireDefault(require("jquery"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var View = /*#__PURE__*/function () {
+  // constructor({el, html, render, data, eventBus, events}) {
+  function View(options) {
+    var _this = this;
+
+    _classCallCheck(this, View);
+
+    Object.assign(this, options);
+    this.el = (0, _jquery.default)(this.el);
+    console.log(this.data);
+    this.render(this.data); // view = render(data)
+
+    this.autoBindEvents();
+    this.eventBus.on('m:updated', function () {
+      _this.render(_this.data);
+    });
+  }
+
+  _createClass(View, [{
+    key: "autoBindEvents",
+    value: function autoBindEvents() {
+      for (var key in this.events) {
+        var value = this[this.events[key]];
+        var spaceIndex = key.indexOf(' ');
+        var click = key.slice(0, spaceIndex);
+        var actionBtn = key.slice(spaceIndex + 1);
+        this.el.on(click, actionBtn, value);
+      }
+    }
+  }]);
+
+  return View;
+}();
+
+var _default = View;
+exports.default = _default;
+},{"jquery":"../node_modules/jquery/dist/jquery.js"}],"app2.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11443,6 +11497,8 @@ require("./app2.css");
 
 var _jquery = _interopRequireDefault(require("jquery"));
 
+var _View = _interopRequireDefault(require("./base/View.js"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var eventBus = (0, _jquery.default)(window);
@@ -11450,54 +11506,50 @@ var localKey = 'app2.index';
 var m = {
   // initialize data
   data: {
-    currentIndex: parseInt(localStorage.getItem(localKey)) || 0
+    index: parseInt(localStorage.getItem(localKey)) || 0
   },
   create: function create() {},
   delete: function _delete() {},
   update: function update(data) {
     Object.assign(m.data, data);
     eventBus.trigger('m:updated');
-    localStorage.setItem(localKey, m.data.currentIndex.toString());
+    localStorage.setItem(localKey, m.data.index.toString());
   },
   get: function get() {}
 };
-var view = {
-  // initialize html
-  el: null,
-  html: function html(index) {
-    return "<div>\n       <ol class=\"tab-bar\">\n            <li class=\"".concat(index === 0 ? 'selected' : '', "\" data-index=\"0\">Column 1</li>\n            <li class=\"").concat(index === 1 ? 'selected' : '', "\" data-index=\"1\">Column 2</li>\n        </ol>\n        <ol class=\"tab-content\">\n            <li class=\"").concat(index === 0 ? 'active' : '', "\" >Content 1</li>\n            <li class=\"").concat(index === 1 ? 'active' : '', "\" >Content 2</li>\n        </ol>\n    </div>");
-  },
-  render: function render(index) {
-    if (view.el.children.length !== 0) view.el.empty();
-    (0, _jquery.default)(view.html(index)).appendTo(view.el);
-  },
-  init: function init(container) {
-    view.el = (0, _jquery.default)(container);
-    view.render(m.data.currentIndex); // view = render(data)
 
-    view.autoBindEvents();
-    eventBus.on('m:updated', function () {
-      view.render(m.data.currentIndex);
-    });
-  },
-  events: {
-    'click .tab-bar li': 'x'
-  },
-  x: function x(e) {
-    var index = parseInt(e.currentTarget.dataset.index);
-    m.update({
-      currentIndex: index
-    });
-  },
-  autoBindEvents: function autoBindEvents() {
-    for (var key in view.events) {
-      var value = view[view.events[key]];
-      var spaceIndex = key.indexOf(' ');
-      var click = key.slice(0, spaceIndex);
-      var actionBtn = key.slice(spaceIndex + 1);
-      view.el.on(click, actionBtn, value);
+var init = function init(el) {
+  new _View.default({
+    // initialize html
+    el: el,
+    data: m.data,
+    eventBus: eventBus,
+    html: function html(index) {
+      return "<div>\n       <ol class=\"tab-bar\">\n            <li class=\"".concat(index === 0 ? 'selected' : '', "\" data-index=\"0\">Column 1</li>\n            <li class=\"").concat(index === 1 ? 'selected' : '', "\" data-index=\"1\">Column 2</li>\n        </ol>\n        <ol class=\"tab-content\">\n            <li class=\"").concat(index === 0 ? 'active' : '', "\" >Content 1</li>\n            <li class=\"").concat(index === 1 ? 'active' : '', "\" >Content 2</li>\n        </ol>\n    </div>");
+    },
+    render: function render(data) {
+      var index = data.index;
+      if (this.el.children.length !== 0) this.el.empty();
+      (0, _jquery.default)(this.html(index)).appendTo(this.el);
+    },
+    // init(container) {
+    //     view.el = $(container)
+    //     view.render(m.data.currentIndex) // view = render(data)
+    //     view.autoBindEvents()
+    //     eventBus.on('m:updated', () => {
+    //         view.render(m.data.currentIndex)
+    //     })
+    // },
+    events: {
+      'click .tab-bar li': 'x'
+    },
+    x: function x(e) {
+      var index = parseInt(e.currentTarget.dataset.index);
+      m.update({
+        index: index
+      });
     }
-  }
+  });
 }; // const $tabBar = $('#app2 .tab-bar')
 // const $tabContent = $('#app2 .tab-content')
 // $tabBar.on('click', 'li', (e) => {
@@ -11514,9 +11566,10 @@ var view = {
 // })
 // $tabBar.children().eq($currentIndex).trigger('click')
 
-var _default = view;
+
+var _default = init;
 exports.default = _default;
-},{"./app2.css":"app2.css","jquery":"../node_modules/jquery/dist/jquery.js"}],"reset.css":[function(require,module,exports) {
+},{"./app2.css":"app2.css","jquery":"../node_modules/jquery/dist/jquery.js","./base/View.js":"base/View.js"}],"reset.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -11540,7 +11593,7 @@ document.querySelector('img').remove();
 
 _app.default.init('#app1');
 
-_app2.default.init('#app2'); // b.init('#app3')
+(0, _app2.default)('#app2'); // b.init('#app3')
 // d.init('#app4')
 },{"./global.css":"global.css","./app1.js":"app1.js","./app2.js":"app2.js","./reset.css":"reset.css"}],"../../../../../.config/yarn/global/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];

@@ -6,6 +6,6 @@ import y from './app2.js'
 import './reset.css'
 document.querySelector('img').remove()
 view.init('#app1')
-y.init('#app2')
+y('#app2')
 // b.init('#app3')
 // d.init('#app4')
