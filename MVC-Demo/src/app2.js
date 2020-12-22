@@ -1,12 +1,10 @@
 import './app2.css'
 import $ from 'jquery'
-import Mode from "./base/Mode";
-import Model from "./base/Mode.js";
 
 const eventBus = $(window)
 
 const localKey = 'app2.index'
-const m = new Model({
+const m = {
     // initialize data
     data: {
         currentIndex: parseInt(localStorage.getItem(localKey)) ?? 0
@@ -22,7 +20,7 @@ const m = new Model({
     },
     get() {
     }
-})
+}
 
 const v = {
     // initialize html

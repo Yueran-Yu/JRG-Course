@@ -11335,7 +11335,35 @@ var Model = /*#__PURE__*/function () {
 
 var _default = Model;
 exports.default = _default;
-},{}],"app1.js":[function(require,module,exports) {
+},{}],"base/View.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _jquery = _interopRequireDefault(require("jquery"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var View = function View(_ref) {
+  var el = _ref.el,
+      html = _ref.html,
+      render = _ref.render;
+
+  _classCallCheck(this, View);
+
+  this.el = (0, _jquery.default)(el);
+  this.html = html;
+  this.render = render;
+};
+
+var _default = View;
+exports.default = _default;
+},{"jquery":"../node_modules/jquery/dist/jquery.js"}],"app1.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11348,6 +11376,8 @@ require("./app1.css");
 var _jquery = _interopRequireDefault(require("jquery"));
 
 var _Mode = _interopRequireDefault(require("./base/Mode.js"));
+
+var _View = _interopRequireDefault(require("./base/View.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -11362,32 +11392,31 @@ var m = new _Mode.default({
     eventBus.trigger('m:updated');
     localStorage.setItem('n', m.data.n.toString());
   }
-}); // put all the v relevant actions to "View"
-
-var v = {
-  // initialize html
-  el: null,
-  html: "<div>\n        <div class=\"output\"> \n            <span id=\"number\">{{n}}</span>\n        </div>\n        <div class=\"actions\">\n            <button id=\"add1\">+1</button>\n            <button id=\"minus1\">-1</button>\n            <button id=\"mul2\">*2</button>\n            <button id=\"divide2\">\xF72</button>\n        </div>\n    </div>",
-  init: function init(container) {
-    v.el = (0, _jquery.default)(container);
-  },
-  render: function render(n) {
-    if (v.el.children.length !== 0) v.el.empty();
-    (0, _jquery.default)(v.html.replace('{{n}}', n.toString())).appendTo(v.el);
-  }
-}; // the remaining actions to "Controller"
+}); // the remaining actions to "Controller"
 
 var c = {
   //这个初始化方法为了避免，element的id在 v.render() 方法之前执行，
   // render方法是为了 append html到  body>.page上去的，
   // 如果render还没执行但先取了element的id，那id的值就是null
+  v: null,
+  initV: function initV() {
+    // put all the v relevant actions to "View"
+    this.v = new _View.default({
+      el: c.container,
+      html: "<div>\n                    <div class=\"output\"> \n                        <span id=\"number\">{{n}}</span>\n                    </div>\n                    <div class=\"actions\">\n                        <button id=\"add1\">+1</button>\n                        <button id=\"minus1\">-1</button>\n                        <button id=\"mul2\">*2</button>\n                        <button id=\"divide2\">\xF72</button>\n                    </div>\n                </div>",
+      render: function render(n) {
+        if (c.v.el.children.length !== 0) c.v.el.empty();
+        (0, _jquery.default)(c.v.html.replace('{{n}}', n.toString())).appendTo(c.v.el);
+      }
+    });
+    c.v.render(m.data.n); // view = render(data)
+  },
   init: function init(container) {
-    v.init(container);
-    v.render(m.data.n); // view = render(data)
-
+    c.container = container;
+    c.initV();
     c.autoBindEvents();
     eventBus.on('m:updated', function () {
-      v.render(m.data.n);
+      c.v.render(m.data.n);
     });
   },
   events: {
@@ -11422,7 +11451,7 @@ var c = {
       var spaceIndex = key.indexOf(' ');
       var click = key.slice(0, spaceIndex);
       var actionBtn = key.slice(spaceIndex + 1);
-      v.el.on(click, actionBtn, value);
+      c.v.el.on(click, actionBtn, value);
     }
   }
 }; //the first time render html
@@ -11430,7 +11459,7 @@ var c = {
 
 var _default = c;
 exports.default = _default;
-},{"./app1.css":"app1.css","jquery":"../node_modules/jquery/dist/jquery.js","./base/Mode.js":"base/Mode.js"}],"app2.css":[function(require,module,exports) {
+},{"./app1.css":"app1.css","jquery":"../node_modules/jquery/dist/jquery.js","./base/Mode.js":"base/Mode.js","./base/View.js":"base/View.js"}],"app2.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -11447,17 +11476,13 @@ require("./app2.css");
 
 var _jquery = _interopRequireDefault(require("jquery"));
 
-var _Mode = _interopRequireDefault(require("./base/Mode"));
-
-var _Mode2 = _interopRequireDefault(require("./base/Mode.js"));
-
 var _parseInt;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var eventBus = (0, _jquery.default)(window);
 var localKey = 'app2.index';
-var m = new _Mode2.default({
+var m = {
   // initialize data
   data: {
     currentIndex: (_parseInt = parseInt(localStorage.getItem(localKey))) !== null && _parseInt !== void 0 ? _parseInt : 0
@@ -11470,7 +11495,7 @@ var m = new _Mode2.default({
     localStorage.setItem('index', m.data.currentIndex.toString());
   },
   get: function get() {}
-});
+};
 var v = {
   // initialize html
   el: null,
@@ -11531,7 +11556,7 @@ var c = {
 
 var _default = c;
 exports.default = _default;
-},{"./app2.css":"app2.css","jquery":"../node_modules/jquery/dist/jquery.js","./base/Mode":"base/Mode.js","./base/Mode.js":"base/Mode.js"}],"reset.css":[function(require,module,exports) {
+},{"./app2.css":"app2.css","jquery":"../node_modules/jquery/dist/jquery.js"}],"reset.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
