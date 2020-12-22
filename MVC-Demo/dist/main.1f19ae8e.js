@@ -11335,103 +11335,7 @@ var Model = /*#__PURE__*/function () {
 
 var _default = Model;
 exports.default = _default;
-},{}],"app1.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-require("./app1.css");
-
-var _jquery = _interopRequireDefault(require("jquery"));
-
-var _Mode = _interopRequireDefault(require("./base/Mode.js"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var eventBus = (0, _jquery.default)(window); // put all the data relevant actions to "Model"
-
-var m = new _Mode.default({
-  data: {
-    n: parseInt(localStorage.getItem('n')) || 100
-  },
-  update: function update(data) {
-    Object.assign(m.data, data);
-    eventBus.trigger('m:updated');
-    localStorage.setItem('n', m.data.n.toString());
-  }
-}); // put all the v relevant actions to "View"
-
-var v = {// initialize html
-}; // the remaining actions to "Controller"
-
-var view = {
-  el: null,
-  html: "<div>\n        <div class=\"output\"> \n            <span id=\"number\">{{n}}</span>\n        </div>\n        <div class=\"actions\">\n            <button id=\"add1\">+1</button>\n            <button id=\"minus1\">-1</button>\n            <button id=\"mul2\">*2</button>\n            <button id=\"divide2\">\xF72</button>\n        </div>\n    </div>",
-  //这个初始化方法为了避免，element的id在 v.render() 方法之前执行，
-  // render方法是为了 append html到  body>.page上去的，
-  // 如果render还没执行但先取了element的id，那id的值就是null
-  init: function init(container) {
-    view.el = (0, _jquery.default)(container);
-    view.render(m.data.n); // view = render(data)
-
-    view.autoBindEvents();
-    eventBus.on('m:updated', function () {
-      view.render(m.data.n);
-    });
-  },
-  render: function render(n) {
-    if (view.el.children.length !== 0) view.el.empty();
-    (0, _jquery.default)(view.html.replace('{{n}}', n.toString())).appendTo(view.el);
-  },
-  events: {
-    'click #add1': 'add',
-    'click #minus1': 'minus',
-    'click #mul2': 'mul',
-    'click #divide2': 'divide'
-  },
-  add: function add() {
-    m.update({
-      n: m.data.n + 1
-    });
-  },
-  minus: function minus() {
-    m.update({
-      n: m.data.n - 1
-    });
-  },
-  mul: function mul() {
-    m.update({
-      n: m.data.n * 2
-    });
-  },
-  divide: function divide() {
-    m.update({
-      n: m.data.n / 2
-    });
-  },
-  autoBindEvents: function autoBindEvents() {
-    for (var key in view.events) {
-      var value = view[view.events[key]];
-      var spaceIndex = key.indexOf(' ');
-      var click = key.slice(0, spaceIndex);
-      var actionBtn = key.slice(spaceIndex + 1);
-      view.el.on(click, actionBtn, value);
-    }
-  }
-}; //the first time render html
-// c.init()
-
-var _default = view;
-exports.default = _default;
-},{"./app1.css":"app1.css","jquery":"../node_modules/jquery/dist/jquery.js","./base/Mode.js":"base/Mode.js"}],"app2.css":[function(require,module,exports) {
-var reloadCSS = require('_css_loader');
-
-module.hot.dispose(reloadCSS);
-module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../../.config/yarn/global/node_modules/parcel/src/builtins/css-loader.js"}],"base/View.js":[function(require,module,exports) {
+},{}],"base/View.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11458,7 +11362,6 @@ var View = /*#__PURE__*/function () {
 
     Object.assign(this, options);
     this.el = (0, _jquery.default)(this.el);
-    console.log(this.data);
     this.render(this.data); // view = render(data)
 
     this.autoBindEvents();
@@ -11485,7 +11388,89 @@ var View = /*#__PURE__*/function () {
 
 var _default = View;
 exports.default = _default;
-},{"jquery":"../node_modules/jquery/dist/jquery.js"}],"app2.js":[function(require,module,exports) {
+},{"jquery":"../node_modules/jquery/dist/jquery.js"}],"app1.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+require("./app1.css");
+
+var _jquery = _interopRequireDefault(require("jquery"));
+
+var _Mode = _interopRequireDefault(require("./base/Mode.js"));
+
+var _View = _interopRequireDefault(require("./base/View.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var eventBus = (0, _jquery.default)(window); // put all the data relevant actions to "Model"
+
+var m = new _Mode.default({
+  data: {
+    n: parseFloat(localStorage.getItem('n')) || 100
+  },
+  update: function update(data) {
+    Object.assign(m.data, data);
+    eventBus.trigger('m:updated');
+    localStorage.setItem('n', m.data.n.toString());
+  }
+});
+
+var init = function init(el) {
+  // the remaining actions to "Controller"
+  new _View.default({
+    el: el,
+    data: m.data,
+    eventBus: eventBus,
+    html: "<div>\n            <div class=\"output\"> \n                <span id=\"number\">{{n}}</span>\n            </div>\n            <div class=\"actions\">\n                <button id=\"add1\">+1</button>\n                <button id=\"minus1\">-1</button>\n                <button id=\"mul2\">*2</button>\n                <button id=\"divide2\">\xF72</button>\n            </div>\n        </div>",
+    //这个初始化方法为了避免，element的id在 v.render() 方法之前执行，
+    // render方法是为了 append html到  body>.page上去的，
+    // 如果render还没执行但先取了element的id，那id的值就是null
+    render: function render(data) {
+      var n = data.n;
+      if (this.el.children.length !== 0) this.el.empty();
+      (0, _jquery.default)(this.html.replace('{{n}}', n.toString())).appendTo(this.el);
+    },
+    events: {
+      'click #add1': 'add',
+      'click #minus1': 'minus',
+      'click #mul2': 'mul',
+      'click #divide2': 'divide'
+    },
+    add: function add() {
+      m.update({
+        n: m.data.n + 1
+      });
+    },
+    minus: function minus() {
+      m.update({
+        n: m.data.n - 1
+      });
+    },
+    mul: function mul() {
+      m.update({
+        n: m.data.n * 2
+      });
+    },
+    divide: function divide() {
+      m.update({
+        n: m.data.n / 2
+      });
+    }
+  });
+};
+
+var _default = init;
+exports.default = _default;
+},{"./app1.css":"app1.css","jquery":"../node_modules/jquery/dist/jquery.js","./base/Mode.js":"base/Mode.js","./base/View.js":"base/View.js"}],"app2.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../../../../../.config/yarn/global/node_modules/parcel/src/builtins/css-loader.js"}],"app2.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11590,9 +11575,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // import b from './app3.js'
 // import d from './app4.js'
 document.querySelector('img').remove();
-
-_app.default.init('#app1');
-
+(0, _app.default)('#app1');
 (0, _app2.default)('#app2'); // b.init('#app3')
 // d.init('#app4')
 },{"./global.css":"global.css","./app1.js":"app1.js","./app2.js":"app2.js","./reset.css":"reset.css"}],"../../../../../.config/yarn/global/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {

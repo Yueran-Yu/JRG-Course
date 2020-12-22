@@ -5,7 +5,6 @@ class View {
     constructor(options) {
         Object.assign(this, options)
         this.el = $(this.el)
-        console.log(this.data)
         this.render(this.data) // view = render(data)
         this.autoBindEvents()
         this.eventBus.on('m:updated', () => {
