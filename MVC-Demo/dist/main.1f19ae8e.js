@@ -23448,6 +23448,8 @@ var _View = _interopRequireDefault(require("./base/View.js"));
 
 var _EventBus = _interopRequireDefault(require("./base/EventBus.js"));
 
+var _vue = _interopRequireDefault(require("vue"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var eventBus = new _EventBus.default();
@@ -23468,13 +23470,20 @@ var m = {
 };
 
 var init = function init(el) {
-  new _View.default({
+  new _vue.default({
+    el: el,
+    data: {
+      index: 0
+    },
+    template: "\n          <section>\n          <ol class=\"tab-bar\">\n            <li :class=\"index\">Column 1</li>\n            <li :class=\"\">Column 2</li>\n          </ol>\n          <ol class=\"tab-content\">\n            <li>Content 1</li>\n            <li>Content 2</li>\n          </ol>\n          </section>"
+  });
+  return new _View.default({
     // initialize html
     el: el,
     data: m.data,
     eventBus: eventBus,
     html: function html(index) {
-      return "<div>\n       <ol class=\"tab-bar\">\n            <li class=\"".concat(index === 0 ? 'selected' : '', "\" data-index=\"0\">Column 1</li>\n            <li class=\"").concat(index === 1 ? 'selected' : '', "\" data-index=\"1\">Column 2</li>\n        </ol>\n        <ol class=\"tab-content\">\n            <li class=\"").concat(index === 0 ? 'active' : '', "\" >Content 1</li>\n            <li class=\"").concat(index === 1 ? 'active' : '', "\" >Content 2</li>\n        </ol>\n    </div>");
+      return;
     },
     render: function render(data) {
       var index = data.index;
@@ -23518,7 +23527,7 @@ var init = function init(el) {
 
 var _default = init;
 exports.default = _default;
-},{"./app2.css":"app2.css","jquery":"../node_modules/jquery/dist/jquery.js","./base/View.js":"base/View.js","./base/EventBus.js":"base/EventBus.js"}],"app3.css":[function(require,module,exports) {
+},{"./app2.css":"app2.css","jquery":"../node_modules/jquery/dist/jquery.js","./base/View.js":"base/View.js","./base/EventBus.js":"base/EventBus.js","vue":"../node_modules/vue/dist/vue.common.js"}],"app3.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);

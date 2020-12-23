@@ -37,7 +37,6 @@ const init = (el) => {
             </div>
         </section>`
     })
-
 }
 export default init
 

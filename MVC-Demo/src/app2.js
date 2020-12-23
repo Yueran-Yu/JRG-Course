@@ -2,6 +2,8 @@ import './app2.css'
 import $ from 'jquery'
 import View from "./base/View.js";
 import EventBus from "./base/EventBus.js";
+import Vue from "vue";
+
 
 const eventBus = new EventBus()
 
@@ -25,22 +27,31 @@ const m = {
 }
 
 const init = (el) => {
-    new View({
+    new Vue({
+        el: el,
+        data: {
+            index: 0
+        },
+        template: `
+          <section>
+          <ol class="tab-bar">
+            <li :class="index">Column 1</li>
+            <li :class="">Column 2</li>
+          </ol>
+          <ol class="tab-content">
+            <li>Content 1</li>
+            <li>Content 2</li>
+          </ol>
+          </section>`
+    })
+
+    return new View({
         // initialize html
         el: el,
         data: m.data,
         eventBus: eventBus,
         html: (index) => {
-            return `<div>
-       <ol class="tab-bar">
-            <li class="${index === 0 ? 'selected' : ''}" data-index="0">Column 1</li>
-            <li class="${index === 1 ? 'selected' : ''}" data-index="1">Column 2</li>
-        </ol>
-        <ol class="tab-content">
-            <li class="${index === 0 ? 'active' : ''}" >Content 1</li>
-            <li class="${index === 1 ? 'active' : ''}" >Content 2</li>
-        </ol>
-    </div>`
+            return
         },
         render(data) {
             const index = data.index
