@@ -11371,7 +11371,7 @@ var Model = /*#__PURE__*/function (_EventBus) {
 
     _classCallCheck(this, Model);
 
-    (_this = _super.call(this) //EventBus#Constructor()
+    _this = _super.call(this); //EventBus#Constructor()
     // js的代码不能以方括号开头
 
     /*
@@ -11381,12 +11381,13 @@ var Model = /*#__PURE__*/function (_EventBus) {
     [0]
     的形式，所以 方括号的数组总是会往前面找变量
      */
-    )[('data', 'update', 'create', 'delete', 'get')].forEach(function (key) {
+
+    var keys = ['data', 'update', 'create', 'delete', 'get'];
+    keys.forEach(function (key) {
       if (key in options) {
         _this[key] = options[key];
       }
     });
-
     return _this;
   }
 
