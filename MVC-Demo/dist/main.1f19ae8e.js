@@ -12207,13 +12207,51 @@ var init = function init(el) {
         localStorage.setItem('n', this.n.toString());
       }
     },
-    template: "<section>\n            <div class=\"output\"> \n                <span id=\"number\">{{n}}</span>\n            </div>\n            <div class=\"actions\">\n                <button @click=\"add\">+1</button>\n                <button @click=\"minus\">-1</button>\n                <button @click=\"mul\">*2</button>\n                <button @click=\"div\">\xF72</button>\n            </div>\n        </section>"
+    template: "\n          <section id=\"app1\">\n          <div class=\"output\">\n            <span id=\"number\">{{ n }}</span>\n          </div>\n          <div class=\"actions\">\n            <button @click=\"add\">+1</button>\n            <button @click=\"minus\">-1</button>\n            <button @click=\"mul\">*2</button>\n            <button @click=\"div\">\xF72</button>\n          </div>\n          </section>"
   });
 };
 
 var _default = init;
 exports.default = _default;
 },{"./app1.css":"app1.css","vue":"../node_modules/vue/dist/vue.common.js"}],"app2.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../../../../../.config/yarn/global/node_modules/parcel/src/builtins/css-loader.js"}],"app2.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+require("./app2.css");
+
+var _vue = _interopRequireDefault(require("vue"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var localKey = 'app2.index';
+
+var init = function init(el) {
+  new _vue.default({
+    el: el,
+    data: {
+      index: parseInt(localStorage.getItem(localKey)) || 0
+    },
+    watch: {
+      change: function change() {
+        localStorage.setItem(localKey, this.index.toString());
+      }
+    },
+    template: "\n          <section id=\"app2\">\n          <ol class=\"tab-bar\">\n            <li :class=\"index === 0 ? 'selected':''\" @click=\"index=0\">Column 1</li>\n            <li :class=\"index === 1 ? 'selected':''\" @click=\"index=1\">Column 2</li>\n          </ol>\n          <ol class=\"tab-content\">\n            <li :class=\"index === 0 ? 'active':''\">Content 1</li>\n            <li :class=\"index === 1 ? 'active':''\">Content 2</li>\n          </ol>\n          </section>"
+  });
+};
+
+var _default = init;
+exports.default = _default;
+},{"./app2.css":"app2.css","vue":"../node_modules/vue/dist/vue.common.js"}],"app3.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -23304,235 +23342,7 @@ if ( typeof noGlobal === "undefined" ) {
 return jQuery;
 } );
 
-},{"process":"../../../../../.config/yarn/global/node_modules/process/browser.js"}],"base/EventBus.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _jquery = _interopRequireDefault(require("jquery"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var EventBus = /*#__PURE__*/function () {
-  function EventBus() {
-    _classCallCheck(this, EventBus);
-
-    this._eventBus = (0, _jquery.default)(window);
-  }
-
-  _createClass(EventBus, [{
-    key: "on",
-    value: function on(eventName, fn) {
-      return this._eventBus.on(eventName, fn);
-    }
-  }, {
-    key: "trigger",
-    value: function trigger(eventName, data) {
-      return this._eventBus.trigger(eventName, data);
-    }
-  }, {
-    key: "off",
-    value: function off(eventName, fn) {
-      return this._eventBus.off(eventName, fn);
-    }
-  }]);
-
-  return EventBus;
-}();
-
-var _default = EventBus;
-exports.default = _default;
-},{"jquery":"../node_modules/jquery/dist/jquery.js"}],"base/View.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _jquery = _interopRequireDefault(require("jquery"));
-
-var _EventBus2 = _interopRequireDefault(require("./EventBus.js"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-var View = /*#__PURE__*/function (_EventBus) {
-  _inherits(View, _EventBus);
-
-  var _super = _createSuper(View);
-
-  function View(options) {
-    var _this;
-
-    _classCallCheck(this, View);
-
-    _this = _super.call(this); // EventBus#constructor()
-
-    Object.assign(_assertThisInitialized(_this), options);
-    _this.el = (0, _jquery.default)(_this.el);
-
-    _this.render(_this.data); // view = render(data)
-
-
-    _this.autoBindEvents();
-
-    _this.on('m:updated', function () {
-      _this.render(_this.data);
-    });
-
-    return _this;
-  }
-
-  _createClass(View, [{
-    key: "autoBindEvents",
-    value: function autoBindEvents() {
-      for (var key in this.events) {
-        var value = this[this.events[key]];
-        var spaceIndex = key.indexOf(' ');
-        var click = key.slice(0, spaceIndex);
-        var actionBtn = key.slice(spaceIndex + 1);
-        this.el.on(click, actionBtn, value);
-      }
-    }
-  }]);
-
-  return View;
-}(_EventBus2.default);
-
-var _default = View;
-exports.default = _default;
-},{"jquery":"../node_modules/jquery/dist/jquery.js","./EventBus.js":"base/EventBus.js"}],"app2.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-require("./app2.css");
-
-var _jquery = _interopRequireDefault(require("jquery"));
-
-var _View = _interopRequireDefault(require("./base/View.js"));
-
-var _EventBus = _interopRequireDefault(require("./base/EventBus.js"));
-
-var _vue = _interopRequireDefault(require("vue"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var eventBus = new _EventBus.default();
-var localKey = 'app2.index';
-var m = {
-  // initialize data
-  data: {
-    index: parseInt(localStorage.getItem(localKey)) || 0
-  },
-  create: function create() {},
-  delete: function _delete() {},
-  update: function update(data) {
-    Object.assign(m.data, data);
-    eventBus.trigger('m:updated');
-    localStorage.setItem(localKey, m.data.index.toString());
-  },
-  get: function get() {}
-};
-
-var init = function init(el) {
-  new _vue.default({
-    el: el,
-    data: {
-      index: 0
-    },
-    template: "\n          <section>\n          <ol class=\"tab-bar\">\n            <li :class=\"index\">Column 1</li>\n            <li :class=\"\">Column 2</li>\n          </ol>\n          <ol class=\"tab-content\">\n            <li>Content 1</li>\n            <li>Content 2</li>\n          </ol>\n          </section>"
-  });
-  return new _View.default({
-    // initialize html
-    el: el,
-    data: m.data,
-    eventBus: eventBus,
-    html: function html(index) {
-      return;
-    },
-    render: function render(data) {
-      var index = data.index;
-      if (this.el.children.length !== 0) this.el.empty();
-      (0, _jquery.default)(this.html(index)).appendTo(this.el);
-    },
-    // init(container) {
-    //     view.el = $(container)
-    //     view.render(m.data.currentIndex) // view = render(data)
-    //     view.autoBindEvents()
-    //     eventBus.on('m:updated', () => {
-    //         view.render(m.data.currentIndex)
-    //     })
-    // },
-    events: {
-      'click .tab-bar li': 'x'
-    },
-    x: function x(e) {
-      var index = parseInt(e.currentTarget.dataset.index);
-      m.update({
-        index: index
-      });
-    }
-  });
-}; // const $tabBar = $('#app2 .tab-bar')
-// const $tabContent = $('#app2 .tab-content')
-// $tabBar.on('click', 'li', (e) => {
-//     const $li = $(e.currentTarget)
-//     $li.addClass('selected')
-//         .siblings()
-//         .removeClass('selected')
-//
-//     const index = $li.index()
-//     localStorage.setItem(localKey, index)
-//     $tabContent
-//         .children().eq(index).addClass('active')
-//         .siblings().removeClass('active')
-// })
-// $tabBar.children().eq($currentIndex).trigger('click')
-
-
-var _default = init;
-exports.default = _default;
-},{"./app2.css":"app2.css","jquery":"../node_modules/jquery/dist/jquery.js","./base/View.js":"base/View.js","./base/EventBus.js":"base/EventBus.js","vue":"../node_modules/vue/dist/vue.common.js"}],"app3.css":[function(require,module,exports) {
-var reloadCSS = require('_css_loader');
-
-module.hot.dispose(reloadCSS);
-module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../../.config/yarn/global/node_modules/parcel/src/builtins/css-loader.js"}],"app3.js":[function(require,module,exports) {
+},{"process":"../../../../../.config/yarn/global/node_modules/process/browser.js"}],"app3.js":[function(require,module,exports) {
 "use strict";
 
 require("./app3.css");
