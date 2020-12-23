@@ -11388,6 +11388,53 @@ var View = /*#__PURE__*/function () {
 
 var _default = View;
 exports.default = _default;
+},{"jquery":"../node_modules/jquery/dist/jquery.js"}],"base/EventBus.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _jquery = _interopRequireDefault(require("jquery"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var EventBus = /*#__PURE__*/function () {
+  function EventBus() {
+    _classCallCheck(this, EventBus);
+
+    this._eventBus = (0, _jquery.default)(window);
+  }
+
+  _createClass(EventBus, [{
+    key: "on",
+    value: function on(eventName, fn) {
+      return this._eventBus.on(eventName, fn);
+    }
+  }, {
+    key: "trigger",
+    value: function trigger(eventName, data) {
+      return this._eventBus.trigger(eventName, data);
+    }
+  }, {
+    key: "off",
+    value: function off(eventName, fn) {
+      return this._eventBus.off(eventName, fn);
+    }
+  }]);
+
+  return EventBus;
+}();
+
+var _default = EventBus;
+exports.default = _default;
 },{"jquery":"../node_modules/jquery/dist/jquery.js"}],"app1.js":[function(require,module,exports) {
 "use strict";
 
@@ -11404,9 +11451,11 @@ var _Mode = _interopRequireDefault(require("./base/Mode.js"));
 
 var _View = _interopRequireDefault(require("./base/View.js"));
 
+var _EventBus = _interopRequireDefault(require("./base/EventBus.js"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var eventBus = (0, _jquery.default)(window); // put all the data relevant actions to "Model"
+var eventBus = new _EventBus.default(); // put all the data relevant actions to "Model"
 
 var m = new _Mode.default({
   data: {
@@ -11465,7 +11514,7 @@ var init = function init(el) {
 
 var _default = init;
 exports.default = _default;
-},{"./app1.css":"app1.css","jquery":"../node_modules/jquery/dist/jquery.js","./base/Mode.js":"base/Mode.js","./base/View.js":"base/View.js"}],"app2.css":[function(require,module,exports) {
+},{"./app1.css":"app1.css","jquery":"../node_modules/jquery/dist/jquery.js","./base/Mode.js":"base/Mode.js","./base/View.js":"base/View.js","./base/EventBus.js":"base/EventBus.js"}],"app2.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -11484,9 +11533,11 @@ var _jquery = _interopRequireDefault(require("jquery"));
 
 var _View = _interopRequireDefault(require("./base/View.js"));
 
+var _EventBus = _interopRequireDefault(require("./base/EventBus.js"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var eventBus = (0, _jquery.default)(window);
+var eventBus = new _EventBus.default();
 var localKey = 'app2.index';
 var m = {
   // initialize data
@@ -11554,7 +11605,7 @@ var init = function init(el) {
 
 var _default = init;
 exports.default = _default;
-},{"./app2.css":"app2.css","jquery":"../node_modules/jquery/dist/jquery.js","./base/View.js":"base/View.js"}],"reset.css":[function(require,module,exports) {
+},{"./app2.css":"app2.css","jquery":"../node_modules/jquery/dist/jquery.js","./base/View.js":"base/View.js","./base/EventBus.js":"base/EventBus.js"}],"reset.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);

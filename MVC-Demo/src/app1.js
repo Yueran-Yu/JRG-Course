@@ -2,9 +2,10 @@ import './app1.css'
 import $ from 'jquery'
 import Model from "./base/Mode.js";
 import View from "./base/View.js";
+import EventBus from "./base/EventBus.js";
 
 
-const eventBus = $(window)
+const eventBus = new EventBus()
 // put all the data relevant actions to "Model"
 const m = new Model({
     data:

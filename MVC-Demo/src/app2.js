@@ -1,8 +1,9 @@
 import './app2.css'
 import $ from 'jquery'
 import View from "./base/View.js";
+import EventBus from "./base/EventBus.js";
 
-const eventBus = $(window)
+const eventBus = new EventBus()
 
 const localKey = 'app2.index'
 const m = {
