@@ -12241,7 +12241,7 @@ var init = function init(el) {
       index: parseInt(localStorage.getItem(localKey)) || 0
     },
     watch: {
-      change: function change() {
+      index: function index() {
         localStorage.setItem(localKey, this.index.toString());
       }
     },

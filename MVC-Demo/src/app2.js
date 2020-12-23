@@ -10,7 +10,7 @@ const init = (el) => {
             index: parseInt(localStorage.getItem(localKey)) || 0
         },
         watch: {
-            change() {
+            index() {
                 localStorage.setItem(localKey, (this.index).toString())
             }
         },
