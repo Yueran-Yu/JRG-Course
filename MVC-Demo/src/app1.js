@@ -3,6 +3,7 @@ import $ from 'jquery'
 import Model from "./base/Mode.js";
 import View from "./base/View.js";
 import EventBus from "./base/EventBus.js";
+import Vue from 'vue'
 
 
 const eventBus = new EventBus()
@@ -20,13 +21,28 @@ const m = new Model({
 })
 
 const init = (el) => {
+    new Vue({
+        el:el,
+        template:`<section>
+            <div class="output"> 
+                <span id="number">{{n}}</span>
+            </div>
+            <div class="actions">
+                <button id="add1">+1</button>
+                <button id="minus1">-1</button>
+                <button id="mul2">*2</button>
+                <button id="divide2">÷2</button>
+            </div>
+        </section>`
+    })
+    return
 // the remaining actions to "Controller"
     new View({
         el: el,
         data: m.data,
         html: `<div>
             <div class="output"> 
-                <span id="number">{{n}}</span>
+                <span id="number">n</span>
             </div>
             <div class="actions">
                 <button id="add1">+1</button>

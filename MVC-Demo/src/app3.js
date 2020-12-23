@@ -32,4 +32,3 @@ $square.on('click', () => {
     }
 })
 
-export default view
