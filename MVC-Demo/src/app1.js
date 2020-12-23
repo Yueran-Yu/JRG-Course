@@ -14,7 +14,7 @@ const m = new Model({
         },
     update(data) {
         Object.assign(m.data, data)
-        eventBus.trigger('m:updated')
+        m.trigger('m:updated')
         localStorage.setItem('n', (m.data.n).toString())
     }
 })
@@ -24,7 +24,6 @@ const init = (el) => {
     new View({
         el: el,
         data: m.data,
-        eventBus:eventBus,
         html: `<div>
             <div class="output"> 
                 <span id="number">{{n}}</span>
