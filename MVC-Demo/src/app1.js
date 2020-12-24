@@ -3,11 +3,17 @@ import Vue from 'vue'
 
 // put all the data relevant actions to "Model"
 const init = (el) => {
+    const m = {
+        get() {
+            return parseFloat(localStorage.getItem('n')) || 100
+        },
+        set(n) {
+            localStorage.setItem('n', n.toString())
+        }
+    }
     new Vue({
         el: el,
-        data: {
-            n: parseFloat(localStorage.getItem('n')) || 100
-        },
+        data: {n: m.get()},
         methods: {
             add() {
                 this.n += 1
@@ -24,7 +30,7 @@ const init = (el) => {
         },
         watch: {
             n() {
-                localStorage.setItem('n', (this.n).toString())
+                m.set(this.n)
             }
         },
         template: `

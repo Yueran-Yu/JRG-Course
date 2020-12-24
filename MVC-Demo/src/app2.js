@@ -4,14 +4,22 @@ import Vue from "vue";
 const localKey = 'app2.index'
 
 const init = (el) => {
+    const m = {
+        get() {
+            return parseInt(localStorage.getItem(localKey)) || 0
+        },
+        set(index) {
+            localStorage.setItem(localKey, index.toString())
+        }
+    }
     new Vue({
         el: el,
         data: {
-            index: parseInt(localStorage.getItem(localKey)) || 0
+            index: m.get()
         },
         watch: {
             index() {
-                localStorage.setItem(localKey, (this.index).toString())
+                m.set(this.index)
             }
         },
         template: `

@@ -12183,10 +12183,18 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // put all the data relevant actions to "Model"
 var init = function init(el) {
+  var m = {
+    get: function get() {
+      return parseFloat(localStorage.getItem('n')) || 100;
+    },
+    set: function set(n) {
+      localStorage.setItem('n', n.toString());
+    }
+  };
   new _vue.default({
     el: el,
     data: {
-      n: parseFloat(localStorage.getItem('n')) || 100
+      n: m.get()
     },
     methods: {
       add: function add() {
@@ -12204,7 +12212,7 @@ var init = function init(el) {
     },
     watch: {
       n: function n() {
-        localStorage.setItem('n', this.n.toString());
+        m.set(this.n);
       }
     },
     template: "\n          <section id=\"app1\">\n          <div class=\"output\">\n            <span id=\"number\">{{ n }}</span>\n          </div>\n          <div class=\"actions\">\n            <button @click=\"add\">+1</button>\n            <button @click=\"minus\">-1</button>\n            <button @click=\"mul\">*2</button>\n            <button @click=\"div\">\xF72</button>\n          </div>\n          </section>"
@@ -12235,14 +12243,22 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var localKey = 'app2.index';
 
 var init = function init(el) {
+  var m = {
+    get: function get() {
+      return parseInt(localStorage.getItem(localKey)) || 0;
+    },
+    set: function set(index) {
+      localStorage.setItem(localKey, index.toString());
+    }
+  };
   new _vue.default({
     el: el,
     data: {
-      index: parseInt(localStorage.getItem(localKey)) || 0
+      index: m.get()
     },
     watch: {
       index: function index() {
-        localStorage.setItem(localKey, this.index.toString());
+        m.set(this.index);
       }
     },
     template: "\n          <section id=\"app2\">\n          <ol class=\"tab-bar\">\n            <li :class=\"index === 0 ? 'selected':''\" @click=\"index=0\">Column 1</li>\n            <li :class=\"index === 1 ? 'selected':''\" @click=\"index=1\">Column 2</li>\n          </ol>\n          <ol class=\"tab-content\">\n            <li :class=\"index === 0 ? 'active':''\">Content 1</li>\n            <li :class=\"index === 1 ? 'active':''\">Content 2</li>\n          </ol>\n          </section>"
@@ -23443,7 +23459,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56990" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54250" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
