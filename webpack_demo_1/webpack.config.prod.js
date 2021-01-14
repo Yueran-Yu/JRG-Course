@@ -9,20 +9,21 @@ module.exports = {
     plugins: [
         ...base.plugins,
         new MiniCssExtractPlugin({
-            // both options are optional
             filename: '[name].[contenthash].css',
             chunkFilename: '[id].[contenthash].css',
+            ignoreOrder: false,
         }),
     ],
     module: {
         rules: [
+            ...base.module.rules,
             {
                 test: /\.css$/i,
                 use: [
                     {
                         loader: MiniCssExtractPlugin.loader,
                         options: {
-                            publicPath: '/public/path/to/',
+                            publicPath: '../',
                         },
                     },
                     'css-loader',
