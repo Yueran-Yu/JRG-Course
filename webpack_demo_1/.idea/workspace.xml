@@ -2,15 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cd036d91-3586-4ca5-a75b-68813be591ad" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/style.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/z.styl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/x.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/x.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/style.less" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/x.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/x.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webpack.config.base.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.base.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.config.prod.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.prod.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +29,7 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_MARK_IGNORED_FILES_AS_EXCLUDED" value="true" />
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -62,7 +61,7 @@
       <workItem from="1609864384492" duration="22332000" />
       <workItem from="1610400055597" duration="1000" />
       <workItem from="1610400918553" duration="14084000" />
-      <workItem from="1610603577762" duration="1007000" />
+      <workItem from="1610603577762" duration="3432000" />
     </task>
     <servers />
   </component>
