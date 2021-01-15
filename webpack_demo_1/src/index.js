@@ -9,7 +9,7 @@ div.innerHTML = `<div><img src="${png}" width="300"></div> `
 const btn = document.createElement('button')
 btn.innerText = "lazy loading"
 btn.onclick = ()=>{
-    const promise = import('./0azy')
+    const promise = import('./lazy')
     promise.then((fn)=>{
         console.log('loaded successfully.')
        const f =  fn.default
