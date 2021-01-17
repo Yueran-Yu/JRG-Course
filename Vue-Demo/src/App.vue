@@ -1,7 +1,8 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    {{n}}
+
+    <button @click="add">+1</button>
   </div>
 </template>
 
@@ -10,8 +11,16 @@ import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  // function
+  data(){
+   return {n:0}
+  },
+
+  // object
+  methods:{
+    add(){
+      this.n += 1
+    }
   }
 }
 </script>
