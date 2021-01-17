@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cd036d91-3586-4ca5-a75b-68813be591ad" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="51e73f61-d50e-41ab-bd77-e851d5b60241" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/vue-demo/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webpack_demo_1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../webpack_demo_1/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,7 +13,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectId" id="1mZSZqpLLC5AxfZpjHr5U6uPb07" />
+  <component name="ProjectId" id="1n97MTpMLyZ5nbFhIRuWRCqZ5h6" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
@@ -22,41 +23,22 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
-    <property name="ASKED_MARK_IGNORED_FILES_AS_EXCLUDED" value="true" />
-    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="vue.rearranger.settings.migration" value="true" />
-  </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/assets" />
-      <recent name="$PROJECT_DIR$/src" />
-      <recent name="$PROJECT_DIR$" />
-    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="cd036d91-3586-4ca5-a75b-68813be591ad" name="Default Changelist" comment="" />
-      <created>1609699679272</created>
+      <changelist id="51e73f61-d50e-41ab-bd77-e851d5b60241" name="Default Changelist" comment="" />
+      <created>1610790406300</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1609699679272</updated>
-      <workItem from="1609699680370" duration="863000" />
-      <workItem from="1609728080043" duration="2806000" />
-      <workItem from="1609735716976" duration="4342000" />
-      <workItem from="1609864384492" duration="22332000" />
-      <workItem from="1610400055597" duration="1000" />
-      <workItem from="1610400918553" duration="14084000" />
-      <workItem from="1610603577762" duration="8116000" />
+      <updated>1610790406300</updated>
+      <workItem from="1610790407980" duration="1785000" />
     </task>
     <servers />
   </component>
@@ -65,9 +47,5 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-  </component>
-  <component name="XSLT-Support.FileAssociations.UIState">
-    <expand />
-    <select />
   </component>
 </project>
