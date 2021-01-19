@@ -1,8 +1,12 @@
-import Vue from 'vue'
-import App from './App.vue'
-
-Vue.config.productionTip = false
-
+console.log(window.Vue)
+// import Vue from 'vue'
+// import App from './App.vue'
+//
+// Vue.config.productionTip = false
+//
 new Vue({
-  el: '#app'
+  el: '#app',
+  data:{
+    n:0
+  }
 })
