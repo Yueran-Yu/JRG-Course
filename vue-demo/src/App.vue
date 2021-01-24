@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    {{n}}
+   {{n}}
     <button @click="add">+1</button>
   </div>
 </template>
@@ -9,15 +9,15 @@
 import HelloWorld from './components/HelloWorld.vue'
 
 export default {
-  name: 'APP',
+  name: 'App',
   data(){
-    return{
-      n:8
+    return {
+      n:0
     }
   },
   methods:{
     add(){
-      this.n +=1
+      this.n += 1
     }
   }
 }
