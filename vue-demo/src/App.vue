@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div>
    {{n}}
     <button @click="add">+1</button>
   </div>
