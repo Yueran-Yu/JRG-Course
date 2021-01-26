@@ -26,6 +26,7 @@
     "sass-loader": "^8.0.2",
     "vue-template-compiler": "^2.6.11"
   },
+  "_id": "vue-demo@0.1.0",
   "gitHooks": {
     "pre-commit": "lint-staged"
   },
@@ -34,5 +35,6 @@
       "vue-cli-service lint",
       "git add"
     ]
-  }
+  },
+  "readme": "ERROR: No README data found!"
 }
