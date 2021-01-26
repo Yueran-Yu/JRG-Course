@@ -4,9 +4,15 @@
 const Vue = window.Vue
 Vue.config.productionTip = false
 import Demo from './Demo.vue'
+
+Vue.component('Demo2', {
+    template: `<div>Demo2</div>`
+})
+
+
 new Vue({
-    components:{
-      Frank:Demo
+    components: {
+        Frank: Demo
     },
     data() {
         return {
@@ -18,7 +24,8 @@ new Vue({
       <div class="red">
       {{ n }}
       <button @click="add">+1</button>
-     <Frank/>
+      <Frank/>
+      <Demo2/>
       <p> {{ filterArray() }}</p>
       </div>
     `,
