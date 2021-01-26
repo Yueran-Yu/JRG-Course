@@ -6,13 +6,17 @@ Vue.config.productionTip = false
 import Demo from './Demo.vue'
 
 Vue.component('Demo2', {
-    template: `<div>Demo2</div>`
+    template: `<div>Here is the second component Demo2</div>`
 })
 
 
 new Vue({
     components: {
-        Frank: Demo
+        Frank: Demo,
+        Costco:{
+            template:`
+            <div>Here is the third way to do component.</div>`
+        }
     },
     data() {
         return {
@@ -26,6 +30,7 @@ new Vue({
       <button @click="add">+1</button>
       <Frank/>
       <Demo2/>
+      <Costco/>
       <p> {{ filterArray() }}</p>
       </div>
     `,
