@@ -1,24 +1,39 @@
 <template>
   <div class="red">
-    Here is the usage of Demo mmmmm
+    {{ n }}
+    <button @click="add">+1</button>
   </div>
 </template>
 <script>
 export default {
-  data(){
+  data() {
     return {
-      n:0
+      n: 0,
+      array: [1, 2, 3, 4, 5, 6, 7, 8]
     }
   },
-  methods:{
-    add(){
+  created() {
+    console.log('=== This object has been stored in the memory.')
+  },
+  mounted() {
+    console.log("=== This has been mounted to the page.")
+  },
+  updated() {
+    console.log("Updated")
+    console.log(this.n)
+  },
+  destroyed() {
+    console.log("destroyed")
+  },
+  methods: {
+    add() {
       this.n += 1
     }
   }
 }
 </script>
 <style scoped>
-.red{
-  color:red;
+.red {
+  color: red;
 }
 </style>
