@@ -5,19 +5,12 @@ const Vue = window.Vue
 Vue.config.productionTip = false
 import Demo from './Demo.vue'
 
-Vue.component('Demo2', {
-    template: `<div>Here is the second component Demo2</div>`
-})
+// Vue.component('Demo2', {
+//     template: `<div>Here is the second component Demo2</div>`
+// })
 
 
 new Vue({
-    components: {
-        Frank: Demo,
-        Costco:{
-            template:`
-            <div>Here is the third way to do component.</div>`
-        }
-    },
     data() {
         return {
             n: 0,
@@ -28,18 +21,24 @@ new Vue({
       <div class="red">
       {{ n }}
       <button @click="add">+1</button>
-      <Frank/>
-      <Demo2/>
-      <Costco/>
-      <p> {{ filterArray() }}</p>
       </div>
     `,
+    created(){
+        console.log('======== This object has been stored in the memory')
+    },
+    mounted(){
+        console.log("This has been show up in the page")
+    },
+    updated(){
+        console.log("Updated")
+        console.log(this.n)
+    },
+    destroyed(){
+
+    },
     methods: {
         add() {
             this.n += 1
-        },
-        filterArray() {
-            return this.array.filter(x => x % 2 === 0)
         }
     }
 }).$mount('#app')
