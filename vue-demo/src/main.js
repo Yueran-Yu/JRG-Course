@@ -6,6 +6,7 @@ console.log(window.Vue)
 const Vue = window.Vue
 Vue.config.productionTip = false
 import Demo from './Demo.vue'
+import Demo2 from './Demo2.vue'
 
 // Vue.component('Demo2', {
 //     template: `<div>Here is the second component Demo2</div>`
@@ -13,19 +14,31 @@ import Demo from './Demo.vue'
 
 
 new Vue({
-    components:{Demo},
-    data:{
-        visible:true
+    components: {Demo, Demo2},
+    data: {
+        visible: true,
+        n: 0
     },
     template:
-        `<div>
-        <button @click="toggle">Toggle</button>
-        <hr>
-        <Demo v-if="visible ===true"/>
-    </div>
-    `,
-    methods:{
-        toggle(){
+        `
+          <div>
+          <button @click="toggle">Toggle</button>
+          <hr>
+          <Demo v-if="visible ===true"/>
+          <hr>
+          {{n}}
+          <!-- <Demo2 message="Hello World props"/>-->
+          <!-- Two ways to pass parameter -->
+          <!-- <Demo2 :message="n"/>  this n is an argument -->
+          <!-- <Demo2 message=" n "/> this n  is a string -->
+          <Demo2 :message1="n" :fn="add"/>
+          </div>
+        `,
+    methods: {
+        add() {
+            this.n += 1
+        },
+        toggle() {
             this.visible = !this.visible
         }
     }
