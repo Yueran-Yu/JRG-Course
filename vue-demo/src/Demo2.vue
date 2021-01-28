@@ -18,6 +18,6 @@ export default {
   color: green;
   font-weight: bold;
   font-size: large;
-  border: 1px solid blue;
+  border: 3px solid black;
 }
 </style>
