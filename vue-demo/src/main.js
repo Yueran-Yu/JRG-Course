@@ -92,11 +92,12 @@ class VueArray extends Array{
         super.push(args)
         this.length
         for(let i = oldLength; i < this.length; i++){
-
+            Vue.set(this, i, this[i])
         }
     }
-
 }
+
+const a = new VueArrau
 
 
 
