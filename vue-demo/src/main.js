@@ -44,7 +44,8 @@ import Demo2 from './Demo2.vue'
     // render: h=> h(Demo)
 }).$mount('#app') **/
 
-new Vue({
+
+/** new Vue({
     data:{
         obj:{
             a:0,
@@ -66,7 +67,24 @@ new Vue({
             console.log(this.obj.b)
         }
     }
-}).$mount('#app')
+}).$mount('#app') **/
+
+new Vue({
+    data: {
+        array: ["a", "b", "c"]
+    },
+    template:
+        `
+          <div>
+          {{ array }}
+          <button @click="setD">set d</button>
+          </div>`,
+    methods: {
+        setD() {
+            this.$set(this.array, 3, "d")
+        }
+    }
+}).$mount("#app")
 
 
 
