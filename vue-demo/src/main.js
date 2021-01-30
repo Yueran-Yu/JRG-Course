@@ -1,7 +1,6 @@
 // import Vue from 'vue'
 // import App from './App.vue'
 
-
 console.log(window.Vue)
 const Vue = window.Vue
 Vue.config.productionTip = false
@@ -13,7 +12,7 @@ import Demo2 from './Demo2.vue'
 // })
 
 
-new Vue({
+/**  new Vue({
     components: {Demo, Demo2},
     data: {
         visible: true,
@@ -43,4 +42,43 @@ new Vue({
         }
     }
     // render: h=> h(Demo)
+}).$mount('#app') **/
+
+new Vue({
+    data:{
+        obj:{
+            a:0,
+        }
+    },
+    template:`
+      <div>{{obj.b}}
+      <hr>
+      <button @click="setB">set B</button>
+      <button @click="addOne">Add 1</button>
+      </div>
+    `,
+    methods:{
+        setB(){
+            this.$set(this.obj, 'b', 1)
+        },
+        addOne(){
+            this.obj.b += 1
+            console.log(this.obj.b)
+        }
+    }
 }).$mount('#app')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
