@@ -11,7 +11,7 @@ import Demo2 from './Demo2.vue'
 //     template: `<div>Here is the second component Demo2</div>`
 // })
 
-
+// （一）
 /**  new Vue({
     components: {Demo, Demo2},
     data: {
@@ -45,6 +45,7 @@ import Demo2 from './Demo2.vue'
 }).$mount('#app') **/
 
 
+//（二）
 /** new Vue({
     data:{
         obj:{
@@ -69,6 +70,8 @@ import Demo2 from './Demo2.vue'
     }
 }).$mount('#app') **/
 
+
+// (三)
 /** new Vue({
     data: {
         array: ["a", "b", "c"]
@@ -97,7 +100,9 @@ import Demo2 from './Demo2.vue'
     }
 } **/
 
-new Vue({
+
+// （四）
+/** new Vue({
     data: {
         user: {
             email: "abc@gmail.com",
@@ -108,7 +113,8 @@ new Vue({
     computed: {
         displayName: {
             get() {
-                return this.user.nickname || this.user.email || this.user.phone
+                const user = this.user
+                return user.nickname || user.email || user.phone
             },
             set(value) {
                 this.user.nickname = value
@@ -129,7 +135,53 @@ new Vue({
             this.displayName = "Apple"
         }
     }
-}).$mount("#app")
+}).$mount("#app")  **/
+
+//（五）
+let id = 0
+const createUser = (name, gender) => {
+    id += 1
+    return {id: id, name: name, gender: gender}
+}
+new Vue({
+    data() {
+        return {
+            users: [
+                createUser('Angela', 'F'),
+                createUser('Mike', 'M'),
+                createUser('Joe', 'F'),
+                createUser('Sam', 'M')
+            ],
+            displayUsers:[]
+        }
+    },
+    created(){
+        this.displayUsers = this.users
+    },
+    methods:{
+        showMale(){
+            this.displayUsers = this.users.filter(u => u.gender === 'M')
+        },
+        showFemale(){
+            this.displayUsers = this.users.filter(u => u.gender === "F")
+        },
+        showAll(){
+            this.displayUsers = this.users
+        }
+    },
+    template: `
+      <div>
+      <div>
+        <button @click="showAll">All</button>
+        <button @click="showMale">MAN</button>
+        <button @click="showFemale">WOMEN</button>
+        <ul>
+          <li v-for="(u, index) in displayUsers" :key="index">{{u.name}} - {{u.gender}}</li>
+        </ul>
+      </div>
+      </div>
+    `
+}).$mount('#app')
 
 
 
