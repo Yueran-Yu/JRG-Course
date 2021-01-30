@@ -138,12 +138,13 @@ import Demo2 from './Demo2.vue'
 }).$mount("#app")  **/
 
 //（五）
-let id = 0
-const createUser = (name, gender) => {
+
+/** let id = 0
+ const createUser = (name, gender) => {
     id += 1
     return {id: id, name: name, gender: gender}
 }
-new Vue({
+ new Vue({
     data() {
         return {
             users: [
@@ -189,6 +190,62 @@ new Vue({
       </div>
       </div>
     `
+}).$mount('#app')
+ **/
+
+// (六)
+new Vue({
+    data: {
+        n: 0,
+        history: [],
+        inUndoMode:false
+    },
+    watch: {
+        n(newValue, oldValue) {
+            if(this.inUndoMode){
+                return
+            }
+            this.history.push({from: oldValue, to: newValue})
+        }
+    },
+    template: `
+      <div>
+      {{ n }}
+      <hr>
+      <button @click="add1">+1</button>
+      <button @click="add2">+2</button>
+      <button @click="minus1">-1</button>
+      <button @click="minus2">-2</button>
+      <hr>
+      <button @click="undo">Revoke</button>
+      <hr>
+      {{history}}
+      </div>
+    `,
+    methods: {
+        add1() {
+            this.n += 1
+        },
+        add2() {
+            this.n += 2
+        },
+        minus1() {
+            this.n -= 1
+        },
+        minus2() {
+            this.n -= 2
+        },
+        undo() {
+           const last= this.history.pop()
+            console.log(last)
+            const old = last.from
+            this.inUndoMode = true
+            this.n = old
+            this.$nextTick(()=>{
+                this.inUndoMode = false
+            },0)
+        }
+    }
 }).$mount('#app')
 
 
