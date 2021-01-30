@@ -152,31 +152,39 @@ new Vue({
                 createUser('Joe', 'F'),
                 createUser('Sam', 'M')
             ],
-            displayUsers:[]
+            gender: ''
         }
     },
-    created(){
-        this.displayUsers = this.users
-    },
-    methods:{
-        showMale(){
-            this.displayUsers = this.users.filter(u => u.gender === 'M')
-        },
-        showFemale(){
-            this.displayUsers = this.users.filter(u => u.gender === "F")
-        },
-        showAll(){
-            this.displayUsers = this.users
+    computed: {
+        displayUsers() {
+            const hash = {
+                M:'M',
+                F:'F'
+            }
+            const {users, gender} = this
+
+            if (gender === '') {
+                return users
+            } else if (typeof gender === 'string') {
+                return users.filter(u => u.gender === hash[gender])
+            }else{
+                throw new Error('gender is invalid.')
+            }
         }
+    },
+    methods: {
+       setGender(str){
+           this.gender = str
+       }
     },
     template: `
       <div>
       <div>
-        <button @click="showAll">All</button>
-        <button @click="showMale">MAN</button>
-        <button @click="showFemale">WOMEN</button>
+        <button @click="setGender('')">All</button>
+        <button @click="setGender('M')">MAN</button>
+        <button @click="setGender('F')">WOMEN</button>
         <ul>
-          <li v-for="(u, index) in displayUsers" :key="index">{{u.name}} - {{u.gender}}</li>
+          <li v-for="(u, index) in displayUsers" :key="index">{{ u.name }} - {{ u.gender }}</li>
         </ul>
       </div>
       </div>
