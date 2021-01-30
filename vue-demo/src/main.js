@@ -69,7 +69,7 @@ import Demo2 from './Demo2.vue'
     }
 }).$mount('#app') **/
 
-new Vue({
+/** new Vue({
     data: {
         array: ["a", "b", "c"]
     },
@@ -86,7 +86,7 @@ new Vue({
     }
 }).$mount("#app")
 
-class VueArray extends Array{
+ class VueArray extends Array{
     push(...args){
         const oldLength = this.length // this means current array
         super.push(args)
@@ -95,9 +95,43 @@ class VueArray extends Array{
             Vue.set(this, i, this[i])
         }
     }
-}
+} **/
 
-const a = new VueArrau
+new Vue({
+    data: {
+        user: {
+            email: "abc@gmail.com",
+            nickname: "lucy",
+            phone: 12345678
+        }
+    },
+    computed: {
+        displayName: {
+            get() {
+                return this.user.nickname || this.user.email || this.user.phone
+            },
+            set(value) {
+                this.user.nickname = value
+            }
+        }
+    },
+    template:
+        `
+          <div>
+          {{ displayName }}
+          <div>
+            {{ displayName }}
+            <button @click="add">set</button>
+          </div>
+          </div>`,
+    methods: {
+        add() {
+            this.displayName = "Apple"
+        }
+    }
+}).$mount("#app")
+
+
 
 
 
