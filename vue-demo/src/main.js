@@ -81,12 +81,22 @@ new Vue({
           </div>`,
     methods: {
         setD() {
-            this.$set(this.array, 3, "d")
+            this.array.push("d")
         }
     }
 }).$mount("#app")
 
+class VueArray extends Array{
+    push(...args){
+        const oldLength = this.length // this means current array
+        super.push(args)
+        this.length
+        for(let i = oldLength; i < this.length; i++){
 
+        }
+    }
+
+}
 
 
 
