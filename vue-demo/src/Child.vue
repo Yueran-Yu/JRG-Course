@@ -2,14 +2,22 @@
   <div class="child">
     {{ money }}
     <button @click="$emit('update:money', money-100)">
-      <span v-x>Spend Money</span>
+      <span v-x v-y>Spend Money</span>
     </button>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["money"]
+  props: ["money"],
+  directives:{
+    'y':{
+      inserted(el){
+        el.addEventListener('click', ()=>{
+          console.log('You only can use the directive Y in current component.')})
+      }
+    }
+  }
 }
 </script>
 
