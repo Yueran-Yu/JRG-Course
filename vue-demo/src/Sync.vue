@@ -26,6 +26,6 @@ export default {
 <style>
 .app {
   border: 3px solid red;
-  padding: 10px;
+  padding: 8px;
 }
 </style>
