@@ -2,6 +2,7 @@
 // import App from './App.vue'
 import Demo from './Demo.vue'
 import Demo2 from './Demo2.vue'
+
 console.log(window.Vue)
 const Vue = window.Vue
 Vue.config.productionTip = false
@@ -12,6 +13,16 @@ import Sync from "./Sync.vue";
 // Vue.component('Demo2', {
 //     template: `<div>Here is the second component Demo2</div>`
 // })
+
+Vue.directive('x', {
+    inserted: function (el) {
+        el.addEventListener('click', () => {
+            console.log('x')
+        })
+    }
+})
+
+
 
 new Vue({
     render: h => h(Sync)

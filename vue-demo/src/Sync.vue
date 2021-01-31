@@ -1,5 +1,7 @@
 <template>
   <div class="app">
+    <button v-x>Today we need to learn vue directives</button>
+    <hr>
     Sync.vue Currently I have {{ total }}
     <hr>
     <!-- <Child :money="total" v-on:update:money="total=$event"/>-->
