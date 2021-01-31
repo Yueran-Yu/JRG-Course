@@ -220,6 +220,8 @@ new Vue({
       <button @click="undo">Revoke</button>
       <hr>
       {{history}}
+      <div v-pre>{{history}} here is {{n}}</div>
+      <div v-html> <strong>Hello test "v-html"</strong> </div>
       </div>
     `,
     methods: {
