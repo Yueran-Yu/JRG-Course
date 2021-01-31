@@ -1,15 +1,23 @@
 // import Vue from 'vue'
 // import App from './App.vue'
-
+import Demo from './Demo.vue'
+import Demo2 from './Demo2.vue'
 console.log(window.Vue)
 const Vue = window.Vue
 Vue.config.productionTip = false
-import Demo from './Demo.vue'
-import Demo2 from './Demo2.vue'
+
+import Sync from "./Sync.vue";
+
 
 // Vue.component('Demo2', {
 //     template: `<div>Here is the second component Demo2</div>`
 // })
+
+new Vue({
+    render: h => h(Sync)
+}).$mount('#app')
+
+
 
 // （一）
 /**  new Vue({
@@ -194,7 +202,7 @@ import Demo2 from './Demo2.vue'
  **/
 
 // (六)
-new Vue({
+/** new Vue({
     data: {
         n: 0,
         history: [],
@@ -249,6 +257,7 @@ new Vue({
         }
     }
 }).$mount('#app')
+ **/
 
 
 
