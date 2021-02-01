@@ -5,12 +5,11 @@
 </template>
 
 <script>
-import log from '../mixins/log.js'
-
+import MyVue from '../MyVue.js'
 export default {
-  data: function () {
+  extends:MyVue,
+  data() {
     return {name: 'Child4'}
-  },
-  mixins: [log]
+  }
 }
 </script>
