@@ -1,5 +1,5 @@
 <template>
-  <div id="app" :class="`app theme-${themeName}`">
+  <div id="app" :class="`app theme-${themeName} fontSize=${fontSizeName}`">
     <Child1 v-if="child1Visible"/>
     <button @click="child1Visible = false">X</button>
     <Child2 v-if="child2Visible"/>
@@ -25,13 +25,14 @@ export default {
   provide() {
     return {
       themeName: this.themeName,
-      changeTheme: this.changeTheme
+      changeTheme: this.changeTheme,
+      changeFontSize: this.changeFontSize
     }
   },
   data() {
     return {
       themeName: "blue", // red
-      fontSize: "normal",  // big, small
+      fontSizeName: "normal",  // big, small
       child1Visible: true,
       child2Visible: true,
       child3Visible: true,
@@ -52,6 +53,11 @@ export default {
         this.themeName = 'red'
       } else {
         this.themeName = 'blue'
+      }
+    },
+    changeFontSize(name) {
+      if (["normal", "big", "small"].indexOf(name) >= 0) {
+        this.fontSizeName = name
       }
     }
   }
@@ -93,5 +99,20 @@ export default {
 
 .app.theme-red {
   color: darkred;
+}
+
+.app button{
+  font-size:inherit;
+}
+.app.fontSize-normal {
+  font-size: 16px;
+}
+
+.app.fontSize-big {
+  font-size: 36px;
+}
+
+.app.fontSize-small {
+  font-size: 12px;
 }
 </style>
