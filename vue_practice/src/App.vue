@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" :class="`app theme-${themeName}`">
     <Child1 v-if="child1Visible"/>
     <button @click="child1Visible = false">X</button>
     <Child2 v-if="child2Visible"/>
@@ -22,13 +22,21 @@ import Child5 from './components/Child5.vue'
 
 export default {
   name: 'App',
-  data(){
+  provide() {
     return {
+      themeName: this.themeName,
+      changeTheme: this.changeTheme
+    }
+  },
+  data() {
+    return {
+      themeName: "blue", // red
+      fontSize: "normal",  // big, small
       child1Visible: true,
-      child2Visible:true,
-      child3Visible:true,
-      child4Visible:true,
-      child5Visible:true
+      child2Visible: true,
+      child3Visible: true,
+      child4Visible: true,
+      child5Visible: true
     }
   },
   components: {
@@ -37,6 +45,15 @@ export default {
     Child3,
     Child4,
     Child5
+  },
+  methods: {
+    changeTheme() {
+      if (this.themeName === 'blue') {
+        this.themeName = 'red'
+      } else {
+        this.themeName = 'blue'
+      }
+    }
   }
 }
 </script>
@@ -49,5 +66,32 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.app {
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+
+.app.theme-blue button {
+  background: blue;
+  color: white;
+}
+
+.app.theme-blue {
+  color: #00008b;
+}
+
+.app.theme-red button {
+  background: red;
+  color: white;
+}
+
+.app.theme-red {
+  color: darkred;
 }
 </style>
