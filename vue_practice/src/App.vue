@@ -1,5 +1,5 @@
 <template>
-  <div id="app" :class="`app theme-${themeName} fontSize=${fontSizeName}`">
+  <div id="app" :class="`app theme-${themeName} fontSize-${fontSizeName}`">
     <Child1 v-if="child1Visible"/>
     <button @click="child1Visible = false">X</button>
     <Child2 v-if="child2Visible"/>
