@@ -19,7 +19,7 @@ import Child2 from './components/Child2.vue'
 import Child3 from './components/Child3.vue'
 import Child4 from './components/Child4.vue'
 import Child5 from './components/Child5.vue'
-
+//最近3-4天心脏不舒服....... 只能以这种方式提交代码了
 export default {
   name: 'App',
   provide() {
