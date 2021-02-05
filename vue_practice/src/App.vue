@@ -20,6 +20,8 @@ import Child3 from './components/Child3.vue'
 import Child4 from './components/Child4.vue'
 import Child5 from './components/Child5.vue'
 //最近3-4天心脏不舒服....... 只能以这种方式提交代码了
+// 今天好多了， 只是因为 准备移民资料 分心了一天，然后就很难收神，也忘了自己要做啥，还有我是趴着的
+// 趴着我就容易忘记自己要做啥
 export default {
   name: 'App',
   provide() {
