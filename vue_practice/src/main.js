@@ -3,9 +3,11 @@ import App from './App.vue'
 import MyVue from "./MyVue.js"
 import Form from './Form.vue'
 import Model from './Model.vue'
-import {Button, message} from 'ant-design-vue'
+import Antd from 'ant-design-vue'
+import 'ant-design-vue/dist/antd.css'
 
 Vue.config.productionTip = false
+Vue.use(Antd)
 
 // new MyVue({
 //   data(){
