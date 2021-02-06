@@ -6,7 +6,9 @@
     <form @submit.prevent="onSubmit">
       <label>
         <span>User Name</span>
-        <input type="text" :value="user.username" @input="user.username = $event.target.value"/>
+   <!--  <MyInput v-model="user.username"/>-->
+        <MyInput :value="user.username" @input="user.username = $event"/>
+
       </label>
       <br>
       <label>
@@ -19,7 +21,11 @@
 </template>
 
 <script>
+import MyInput from "@/MyInput";
 export default {
+  components:{
+    MyInput
+  },
   name: "App",
   data() {
     return {
