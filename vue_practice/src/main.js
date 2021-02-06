@@ -3,6 +3,7 @@ import App from './App.vue'
 import MyVue from "./MyVue.js"
 import Form from './Form.vue'
 import Model from './Model.vue'
+import {Button, message} from 'ant-design-vue'
 
 Vue.config.productionTip = false
 
