@@ -1,7 +1,8 @@
 import Vue from 'vue'
-// import App from './App.vue'
+import App from './App.vue'
+import MyVue from "./MyVue.js"
 import Form from './Form.vue'
-// import MyVue from "./MyVue.js"
+import Model from './Model.vue'
 
 Vue.config.productionTip = false
 
@@ -14,5 +15,5 @@ Vue.config.productionTip = false
 
 
 new Vue({
-  render: h => h(Form),
+  render: h => h(Model),
 }).$mount('#app')
