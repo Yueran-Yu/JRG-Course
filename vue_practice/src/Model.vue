@@ -1,17 +1,16 @@
 <template>
   <div id="app">
-
     <a-form
         id="components-form-demo-normal-login"
         :form="form"
         class="login-form"
-        @submit="handleSubmit"
+        @submit="onSubmit"
     >
       <a-form-item>
         <a-input
             v-decorator="[
           'userName',
-          { rules: [{ required: true, message: 'Please input your username!' }] },
+          { rules:[{require:true, message:'Username should be provided!'}] },
         ]"
             placeholder="Username"
         >
@@ -22,7 +21,12 @@
         <a-input
             v-decorator="[
           'password',
-          { rules: [{ required: true, message: 'Please input your Password!' }] },
+          { rules: [
+              { required: true, message: 'Please input your Password!'},
+              { len: 8, message: 'The minimum length of Password should be 8!'},
+              { pattern: /[a-zA-Z]/, message: 'Letters should be included!'}
+              ]
+          },
         ]"
             type="password"
             placeholder="Password"
@@ -31,17 +35,6 @@
         </a-input>
       </a-form-item>
       <a-form-item>
-        <a-checkbox
-            v-decorator="[
-          'remember',
-          {
-            valuePropName: 'checked',
-            initialValue: true,
-          },
-        ]"
-        >
-          Remember me
-        </a-checkbox>
         <a class="login-form-forgot" href="">
           Forgot password
         </a>
@@ -59,18 +52,19 @@
 
 <script>
 // import MyInput from "@/MyInput";
-
 export default {
-  name:"App",
+  name: "App",
   beforeCreate() {
     this.form = this.$form.createForm(this, {name: 'normal_login'});
   },
   methods: {
-    handleSubmit(e) {
+    onSubmit(e) {
       e.preventDefault();
       this.form.validateFields((err, values) => {
         if (!err) {
           console.log('Received values of form: ', values);
+        }else{
+          console.log("error: ", err)
         }
       });
     },
