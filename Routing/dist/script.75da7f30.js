@@ -118,14 +118,15 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"script.js":[function(require,module,exports) {
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 var app = document.querySelector('#app');
 var div1 = document.createElement('div');
-div1.innerHTML = '1'; //嵌套路由
-
-var view1 = document.createElement('div');
-div1.appendChild(view1);
-view1.style.height = '50px';
-view1.style.background = 'pink';
+div1.innerHTML = '1';
 var div2 = document.createElement('div');
 div2.innerHTML = '2';
 var div3 = document.createElement('div');
@@ -133,27 +134,16 @@ div3.innerHTML = '3';
 var div4 = document.createElement('div');
 div4.innerHTML = '4';
 var routeTable = {
-  "1": div1,
-  "2": div2,
-  "3": div3,
-  "4": div4
-};
-var div11 = document.createElement('div');
-div11.innerHTML = '1.1';
-var div12 = document.createElement('div');
-div12.innerHTML = '1.2';
-var div13 = document.createElement('div');
-div13.innerHTML = '1.3';
-var subRouteTable = {
-  "1/1": div11,
-  "1/2": div12,
-  "1/3": div13
+  "/1": div1,
+  "/2": div2,
+  "/3": div3,
+  "/4": div4
 };
 
 function routing(container) {
-  var app = document.querySelector('#app'); //获取用户想去哪里
-
-  var number = window.location.hash.substr(1) || 1; //获取界面
+  //获取用户想去哪里
+  var number = window.location.pathname;
+  console.log("number", number); //获取界面
 
   var div = routeTable[number.toString()]; //渲染界面
 
@@ -164,13 +154,44 @@ function routing(container) {
   div.style.display = "block"; //展示界面，放到合适的位置
 
   container.innerHTML = '';
-  if (container) app.appendChild(div);
+  container.appendChild(div);
 }
 
-window.addEventListener('hashchange', function () {
-  routing(app);
-});
+var aTags = document.querySelectorAll('a.link');
+
+var _iterator = _createForOfIteratorHelper(aTags),
+    _step;
+
+try {
+  var _loop = function _loop() {
+    var a = _step.value;
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      var href = a.getAttribute('href');
+      console.log(href);
+      window.history.pushState(null, "page ".concat(href), href);
+      onStateChange(href);
+    });
+  };
+
+  for (_iterator.s(); !(_step = _iterator.n()).done;) {
+    _loop();
+  } // window.addEventListener('hashchange', () => {
+  //     routing(app)
+  // })
+
+} catch (err) {
+  _iterator.e(err);
+} finally {
+  _iterator.f();
+}
+
 routing(app);
+
+function onStateChange() {
+  console.log("state changed.");
+  routing(app);
+}
 },{}],"../../../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
