@@ -17,8 +17,20 @@ const routeTable = {
 
 function routing(container) {
     //获取用户想去哪里
-    let number = window.location.pathname
-    console.log("number",number)
+    // ===> History
+    // let number = window.location.pathname
+    // if(number === '/'){
+    //     number = "/1"
+    // }
+    // ===> Hash
+    // hash = window.location.hash.sbuStr(1)
+    // ===> Local Storage
+    let number = window.localStorage.getItem('localNumber')
+    if(!number){
+        number = '/1'
+    }
+
+
     //获取界面
     let div = routeTable[number.toString()]
     //渲染界面
@@ -38,7 +50,8 @@ for(let a of aTags){
         e.preventDefault()
         const href = a.getAttribute('href')
         console.log(href)
-        window.history.pushState(null,`page ${href}`,href)
+        // window.history.pushState(null,`page ${href}`,href)
+        window.localStorage.setItem('localNumber', href)
         onStateChange(href)
     })
 }

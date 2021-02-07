@@ -142,8 +142,20 @@ var routeTable = {
 
 function routing(container) {
   //获取用户想去哪里
-  var number = window.location.pathname;
-  console.log("number", number); //获取界面
+  // ===> History
+  // let number = window.location.pathname
+  // if(number === '/'){
+  //     number = "/1"
+  // }
+  // ===> Hash
+  // hash = window.location.hash.sbuStr(1)
+  // ===> Local Storage
+  var number = window.localStorage.getItem('localNumber');
+
+  if (!number) {
+    number = '/1';
+  } //获取界面
+
 
   var div = routeTable[number.toString()]; //渲染界面
 
@@ -168,8 +180,9 @@ try {
     a.addEventListener('click', function (e) {
       e.preventDefault();
       var href = a.getAttribute('href');
-      console.log(href);
-      window.history.pushState(null, "page ".concat(href), href);
+      console.log(href); // window.history.pushState(null,`page ${href}`,href)
+
+      window.localStorage.setItem('localNumber', href);
       onStateChange(href);
     });
   };
