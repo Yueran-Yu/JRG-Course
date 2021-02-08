@@ -22,8 +22,10 @@
 
     <div id="example-2">
       <button @click="show2 = !show2">Toggle show</button>
-      <transition :duration="10000" enter-active-class="animate__animated animate__backInRight" leave-active-class="animate__animated animate__bounceOutLeft">
-        <p v-if="show2" >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris facilisis enim libero, at lacinia
+      <transition :duration="10000" enter-active-class="animate__animated animate__backInRight"
+                  leave-active-class="animate__animated animate__bounceOutLeft">
+        <p v-if="show2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris facilisis enim libero, at
+          lacinia
           diam fermentum id. Pellentesque habitant morbi tristique senectus et netus.</p>
       </transition>
     </div>
@@ -33,6 +35,17 @@
         <button key="off" v-else @click="status = `off`">OFF</button>
       </transition>
     </div>
+
+    <div id="list-demo">
+      <button v-on:click="add">Add</button>
+      <button v-on:click="remove">Remove</button>
+      <transition-group name="list" tag="div">
+    <div v-for="item in items" v-bind:key="item" class="list-item">
+      {{ item }}
+    </div>
+      </transition-group>
+    </div>
+
   </div>
 </template>
 
@@ -42,9 +55,22 @@ export default {
     return {
       visible: true,
       show: true,
-      show2:true,
-      status:'on'
+      show2: true,
+      status: 'on',
+      items: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      nextNum: 10
     }
+  },
+  methods: {
+    randomIndex() {
+      return Math.floor(Math.random() * this.items.length)
+    },
+    add() {
+      this.items.splice(this.randomIndex(), 0, this.nextNum++)
+    },
+    remove() {
+      this.items.splice(this.randomIndex(), 1)
+    },
   }
 }
 </script>
@@ -77,7 +103,6 @@ export default {
     transform: translateX(20px);
     opacity: 0;
   }
-
   .de {
     background: #ffac3e;
   }
@@ -85,9 +110,11 @@ export default {
   .bounce-enter-active {
     animation: bounce-in 1s;
   }
+
   .bounce-leave-active {
     animation: bounce-in 1s reverse;
   }
+
   @keyframes bounce-in {
     0% {
       transform: scale(0);
@@ -99,26 +126,35 @@ export default {
       transform: scale(1);
     }
   }
-
-  .fade-enter-active, .fade-leave-active{
+  .fade-enter-active, .fade-leave-active {
     transition: all 1s;
   }
-
-  .fade-enter{
-    opacity:0;
+  .fade-enter {
+    opacity: 0;
     background: red;
     transform: translateX(100px);
   }
-
-  .fade-leave-to{
-    opacity:0;
+  .fade-leave-to {
+    opacity: 0;
     transform: translateX(-100px);
   }
-
-  #example-4{
-    position:relative;
-    padding:100px;
+  #example-4 {
+    position: relative;
+    padding: 100px;
   }
-
+  .list-item {
+    margin-right: 10px;
+    border: 1px solid red;
+    background: #ff9000;
+  }
+  .list-enter-active, .list-leave-active {
+    transition: all 1s;
+  }
+  .list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */
+  {
+    opacity: 0;
+    transform: translateX(100%);
+    background: #ffe1bc;
+  }
 }
 </style>
