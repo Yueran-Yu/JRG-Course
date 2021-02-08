@@ -8,6 +8,8 @@
         <p v-if="visible">hello</p>
       </transition>
     </div>
+
+
     <div id="example-1">
       <button @click="show = !show">
         Toggle render
@@ -16,10 +18,12 @@
         <p class="de" v-if="show">hello</p>
       </transition>
     </div>
+
+
     <div id="example-2">
       <button @click="show2 = !show2">Toggle show</button>
-      <transition name="bounce">
-        <p v-if="show2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris facilisis enim libero, at lacinia
+      <transition :duration="10000" enter-active-class="animate__animated animate__backInRight" leave-active-class="animate__animated animate__bounceOutLeft">
+        <p v-if="show2" >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris facilisis enim libero, at lacinia
           diam fermentum id. Pellentesque habitant morbi tristique senectus et netus.</p>
       </transition>
     </div>
@@ -69,10 +73,10 @@ export default {
   }
 
   .bounce-enter-active {
-    animation: bounce-in .5s;
+    animation: bounce-in 1s;
   }
   .bounce-leave-active {
-    animation: bounce-in .5s reverse;
+    animation: bounce-in 1s reverse;
   }
   @keyframes bounce-in {
     0% {
