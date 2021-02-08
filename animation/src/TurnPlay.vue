@@ -22,12 +22,17 @@ export default {
 
 <style lang="scss">
 #app {
-  .fade-enter-active, .fade-leave-active {
-    transition: all 2s;
-  }
+  //.fade-enter-active, .fade-leave-active {
+  //  transition: all 2s;
+  //}
+  //
+  //.fade-enter,  .fade-leave-to  {
+  //  opacity: 0;
+  //}
 
-  .fade-enter,  .fade-leave-to  {
-    opacity: 0;
+
+  .fade-enter-active{
+    animation
   }
 }
 </style>
