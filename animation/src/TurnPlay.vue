@@ -32,7 +32,21 @@ export default {
 
 
   .fade-enter-active{
-    animation
+    animation: spin 1s;
+  }
+
+  .fade-leave-active{
+    animation: spin 1s reverse;
+  }
+
+  @keyframes spin{
+    0%{
+      transform:rotate(90deg);
+    }
+
+    100%{
+      transform: rotate(0deg);
+    }
   }
 }
 </style>
