@@ -27,14 +27,24 @@
           diam fermentum id. Pellentesque habitant morbi tristique senectus et netus.</p>
       </transition>
     </div>
-
+    <div id="example-4">
+      <transition name="fade" mode="in-out">
+        <button key="on" v-if="status==='off'" @click="status='on'">ON</button>
+        <button key="off" v-else @click="status = `off`">OFF</button>
+      </transition>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   data() {
-    return {visible: true, show: true, show2:true}
+    return {
+      visible: true,
+      show: true,
+      show2:true,
+      status:'on'
+    }
   }
 }
 </script>
@@ -89,5 +99,26 @@ export default {
       transform: scale(1);
     }
   }
+
+  .fade-enter-active, .fade-leave-active{
+    transition: all 1s;
+  }
+
+  .fade-enter{
+    opacity:0;
+    background: red;
+    transform: translateX(100px);
+  }
+
+  .fade-leave-to{
+    opacity:0;
+    transform: translateX(-100px);
+  }
+
+  #example-4{
+    position:relative;
+    padding:100px;
+  }
+
 }
 </style>
