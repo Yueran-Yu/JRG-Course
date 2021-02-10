@@ -16,6 +16,7 @@ import Child from "./Child.vue"
 export default {
   data() {
     return {total: 10000}
+    //  here is the updated code
   },
 
   // components:{Child: Child} simplify below
