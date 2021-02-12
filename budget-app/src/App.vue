@@ -7,8 +7,14 @@
     <router-view/>
   </div>
 </template>
+<script lang="ts">
 
+</script>
 <style lang="scss">
+@import 'assets/style/file2.scss';
+body{
+  background:$red ;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
