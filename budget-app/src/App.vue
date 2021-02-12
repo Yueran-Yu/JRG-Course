@@ -11,7 +11,7 @@
 
 </script>
 <style lang="scss">
-@import 'assets/style/file2.scss';
+@import '~@/assets/style/file2.scss';
 body{
   background:$red ;
 }
