@@ -1,14 +1,12 @@
 <template>
   <div>Here is the Money Page
-    <Nav />
+    <Nav/>
   </div>
 </template>
 
 <script lang="ts">
-import Nav from "@/components/Nav.vue";
 export default {
-  name: "Money",
-  components: {Nav}
+  name: "Money"
 }
 </script>
 
