@@ -1,28 +1,14 @@
 <template>
   <div>
     <router-view/>
-    <hr/>
-    <div>
-      <router-link to="/money">New</router-link>
-      |
-      <router-link to="/labels">Tags</router-link>
-      |
-      <router-link to="/statistics">Statistics</router-link>
-
-    </div>
   </div>
 </template>
-
 
 
 <script lang="ts">
 
 
-
-
-
 </script>
-
 
 
 <style lang="scss">

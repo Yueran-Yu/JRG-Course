@@ -1,10 +1,14 @@
 <template>
-  <div>This is the Statistics</div>
+  <div>This is the Statistics
+  <Nav/>
+  </div>
 </template>
 
 <script lang="ts">
+import Nav from "@/components/Nav.vue";
 export default {
-  name: "Statistics"
+  name: "Statistics",
+  components: {Nav}
 }
 </script>
 
