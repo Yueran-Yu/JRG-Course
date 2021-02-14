@@ -1,9 +1,8 @@
 <template>
-  <div class="nav-wrapper">
-    <div class="content">
-      This is the Statistics
-        <Nav/>
-      </div>
+  <div>
+    <Layout>
+       This is the Statistics
+    </Layout>
     </div>
 </template>
 

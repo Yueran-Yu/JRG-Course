@@ -1,14 +1,15 @@
 <template>
-    <div>
-      <Layout>
-        This is the Label
-      </Layout>
+  <div class="nav-wrapper">
+    <div class="content">
+      <slot/>
     </div>
+    <Nav/>
+  </div>
 </template>
 
 <script lang="ts">
 export default {
-  name: "label"
+  name: "Layout"
 }
 </script>
 
@@ -21,7 +22,7 @@ export default {
 }
 
 .content {
-  border:1px solid orange;
+  border: 1px solid orange;
   overflow: auto;
   flex-grow: 1;
 }
