@@ -1,6 +1,10 @@
 <template>
   <div class="nav">
-    <router-link to="/money">New</router-link>
+    <router-link to="/money">
+      <svg>
+        <use xlink:href="#label"/>
+      </svg>
+      New</router-link>
     |
     <router-link to="/labels">Tags</router-link>
     |
