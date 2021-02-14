@@ -81,8 +81,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-
 .nav-wrapper {
   border: 3px solid green;
   display: flex;
