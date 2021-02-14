@@ -9,13 +9,16 @@
 </template>
 
 <script lang="ts">
+import label from '@/assets/icons/label.svg';
+
+console.log(label);
 export default {
   name: "Nav"
 }
 </script>
 
 <style lang="scss" scoped>
-.nav{
-  border:1px solid pink;
+.nav {
+  border: 1px solid pink;
 }
 </style>
