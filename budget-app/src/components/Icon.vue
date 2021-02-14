@@ -18,13 +18,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.icon {
   .icon {
     width: 1em;
     height: 1em;
     vertical-align: -0.15em;
-    fill: currentColor;
+    fill: #949494;
     overflow: hidden;
   }
-}
 </style>
