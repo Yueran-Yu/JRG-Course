@@ -1,7 +1,74 @@
 <template>
   <div class="nav-wrapper">
     <div class="content">
-      Here is the Money Page
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
+      <p>Here is the Money Page</p>
     </div>
     <Nav/>
   </div>
@@ -17,14 +84,15 @@ export default {
 
 
 .nav-wrapper {
-  border: 1px solid green;
+  border: 3px solid green;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100vh;
 }
 
 .content {
-  background-color: #9c9cdb;
+  border:1px solid orange;
+  overflow: auto;
   flex-grow: 1;
 }
 </style>
