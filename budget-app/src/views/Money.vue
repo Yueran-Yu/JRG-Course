@@ -34,7 +34,7 @@ export default {
 </script>
 
 <style lang="scss">
- $red:#f00;
+@import "~@/assets/style/helper.scss";
  p{
    color:$red;
  }
