@@ -18,10 +18,11 @@
   box-sizing: border-box;
 }
 
-body{
-  line-height:1.5;
+body {
+  line-height: 1.5;
 }
-a{
+
+a {
   text-decoration: none;
 }
 
