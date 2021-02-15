@@ -29,9 +29,10 @@ nav {
   display: flex;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
   flex-direction: row;
+  font-family: "Avenir Next Condensed",serif;
 
   .item {
-    margin: 10px 0;
+    margin: 5px 0;
     width: 33.33333%;
     display: flex;
     justify-content: center;
@@ -39,8 +40,8 @@ nav {
     flex-direction: column;
 
     .icon {
-      width: 30px;
-      height: 30px;
+      width: 28px;
+      height: 28px;
       margin-bottom: 2px;
     }
   }
