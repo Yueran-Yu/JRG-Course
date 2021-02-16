@@ -59,6 +59,6 @@ export default {
 @import "~@/assets/style/helper.scss";
 
 p {
-  color: $red;
+  color: $color-highlight;
 }
 </style>

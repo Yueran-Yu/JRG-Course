@@ -18,13 +18,13 @@
 </template>
 
 <script lang="ts">
-
 export default {
   name: "Nav"
 }
 </script>
 
 <style lang="scss" scoped>
+@import "~@/assets/style/helper.scss";
 nav {
   display: flex;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
@@ -37,16 +37,17 @@ nav {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    font-size: 0.8em;
 
     .icon {
-      width: 28px;
-      height: 28px;
+      width: 25px;
+      height: 25px;
       margin-bottom: 2px;
     }
   }
 
   .item.selected {
-    color: #e04b64;
+    color: $color-highlight;
   }
 }
 </style>
