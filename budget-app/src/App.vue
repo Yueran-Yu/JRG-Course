@@ -13,19 +13,15 @@ export default {
 
 
 <style lang="scss">
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
+@import "~@/assets/style/reset.scss";
+@import "~@/assets/style/helper.scss";
+
 
 body {
   line-height: 1.5;
+  font-family: $fonts-simple;
 }
 
-a {
-  text-decoration: none;
-}
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

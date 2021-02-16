@@ -29,7 +29,6 @@ nav {
   display: flex;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
   flex-direction: row;
-  font-family: "Avenir Next Condensed",serif;
 
   .item {
     margin: 5px 0;
