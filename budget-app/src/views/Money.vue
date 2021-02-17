@@ -12,16 +12,16 @@
           <button>New</button>
         </div>
       </div>
-      <div >
+      <div>
         <label class="notes">
           <span class="name">Notes</span>
           <input type="text" placeholder="Please enter notes here"/>
         </label>
       </div>
       <div>
-        <ul>
+        <ul class="types">
           <li class="selected">Expense</li>
-          <li>Income</li>
+          <li class="" >Income</li>
         </ul>
       </div>
       <div class="numberPad">
@@ -57,31 +57,59 @@ export default {
 
 <style lang="scss">
 @import "~@/assets/style/helper.scss";
-.type{
 
+.types {
+  background-color: $color-highlight;
+  display: flex;
+  font-size: 18px;
+
+  li {
+    width: 50%;
+    text-align: center;
+    height: 45px;
+    font-weight: bolder;
+    color: aliceblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    &.selected::after {
+      border-bottom: 4px solid $color-highlight;
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width:100%;
+      height:2px;
+      background: white;
+    }
+  }
 }
-.notes{
+
+.notes {
   background: #fff7fa;
   font-size: 14px;
-  padding-left:16px;
+  padding-left: 16px;
   display: flex;
   align-items: center;
 
-  .name{
+  .name {
     color: #ae003d;
     font-size: 14px;
   }
 
-  input{
+  input {
     margin-left: 10px;
-    height:50px;
-    border:none;
-    flex-grow:1;
+    height: 50px;
+    border: none;
+    flex-grow: 1;
     background: transparent;
 
 
   }
-  input::placeholder{
+
+  input::placeholder {
     font-style: italic;
     font-size: 13px;
     color: #ababab;
@@ -98,7 +126,7 @@ export default {
     display: flex;
 
     li {
-      background: $color-background;
+      background: $color-highlight;
       height: $he;
       border-radius: $he/2;
       padding: 0 8px;
@@ -115,10 +143,10 @@ export default {
     button {
       //color: $font-button;
       color: #fda3a3;
-      background-color:transparent;
-      padding:0 4px;
+      background-color: transparent;
+      padding: 0 4px;
       outline: none;
-      border:none;
+      border: none;
       border-bottom: 2px solid $color-background;
 
     }
