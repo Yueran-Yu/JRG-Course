@@ -11,18 +11,15 @@ export default {
 }
 </script>
 
-
 <style lang="scss">
 @import "~@/assets/style/reset.scss";
 @import "~@/assets/style/helper.scss";
-
 
 body {
   line-height: 1.5;
   font-family: $fonts-simple;
   font-size: 16px;
 }
-
 
 #app {
   -webkit-font-smoothing: antialiased;
