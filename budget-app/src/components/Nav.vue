@@ -39,6 +39,7 @@ nav {
     flex-direction: column;
     font-size: 0.8em;
 
+
     .icon {
       width: 25px;
       height: 25px;

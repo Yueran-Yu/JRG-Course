@@ -20,6 +20,7 @@ export default {
 body {
   line-height: 1.5;
   font-family: $fonts-simple;
+  font-size: 16px;
 }
 
 

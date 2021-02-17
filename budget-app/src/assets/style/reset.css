@@ -6,4 +6,10 @@
 a {
   text-decoration: none; }
 
+ul, ol {
+  list-style: none; }
+
+button, input {
+  font: inherit; }
+
 /*# sourceMappingURL=reset.css.map */

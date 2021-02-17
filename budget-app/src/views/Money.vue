@@ -58,7 +58,39 @@ export default {
 <style lang="scss">
 @import "~@/assets/style/helper.scss";
 
-p {
-  color: $color-highlight;
+.tags {
+  color: $color-tag;
+  padding: 16px;
+  $he: 22px;
+
+  .current {
+    display: flex;
+
+    li {
+      background: $color-background;
+      height: $he;
+      border-radius: $he/2;
+      padding: 0 8px;
+      margin-right: 10px;
+      font-size: 0.7rem;
+      font-weight: bold;
+      line-height: $he;
+    }
+  }
+
+  .new {
+    padding-top: 16px;
+
+    button {
+      //color: $font-button;
+      color: #fda3a3;
+      background-color:transparent;
+      padding:0 4px;
+      outline: none;
+      border:none;
+      border-bottom: 2px solid $color-background;
+
+    }
+  }
 }
 </style>
