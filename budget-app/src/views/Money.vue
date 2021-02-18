@@ -21,7 +21,7 @@
       <div>
         <ul class="types">
           <li class="selected">Expense</li>
-          <li class="" >Income</li>
+          <li class="">Income</li>
         </ul>
       </div>
       <div class="numberPad">
@@ -30,19 +30,22 @@
           <button>1</button>
           <button>2</button>
           <button>3</button>
+          <button>+</button>
           <button>Delete</button>
-          <button>---</button>
           <button>4</button>
           <button>5</button>
           <button>6</button>
+          <button>-</button>
           <button>Clear</button>
-          <button>---</button>
           <button>7</button>
           <button>8</button>
           <button>9</button>
-          <button>OK</button>
-          <button>0</button>
+          <button>×</button>
+          <button class="ok">OK</button>
+          <button class="zero">0</button>
           <button>.</button>
+          <button>%</button>
+          <button>÷</button>
         </div>
       </div>
     </Layout>
@@ -57,6 +60,29 @@ export default {
 
 <style lang="scss">
 @import "~@/assets/style/helper.scss";
+
+.numberPad {
+  .output {
+    font-size: 30px;
+    padding: 9px 16px;
+    font-family: Consolas, monospace;
+    text-align: right;
+  }
+
+  .buttons {
+    button {
+      width:20%;
+      outline: none;
+      border:none;
+      height:64px;
+      float: left;
+      &.ok{
+        height:64*2px;
+        float: right;
+      }
+    }
+  }
+}
 
 .types {
   background-color: $color-highlight;
@@ -80,8 +106,8 @@ export default {
       position: absolute;
       bottom: 0;
       left: 0;
-      width:100%;
-      height:2px;
+      width: 100%;
+      height: 2px;
       background: white;
     }
   }
