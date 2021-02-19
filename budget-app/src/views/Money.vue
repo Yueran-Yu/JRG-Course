@@ -1,29 +1,6 @@
 <template>
   <div>
-    <Layout>
-      <div class="tags">
-        <ul class="current">
-          <li>Residence</li>
-          <li>Food</li>
-          <li>Wear</li>
-          <li>Transportation</li>
-        </ul>
-        <div class="new">
-          <button>New</button>
-        </div>
-      </div>
-      <div>
-        <label class="notes">
-          <span class="name">Notes</span>
-          <input type="text" placeholder="Please enter notes here"/>
-        </label>
-      </div>
-      <div>
-        <ul class="types">
-          <li class="selected">Expense</li>
-          <li class="">Income</li>
-        </ul>
-      </div>
+    <Layout class-prefix="layout">
       <div class="numberPad">
         <div class="output">100</div>
         <div class="buttons">
@@ -47,6 +24,30 @@
           <button>÷</button>
         </div>
       </div>
+      <div>
+        <ul class="types">
+          <li class="selected">Expense</li>
+          <li class="">Income</li>
+        </ul>
+      </div>
+      <div>
+        <label class="notes">
+          <span class="name">Notes</span>
+          <input type="text" placeholder="Please enter notes here"/>
+        </label>
+      </div>
+      <div class="tags">
+        <div class="new">
+          <button>New</button>
+        </div>
+        <ul class="current">
+          <li>Residence</li>
+          <li>Food</li>
+          <li>Wear</li>
+          <li>Transportation</li>
+
+        </ul>
+      </div>
     </Layout>
   </div>
 </template>
@@ -58,6 +59,13 @@ export default {
 </script>
 
 <style lang="scss">
+.layout-content {
+  display: flex;
+  flex-direction: column-reverse;
+}
+</style>
+
+<style lang="scss">
 @import "~@/assets/style/helper.scss";
 
 .numberPad {
@@ -65,7 +73,7 @@ export default {
     @extend %clearFix;
     @extend %innerShadow;
     font-size: 30px;
-    padding: 9px 16px;
+    padding: 5px 16px;
     font-family: Consolas, monospace;
     text-align: right;
 
@@ -91,7 +99,7 @@ export default {
         width: 20*2%;
       }
 
-      $bg: #fffcfd;
+      $bg: #fcf5f7;
 
       &:nth-child(1) {
         background: $bg;
@@ -108,8 +116,9 @@ export default {
       &:nth-child(4), &:nth-child(8), &:nth-child(12) {
         background: darken($bg, 12%);
       }
-      &:nth-child(16){
-        background: darken($bg,14%);
+
+      &:nth-child(16) {
+        background: darken($bg, 14%);
       }
 
       &:nth-child(5), &:nth-child(9), &:nth-child(13) {
@@ -194,9 +203,12 @@ export default {
   color: $color-tag;
   padding: 16px;
   $he: 22px;
-
+  flex-grow: 1;
+display: flex;
+  flex-direction: column-reverse;
   .current {
     display: flex;
+    flex-wrap: wrap;
 
     li {
       background: $color-highlight;
