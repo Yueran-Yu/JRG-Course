@@ -9,21 +9,23 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import {Component} from "vue-property-decorator";
+import {Vue, Component, Prop} from "vue-property-decorator";
 
 @Component
 export default class Types extends Vue{
   type='-' //'-' means expense, '+' means income
+  @Prop(Number) example2: number | undefined
   selectType(type: string) {
     if (type !== '-' && type !== '+') {
       throw new Error('Type is unknown.')
     }
     this.type = type
   }
+
+  mounted(){
+    console.log(this.example2);
+  }
 }
-
-
 // export default {
 //   name: "Types",
 //   props:['xxxx'],
