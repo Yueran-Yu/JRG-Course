@@ -2,7 +2,7 @@
   <div>
     <Layout class-prefix="layout">
       <NumberPad/>
-      <Types/>
+      <Types xxxx="Here is an argument from Money.vue"/>
       <Notes/>
       <Tags/>
     </Layout>
