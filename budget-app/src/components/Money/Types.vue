@@ -9,26 +9,41 @@
 </template>
 
 <script lang="ts">
-export default {
-  name: "Types",
-  props:['xxxx'],
-  data() {
-    return {
-      type: '-' // '-' means expense, '+' means income
+import Vue from 'vue'
+import {Component} from "vue-property-decorator";
+
+@Component
+export default class Types extends Vue{
+  type='-' //'-' means expense, '+' means income
+  selectType(type: string) {
+    if (type !== '-' && type !== '+') {
+      throw new Error('Type is unknown.')
     }
-  },
-  mounted(){
-    console.log(this.xxxx)
-  },
-  methods: {
-    selectType(type) {
-      if (type !== '-' && type !== '+') {
-        throw new Error('Type is unknown.')
-      }
-      this.type = type
-    }
+    this.type = type
   }
 }
+
+
+// export default {
+//   name: "Types",
+//   props:['xxxx'],
+//   data() {
+//     return {
+//       type: '-' // '-' means expense, '+' means income
+//     }
+//   },
+//   mounted(){
+//     console.log(this.xxxx)
+//   },
+//   methods: {
+//     selectType(type) {
+//       if (type !== '-' && type !== '+') {
+//         throw new Error('Type is unknown.')
+//       }
+//       this.type = type
+//     }
+//   }
+// }
 </script>
 
 <style lang="scss" scoped>
