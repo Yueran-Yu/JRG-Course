@@ -30,7 +30,8 @@ export default class Tags extends Vue {
 
     }
     //这个方法里， this.selectedTags 是传出去的参数
-    this.$emit('update:value', this.selectedTags)
+    //Tags.vue组件里的 update:valueTags  名字需要和  Money.vue 里的 @update:valueTags 一样
+    this.$emit('update:valueTags', this.selectedTags)
   }
 
   createTag() {

@@ -1,6 +1,6 @@
 <template>
   <div class="numberPad">
-    <div class="output">{{ output }}</div>
+    <div class="output">{{output}}</div>
     <div class="buttons">
       <button @click="inputContent">1</button>
       <button @click="inputContent">2</button>
@@ -21,11 +21,12 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component} from 'vue-property-decorator'
+import {Vue, Component, Prop} from 'vue-property-decorator'
 
 @Component
 export default class NumberPad extends Vue {
-  output = '0'
+  @Prop() readonly value!: number
+  output = this.value.toString()
 
   inputContent(event: MouseEvent) {
     const button = event.target as HTMLButtonElement

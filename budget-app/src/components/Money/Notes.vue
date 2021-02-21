@@ -1,6 +1,6 @@
 <template>
   <div>
-    <label class="notes">{{ value }}
+    <label class="notes">
       <span class="name">Notes</span>
       <input type="text"
              v-model="value"
