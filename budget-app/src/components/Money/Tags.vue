@@ -1,7 +1,7 @@
 <template>
   <div class="tags">
     <div class="new">
-      <button>New Tag</button>
+      <button @click="createTag">New Tag</button>
     </div>
     <ul class="current">
       <li v-for="tag in dataSource" :key="tag"
@@ -18,7 +18,7 @@ import {Vue, Component, Prop} from "vue-property-decorator";
 @Component
 export default class Tags extends Vue {
   // need pass from outside
-  @Prop() dataSource: string[] | undefined
+  @Prop() readonly dataSource: string[] | undefined
   selectedTags: string[] = []
 
   toggle(tag: string) {
@@ -28,6 +28,17 @@ export default class Tags extends Vue {
     } else {
       this.selectedTags.push(tag)
 
+    }
+  }
+
+  createTag(){
+    const name = window.prompt('Please enter the tag name:')
+    if(name === ''){
+      window.alert("Tag name can't be empty.")
+    }else{
+      if(this.dataSource){
+        this.dataSource.push(name as string)
+      }
     }
   }
 }
