@@ -1,20 +1,25 @@
 <template>
   <div>
-    <label class="notes">
+    <label class="notes">{{value}}
       <span class="name">Notes</span>
-      <input type="text" placeholder="Please enter notes here"/>
+      <input type="text" v-model="value"
+             placeholder="Please enter notes here"/>
     </label>
   </div>
 </template>
 
 <script lang="ts">
-export default {
-  name: "Notes"
+import {Vue, Component} from "vue-property-decorator";
+
+@Component
+export default class Notes extends Vue {
+  value = ''
 }
 </script>
 
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
+
 .notes {
   background: #fff7fa;
   font-size: 14px;
