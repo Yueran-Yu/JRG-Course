@@ -1,39 +1,55 @@
 <template>
   <div class="tags">
     <div class="new">
-      <button>New</button>
+      <button>New Tag</button>
     </div>
     <ul class="current">
-      <li>Residence</li>
-      <li>Food</li>
-      <li>Wear</li>
-      <li>Transportation</li>
-
+      <li v-for="tag in dataSource" :key="tag"
+          :class="{selected: selectedTags.indexOf(tag)>= 0}"
+          @click="toggle(tag)">{{ tag }}
+      </li>
     </ul>
   </div>
 </template>
 
 <script lang="ts">
-export default {
-name: "Tags"
+import {Vue, Component, Prop} from "vue-property-decorator";
+
+@Component
+export default class Tags extends Vue {
+  // need pass from outside
+  @Prop() dataSource: string[] | undefined
+  selectedTags: string[] = []
+
+  toggle(tag: string) {
+    const index = this.selectedTags.indexOf(tag)
+    if (index >= 0) {
+      this.selectedTags.splice(index, 1)
+    } else {
+      this.selectedTags.push(tag)
+
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
+
 .tags {
-  color: $color-tag;
   padding: 16px;
   $he: 22px;
   flex-grow: 1;
   display: flex;
+
   flex-direction: column-reverse;
+
   .current {
     display: flex;
     flex-wrap: wrap;
 
     li {
-      background: $color-highlight;
+      margin-top: 4px;
       height: $he;
       border-radius: $he/2;
       padding: 0 8px;
@@ -41,6 +57,14 @@ name: "Tags"
       font-size: 0.7rem;
       font-weight: bold;
       line-height: $he;
+      background: #fde4eb;
+      color: $color-highlight;
+
+      &.selected {
+        color: $color-tag;
+        background: $color-highlight;
+
+      }
     }
   }
 
@@ -49,7 +73,7 @@ name: "Tags"
 
     button {
       //color: $font-button;
-      color: #fda3a3;
+      color: #ec7373;
       background-color: transparent;
       padding: 0 4px;
       outline: none;
