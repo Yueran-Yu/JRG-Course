@@ -5,36 +5,67 @@
       <button @click="inputContent">1</button>
       <button @click="inputContent">2</button>
       <button @click="inputContent">3</button>
-      <button>Delete</button>
+      <button @click="remove">Delete</button>
       <button @click="inputContent">4</button>
       <button @click="inputContent">5</button>
       <button @click="inputContent">6</button>
-      <button>Clear</button>
+      <button @click="clear">Clear</button>
       <button @click="inputContent">7</button>
       <button @click="inputContent">8</button>
       <button @click="inputContent">9</button>
-      <button class="ok">OK</button>
+      <button @click="ok" class="ok">OK</button>
       <button @click="inputContent" class="zero">0</button>
       <button @click="inputContent">.</button>
     </div>
   </div>
 </template>
 
-
 <script lang="ts">
 import {Vue, Component} from 'vue-property-decorator'
+
 @Component
 export default class NumberPad extends Vue {
-  output = ''
+  output = '0'
+
   inputContent(event: MouseEvent) {
     const button = event.target as HTMLButtonElement
-    console.log((button).textContent)
+    const input = button.textContent as string
+
+    if (this.output.length === 16) return
+    if (this.output === '0') {
+      if ('0123456789'.indexOf(input) >= 0) {
+        this.output = input
+      } else {
+        this.output += input
+      }
+      return
+    }
+
+    if (this.output.indexOf('.') >= 0 && input === '.') return
+    this.output += input
+  }
+
+  remove() {
+    if (this.output.length === 1) {
+      this.output = '0'
+    } else {
+      this.output = this.output.slice(0, -1)
+    }
+  }
+
+  clear() {
+    this.output = '0'
+  }
+
+  ok() {
+    console.log(1)
   }
 }
 </script>
 
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
+
 .numberPad {
   .output {
     @extend %clearFix;
