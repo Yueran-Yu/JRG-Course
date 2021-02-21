@@ -29,6 +29,8 @@ export default class Tags extends Vue {
       this.selectedTags.push(tag)
 
     }
+    //这个方法里， this.selectedTags 是传出去的参数
+    this.$emit('update:value', this.selectedTags)
   }
 
   createTag() {
