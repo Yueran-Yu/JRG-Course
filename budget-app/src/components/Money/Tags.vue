@@ -31,14 +31,12 @@ export default class Tags extends Vue {
     }
   }
 
-  createTag(){
+  createTag() {
     const name = window.prompt('Please enter the tag name:')
-    if(name === ''){
+    if (name === '') {
       window.alert("Tag name can't be empty.")
-    }else{
-      if(this.dataSource){
-        this.$emit('update:dataSource', [...this.dataSource,name])
-      }
+    } else if (this.dataSource) {
+      this.$emit('update:dataSource', [...this.dataSource, name])
     }
   }
 }
