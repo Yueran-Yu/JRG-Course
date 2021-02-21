@@ -37,7 +37,7 @@ export default class Tags extends Vue {
       window.alert("Tag name can't be empty.")
     }else{
       if(this.dataSource){
-        this.dataSource.push(name as string)
+        this.$emit('update:dataSource', [...this.dataSource,name])
       }
     }
   }

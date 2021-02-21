@@ -4,7 +4,7 @@
       <NumberPad/>
       <Types :example2="908" />
       <Notes/>
-      <Tags :data-source="tags"/>
+      <Tags :data-source.sync="tags"/>
     </Layout>
   </div>
 </template>
