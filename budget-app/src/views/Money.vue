@@ -1,7 +1,6 @@
 <template>
   <div>
     <Layout class-prefix="layout">
-      {{ recordList }}
       <NumberPad :value.sync="record.amount" @submit="saveRecord"/>
       <Types :valueType.sync="record.type"/>
       <Notes @update:value="onUpdateNotes"/>
@@ -17,6 +16,7 @@ import Types from "@/components/Money/Types.vue";
 import Notes from "@/components/Money/Notes.vue";
 import Tags from "@/components/Money/Tags.vue";
 
+const recordList: Record[] = JSON.parse(window.localStorage.getItem('recordList') || '[]')
 
 type Record = {
   tags: string[];
@@ -33,7 +33,7 @@ type Record = {
 export default class Money extends Vue {
   tags = ['Residence', 'Food', 'Wear', 'Transportation', 'Utilities']
   record: Record = {tags: [], notes: '', type: '-', amount: 0};
-  recordList: Record[] = JSON.parse(window.localStorage.getItem('recordList') || '[]')
+  recordList: Record[] = recordList;
 
   onUpdateTags(tags: string[]) {
     this.record.tags = tags
