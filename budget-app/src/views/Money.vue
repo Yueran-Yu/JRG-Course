@@ -17,24 +17,13 @@ import Types from "@/components/Money/Types.vue";
 import Notes from "@/components/Money/Notes.vue";
 import Tags from "@/components/Money/Tags.vue";
 
-const version = window.localStorage.getItem('version') || '0';
-const recordList: Record[] = JSON.parse(window.localStorage.getItem('version')||'[]')
-if (version === '0.0.1') {
-  //数据库升级，数据迁移
-  recordList.forEach(record => {
-    record.createAt = new Date(2020, 0, 1)
-  })
-  // 保存数据
-  window.localStorage.setItem('recordList', JSON.stringify(recordList))
-}
-window.localStorage.setItem('version', '0.0.2')
 
 type Record = {
   tags: string[];
   notes: string;
   type: string;
   amount: number; // data type => object / string
-  // createdAt?: Date; // class/constructor=> class is used to divide objects
+  createdAt?: Date; // class/constructor=> class is used to divide objects
   // 问号的意思是 createAt 可以不存在
 }
 
@@ -56,7 +45,7 @@ export default class Money extends Vue {
 
   saveRecord() {
     const record2: Record = JSON.parse(JSON.stringify(this.record))
-    // record2.createdAt = new Date()
+    record2.createdAt = new Date()
     this.recordList.push(record2)
     // console.log(this.recordList)
   }
