@@ -1,6 +1,6 @@
 <template>
   <div class="numberPad">
-    <div class="output">{{output}}</div>
+    <div class="output">{{ output }}</div>
     <div class="buttons">
       <button @click="inputContent">1</button>
       <button @click="inputContent">2</button>
@@ -60,6 +60,7 @@ export default class NumberPad extends Vue {
 
   ok() {
     this.$emit('update:value', this.output)
+    this.$emit('submit', this.output)
   }
 }
 </script>
@@ -68,6 +69,9 @@ export default class NumberPad extends Vue {
 @import "~@/assets/style/helper.scss";
 
 .numberPad {
+  color: #4e4d4d;
+  font-weight: bolder;
+
   .output {
     @extend %clearFix;
     @extend %innerShadow;
@@ -76,7 +80,6 @@ export default class NumberPad extends Vue {
     font-family: Consolas, monospace;
     text-align: right;
     min-height: 55px;
-
   }
 
   .buttons {
@@ -89,6 +92,7 @@ export default class NumberPad extends Vue {
       background: transparent;
       height: 64px;
       float: left;
+      color: inherit;
 
       &.ok {
         height: 64*2px;
