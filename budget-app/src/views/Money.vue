@@ -17,6 +17,7 @@ import Notes from "@/components/Money/Notes.vue";
 import Tags from "@/components/Money/Tags.vue";
 import model from "@/model";
 
+
 const recordList = model.fetch()
 
 
