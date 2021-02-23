@@ -2,32 +2,32 @@
   <div>
     <Layout>
       <ol class="tags">
-        <li><span>'Residence'</span>
-          <Icon name="arrow"/>
-        </li>
-        <li><span>'Food'</span>
-          <Icon name="arrow"/>
-        </li>
-        <li><span>'Wear'</span>
-          <Icon name="arrow"/>
-        </li>
-        <li><span>Transportation'</span>'
-          <Icon name="arrow"/>
-        </li>
-        <li><span>'Utilities'</span>
+        <li v-for="tag in tags" :key="tag"><span>{{ tag }}</span>
           <Icon name="arrow"/>
         </li>
       </ol>
       <div class="createTag-wrapper">
-        <button class="createTag">New Tag</button>
+        <button class="createTag" @click="createTag">New Tag</button>
       </div>
     </Layout>
   </div>
 </template>
 
 <script lang="ts">
-export default {
-  name: "label"
+import {Vue, Component} from "vue-property-decorator";
+import tagListModel from "@/models/tagListModel";
+tagListModel.fetch()
+
+@Component
+export default class Labels extends Vue {
+  tags = tagListModel.data
+
+  createTag() {
+    const name = window.prompt('Please enter the tag name: ')
+    if (name) {
+      tagListModel.create(name)
+    }
+  }
 }
 </script>
 
@@ -35,7 +35,7 @@ export default {
 .createTag {
   background: #de2f76;
   color: white;
-  font-weight:bolder;
+  font-weight: bolder;
   border-radius: 4px;
   border: none;
   height: 40px;
