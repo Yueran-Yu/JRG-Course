@@ -16,6 +16,7 @@
 <script lang="ts">
 import {Vue, Component} from "vue-property-decorator";
 import tagListModel from "@/models/tagListModel";
+
 tagListModel.fetch()
 
 @Component
@@ -25,7 +26,13 @@ export default class Labels extends Vue {
   createTag() {
     const name = window.prompt('Please enter the tag name: ')
     if (name) {
-      tagListModel.create(name)
+      try {
+        tagListModel.create(name)
+      } catch (error) {
+        if(error.message === 'duplicated'){
+          window.alert("")
+        }
+      }
     }
   }
 }

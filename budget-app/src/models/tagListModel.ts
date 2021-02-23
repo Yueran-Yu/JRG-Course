@@ -13,7 +13,7 @@ const tagListModel: TagListModel = {
         return this.data
     },
     create(name: string) {
-        if(this.data.indexOf(name)>= 0) {return false}
+        if(this.data.indexOf(name)>= 0) {throw new Error('Duplicated.')}
         this.data.push(name)
         this.save()
         return true;
