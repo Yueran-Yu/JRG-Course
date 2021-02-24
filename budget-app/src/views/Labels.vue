@@ -2,7 +2,7 @@
   <div>
     <Layout>
       <ol class="tags">
-        <li v-for="tag in tags" :key="tag"><span>{{ tag }}</span>
+        <li v-for="tag in tags" :key="tag.id"><span>{{ tag.name }}</span>
           <Icon name="arrow"/>
         </li>
       </ol>
@@ -26,13 +26,11 @@ export default class Labels extends Vue {
   createTag() {
     const name = window.prompt('Please enter the tag name: ')
     if (name) {
-      try {
-        tagListModel.create(name)
-      } catch (error) {
-        if(error.message === 'duplicated'){
-          window.alert("")
-        }
-      }
+      const message = tagListModel.create(name)
+      if (message === 'duplicated')
+        window.alert('Tag name duplicated.')
+    } else {
+      window.alert('Added Successfully!')
     }
   }
 }
