@@ -3,11 +3,11 @@
     <Layout>
       <ol class="tags">
         <router-link class="tag" v-for="tag in tags" :key="tag.id" :to="`/labels/edit/${tag.id}`"><span>{{ tag.name }}</span>
-          <Icon name="right-arrow"/>
+
         </router-link>
       </ol>
       <div class="createTag-wrapper">
-        <button class="createTag" @click="createTag">New Tag</button>
+        <Button class="createTag" @click="createTag">New Tag</Button>
       </div>
     </Layout>
   </div>
