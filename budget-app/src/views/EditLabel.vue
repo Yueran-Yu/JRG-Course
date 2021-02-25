@@ -1,6 +1,7 @@
 <template>
   <Layout>
-    Edit Label
+    <Icon name="left-arrow"/>
+    <span>Edit Label</span>
   </Layout>
 </template>
 
