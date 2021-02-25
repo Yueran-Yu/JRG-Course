@@ -10,28 +10,29 @@ Vue.use(VueRouter)
 
 const routes: Array<RouteConfig> = [
     {
-        path:'/',
-        redirect:'/money'
+        path: '/',
+        redirect: '/money'
     },
     {
-        path:'/money',
+        path: '/money',
         component: Money
     },
     {
-        path:'/labels',
-        component:Labels
+        path: '/labels',
+        component: Labels
     },
     {
-        path:'/statistics',
-        component:Statistics
+        path: '/statistics',
+        component: Statistics
     },
     {
-        path:'*',
-        component:NotFound
+        path: '*',
+        component: NotFound
     },
     {
-        path: '/labels/edit',
-        component:EditLabel
+        // :id 只是个命名
+        path: '/labels/edit/:id',
+        component: EditLabel
     }
 ]
 
