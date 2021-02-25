@@ -1,15 +1,21 @@
 <template>
   <Layout>
-    <Icon name="left-arrow"/>
-    <span>Edit Label</span>
+    <div>
+      <Icon name="left-arrow"/>
+      <span>Edit Label</span>
+      <FormWidget field-name="New Tag: " placeholder="Please enter the tag name"/>
+    </div>
   </Layout>
 </template>
 
 <script lang="ts">
 import {Vue, Component, Prop} from 'vue-property-decorator'
 import tagListModel from "@/models/tagListModel";
+import FormWidget from "@/components/Money/FormWidget.vue";
 
-@Component
+@Component({
+  components: {FormWidget}
+})
 export default class EditLabel extends Vue {
   created() {
     const id = this.$route.params.id

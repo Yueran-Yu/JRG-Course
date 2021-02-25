@@ -1,20 +1,22 @@
 <template>
   <div>
     <label class="notes">
-      <span class="name">Notes</span>
+      <span class="name">{{ this.fieldName }}</span>
       <input type="text"
              v-model="value"
-             placeholder="Please enter notes here"/>
+             :placeholder="this.placeholder"/>
     </label>
   </div>
 </template>
 
 <script lang="ts">
-import {Vue, Component, Watch} from "vue-property-decorator";
+import {Vue, Component, Watch, Prop} from "vue-property-decorator";
 
 @Component
-export default class Notes extends Vue {
+export default class FormWidget extends Vue {
   value = ''
+  @Prop({required: true}) fieldName!: string;
+  @Prop() placeholder?: string;
 
   @Watch('value')
   onValueChanged(value: string) {
