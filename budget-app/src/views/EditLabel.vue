@@ -27,10 +27,7 @@ export default class EditLabel extends Vue {
     } else {
       //为了防止用户不能后退，需要用 replace 而不是 push
       this.$router.replace('/404')
-      console.log((this.$route.params))
-
-      //  something updated
-    }
+      console.log((this.$route.params))}
   }
 }
 </script>
