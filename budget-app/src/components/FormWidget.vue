@@ -2,9 +2,10 @@
   <div>
     <label class="formItem">
       <span class="name">{{ this.fieldName }}</span>
+      <!-- it better not to use v0-model -->
       <input type="text"
              :value="value"
-             @change="onValueChanged($event.target.value)"
+             @input="onValueChanged($event.target.value)"
              :placeholder="this.placeholder"/>
     </label>
   </div>
