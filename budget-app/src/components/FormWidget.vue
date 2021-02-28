@@ -1,12 +1,12 @@
 <template>
   <div>
     <label class="formItem">
-      <span class="name">{{ this.fieldName }}</span>
+      <span class="name">{{ fieldName }}</span>
       <!-- it better not to use v-model -->
       <input type="text"
              :value="value"
              @input="onValueChanged($event.target.value)"
-             :placeholder="this.placeholder"/>
+             :placeholder="placeholder"/>
     </label>
   </div>
 </template>
@@ -21,7 +21,6 @@ export default class FormWidget extends Vue {
   @Prop() placeholder?: string;
 
   // 我不知道这个value是什么作用
-  @Watch('value')
   onValueChanged(value: string) {
     this.$emit('update:value', value)
   }
