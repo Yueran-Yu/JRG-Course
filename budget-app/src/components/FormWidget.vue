@@ -14,7 +14,7 @@ import {Vue, Component, Watch, Prop} from "vue-property-decorator";
 
 @Component
 export default class FormWidget extends Vue {
-  value = ''
+  @Prop({default: ''}) value!: string;
   @Prop({required: true}) fieldName!: string;
   @Prop() placeholder?: string;
 
@@ -28,6 +28,7 @@ export default class FormWidget extends Vue {
 
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
+
 .formItem {
   background: #fff7fa;
   font-size: 14px;
