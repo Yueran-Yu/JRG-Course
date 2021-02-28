@@ -1,6 +1,6 @@
 <template>
   <div>
-    <label class="notes">
+    <label class="formItem">
       <span class="name">{{ this.fieldName }}</span>
       <input type="text"
              v-model="value"
@@ -29,7 +29,7 @@ export default class FormWidget extends Vue {
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
 
-.notes {
+.formItem {
   background: #fff7fa;
   font-size: 14px;
   padding-left: 16px;
@@ -43,12 +43,10 @@ export default class FormWidget extends Vue {
 
   input {
     margin-left: 10px;
-    height: 50px;
+    height: 44px;
     border: none;
     flex-grow: 1;
     background: transparent;
-
-
   }
 
   input::placeholder {

@@ -1,10 +1,14 @@
 <template>
   <Layout>
-    <div>
-
-      <Icon name="left-arrow"/>
-      <span>Edit Label</span>
+    <div class="navBar">
+      <Icon class="leftIcon" name="left-arrow"/>
+      <span class="title">Edit Label</span>
+      <span class="rightIcon"></span>
+    </div>
+    <div class="form-wrapper">
       <FormWidget field-name="New Tag: " placeholder="Please enter the tag name"/>
+    </div>
+    <div class="button-wrapper">
       <Button>Delete Tag</Button>
     </div>
   </Layout>
@@ -38,5 +42,42 @@ export default class EditLabel extends Vue {
 </script>
 
 <style lang="scss" scoped>
+.navBar {
+  text-align: center;
+  line-height: 48px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #a70955;
+  font-size:20px;
+  font-weight: bolder;
+  color: white;
+
+
+  > .title {
+
+  }
+
+  > .leftIcon {
+
+  }
+
+  > .rightIcon {
+    padding:10px;
+  }
+
+}
+.form-wrapper{
+  background: white;
+  margin-top: 8px;
+}
+
+.button-wrapper{
+  text-align: center;
+  margin-top: 44-16px;
+  background: #e04ea8;
+
+}
 
 </style>

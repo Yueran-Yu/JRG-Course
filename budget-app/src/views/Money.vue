@@ -3,9 +3,11 @@
     <Layout class-prefix="layout">
       <NumberPad :value.sync="record.amount" @submit="saveRecord"/>
       <Types :valueType.sync="record.type"/>
+      <div class="notes">
       <FormWidget field-name="Notes: "
              placeholder="Please enter notes here"
              @update:value="onUpdateNotes"/>
+      </div>
       <Tags :dataSource.sync="tags" @update:valueTags="onUpdateTags"/>
     </Layout>
   </div>
@@ -58,6 +60,7 @@ export default class Money extends Vue {
   display: flex;
   flex-direction: column-reverse;
 }
+
 </style>
 
 <style lang="scss">
