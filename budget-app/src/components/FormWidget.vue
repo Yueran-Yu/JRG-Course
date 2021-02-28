@@ -2,7 +2,7 @@
   <div>
     <label class="formItem">
       <span class="name">{{ this.fieldName }}</span>
-      <!-- it better not to use v0-model -->
+      <!-- it better not to use v-model -->
       <input type="text"
              :value="value"
              @input="onValueChanged($event.target.value)"
@@ -16,7 +16,7 @@ import {Vue, Component, Watch, Prop} from "vue-property-decorator";
 
 @Component
 export default class FormWidget extends Vue {
-  @Prop({default: ''}) value!: string;
+  @Prop({default: ''}) readonly value!: string;
   @Prop({required: true}) fieldName!: string;
   @Prop() placeholder?: string;
 
