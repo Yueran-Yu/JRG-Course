@@ -2,8 +2,11 @@
   <div>
     <Layout>
       <div class="tags">
-        <router-link class="tag" v-for="tag in tags" :key="tag.id" :to="`/labels/edit/${tag.id}`"><span>{{ tag.name }}</span>
+        <router-link class="tag" v-for="tag in tags" :key="tag.id" :to="`/labels/edit/${tag.id}`"><span>{{
+            tag.name
+          }}</span> <Icon class="leftIcon" name="right-arrow"/>
         </router-link>
+
       </div>
       <div class="createTag-wrapper">
         <Button class="createTag" @click="createTag">New Tag</Button>
@@ -16,19 +19,20 @@
 import {Vue, Component} from "vue-property-decorator";
 import tagListModel from "@/models/tagListModel";
 import Button from "@/components/Button.vue";
+
 @Component({
   components: {Button}
 })
 export default class Labels extends Vue {
   tags = tagListModel.data
 
-  createTag(){
+  createTag() {
     const name = window.prompt('Please enter the tag name:')
-    if(name){
+    if (name) {
       const message = tagListModel.create(name)
-      if(message === 'duplicated'){
+      if (message === 'duplicated') {
         window.alert('The tag id duplicated.')
-      }else if(message=== 'success'){
+      } else if (message === 'success') {
         window.alert('Added successfully.')
       }
     }
@@ -68,13 +72,13 @@ export default class Labels extends Vue {
     svg {
       width: 18px;
       height: 18px;
-      color: #666;
+      color: #a40e5c;
       margin-right: 16px;
     }
   }
 }
 
-.button{
+.button {
   background: #de2f76;
 }
 </style>
