@@ -1,15 +1,18 @@
 <template>
   <Layout>
     <div class="navBar">
-      <Icon class="leftIcon" name="left-arrow"/>
+      <Icon class="leftIcon" name="left-arrow" @click="goBack"/>
       <span class="title">Edit Label</span>
       <span class="rightIcon"></span>
     </div>
     <div class="form-wrapper">
-      <FormWidget field-name="New Tag: " placeholder="Please enter the tag name"/>
+      <FormWidget :value="tag.name"
+                  @update:value="update"
+                  field-name="New Tag: "
+                  placeholder="Please enter the tag name"/>
     </div>
     <div class="button-wrapper">
-      <Button>Delete Tag</Button>
+      <Button @click="remove">Delete Tag</Button>
     </div>
   </Layout>
 </template>
@@ -24,6 +27,9 @@ import Button from "@/components/Button.vue";
   components: {Button, FormWidget}
 })
 export default class EditLabel extends Vue {
+  // typescript 要求申明的时候需要写明类型
+  tag?: { id: string; name: string } = undefined;
+
   created() {
     // 这一步很重要，怎么获取，url上的ID
     const id = this.$route.params.id
@@ -32,11 +38,28 @@ export default class EditLabel extends Vue {
     // filter 返回的是一个数组
     const tag = tags.filter(t => t.id === id)[0]
     if (tag) {
-      console.log(tag)
+      this.tag = tag
     } else {
       //为了防止用户不能后退，需要用 replace 而不是 push
       this.$router.replace('/404')
     }
+  }
+
+  update(name: string) {
+    if (this.tag) {
+      tagListModel.update(this.tag.id, name)
+    }
+  }
+
+  remove() {
+    if (this.tag) {
+      tagListModel.remove(this.tag.id)
+
+    }
+  }
+
+  goBack(){
+    this.$router.back()
   }
 }
 </script>
@@ -50,7 +73,7 @@ export default class EditLabel extends Vue {
   align-items: center;
   justify-content: space-between;
   background: #de1b79;
-  font-size:22px;
+  font-size: 22px;
   font-weight: bolder;
   color: white;
 
@@ -64,21 +87,22 @@ export default class EditLabel extends Vue {
   }
 
   > .rightIcon {
-    padding:10px;
+    padding: 10px;
   }
 
 }
-.form-wrapper{
+
+.form-wrapper {
   background: white;
   margin-top: 8px;
 }
 
-.button-wrapper{
+.button-wrapper {
   text-align: center;
   margin-top: 44-16px;
 }
 
-.button{
+.button {
   background: #ee6195;
 }
 
