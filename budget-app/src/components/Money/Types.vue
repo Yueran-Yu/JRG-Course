@@ -21,8 +21,6 @@ export default class Types extends Vue {
     this.$emit('update:valueType', type)
   }
 }
-
-
 </script>
 
 <style lang="scss" scoped>

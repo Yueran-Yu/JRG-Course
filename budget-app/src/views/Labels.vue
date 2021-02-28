@@ -1,11 +1,10 @@
 <template>
   <div>
     <Layout>
-      <ol class="tags">
+      <div class="tags">
         <router-link class="tag" v-for="tag in tags" :key="tag.id" :to="`/labels/edit/${tag.id}`"><span>{{ tag.name }}</span>
-
         </router-link>
-      </ol>
+      </div>
       <div class="createTag-wrapper">
         <Button class="createTag" @click="createTag">New Tag</Button>
       </div>
@@ -16,21 +15,22 @@
 <script lang="ts">
 import {Vue, Component} from "vue-property-decorator";
 import tagListModel from "@/models/tagListModel";
-
-tagListModel.fetch()
-
-@Component
+import Button from "@/components/Button.vue";
+@Component({
+  components: {Button}
+})
 export default class Labels extends Vue {
   tags = tagListModel.data
 
-  createTag() {
-    const name = window.prompt('Please enter the tag name: ')
-    if (name) {
+  createTag(){
+    const name = window.prompt('Please enter the tag name:')
+    if(name){
       const message = tagListModel.create(name)
-      if (message === 'duplicated')
-        window.alert('Tag name duplicated.')
-    } else {
-      window.alert('Added Successfully!')
+      if(message === 'duplicated'){
+        window.alert('The tag id duplicated.')
+      }else if(message=== 'success'){
+        window.alert('Added successfully.')
+      }
     }
   }
 }

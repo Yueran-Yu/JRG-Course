@@ -15,7 +15,7 @@
 import {Component, Vue, Watch} from "vue-property-decorator";
 import NumberPad from "@/components/Money/NumberPad.vue";
 import Types from "@/components/Money/Types.vue";
-import FormWidget from "@/components/Money/FormWidget.vue";
+import FormWidget from "@/components/FormWidget.vue";
 import Tags from "@/components/Money/Tags.vue";
 import recordListModel from "@/models/recordListModel";
 import tagListModel from "@/models/tagListModel";

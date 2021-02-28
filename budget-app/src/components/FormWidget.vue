@@ -18,6 +18,7 @@ export default class FormWidget extends Vue {
   @Prop({required: true}) fieldName!: string;
   @Prop() placeholder?: string;
 
+  // 我不知道这个value是什么作用
   @Watch('value')
   onValueChanged(value: string) {
     this.$emit('update:value', value)
