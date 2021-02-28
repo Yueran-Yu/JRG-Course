@@ -60,6 +60,9 @@ export default class Money extends Vue {
   display: flex;
   flex-direction: column-reverse;
 }
+.formItem{
+  padding:10px 0;
+}
 
 </style>
 

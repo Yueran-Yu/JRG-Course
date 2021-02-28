@@ -49,8 +49,8 @@ export default class EditLabel extends Vue {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #a70955;
-  font-size:20px;
+  background: #de1b79;
+  font-size:22px;
   font-weight: bolder;
   color: white;
 
@@ -76,8 +76,10 @@ export default class EditLabel extends Vue {
 .button-wrapper{
   text-align: center;
   margin-top: 44-16px;
-  background: #e04ea8;
+}
 
+.button{
+  background: #ee6195;
 }
 
 </style>

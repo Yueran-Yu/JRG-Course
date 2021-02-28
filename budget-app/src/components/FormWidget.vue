@@ -28,7 +28,6 @@ export default class FormWidget extends Vue {
 
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
-
 .formItem {
   background: #fff7fa;
   font-size: 14px;
@@ -43,7 +42,7 @@ export default class FormWidget extends Vue {
 
   input {
     margin-left: 10px;
-    height: 44px;
+    height: 20px;
     border: none;
     flex-grow: 1;
     background: transparent;

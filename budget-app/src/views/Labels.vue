@@ -38,7 +38,6 @@ export default class Labels extends Vue {
 
 <style lang="scss" scoped>
 .createTag {
-  background: #de2f76;
   color: white;
   font-weight: bolder;
   border-radius: 4px;
@@ -73,5 +72,9 @@ export default class Labels extends Vue {
       margin-right: 16px;
     }
   }
+}
+
+.button{
+  background: #de2f76;
 }
 </style>
