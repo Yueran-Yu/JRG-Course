@@ -27,12 +27,13 @@ import Button from "@/components/Button.vue";
 })
 export default class EditLabel extends Vue {
   // typescript 要求申明的时候需要写明类型
-  // 这一步很重要，怎么获取，url上的ID
-  tag = window.findTag(this.$route.params.id);
+  tag?: Tag = undefined;
 
   created() {
-    //为了防止用户不能后退，需要用 replace 而不是 push
+    // 这一步很重要，怎么获取，url上的ID
+    this.tag = window.findTag(this.$route.params.id);
     if (!this.tag) {
+      //为了防止用户不能后退，需要用 replace 而不是 push
       this.$router.replace('/404')
     }
   }
