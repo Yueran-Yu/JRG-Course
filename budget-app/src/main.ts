@@ -14,7 +14,13 @@ Vue.component('Layout', Layout)
 Vue.component('Icon', Icon)
 
 window.tagList = tagListModel.fetch()
-window.createTag = (name: string)=>{
+
+window.findTag = (id: string) => {
+    // filter 返回的是一个数组
+    return window.tagList.filter(t => t.id === id)[0]
+}
+
+window.createTag = (name: string) => {
     // point 2: write data: from the tagListModel
     const message = tagListModel.create(name)
     if (message === 'duplicated') {
@@ -23,6 +29,16 @@ window.createTag = (name: string)=>{
         window.alert('Added successfully.')
     }
 }
+
+window.removeTag = (id: string) => {
+    return tagListModel.remove(id);
+}
+
+window.updateTag = (id: string, name: string) => {
+    return tagListModel.update(id, name)
+}
+
+
 new Vue({
     router: router,
     store,

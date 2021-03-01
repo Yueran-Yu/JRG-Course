@@ -19,7 +19,6 @@
 
 <script lang="ts">
 import {Vue, Component} from 'vue-property-decorator'
-import tagListModel from "@/models/tagListModel";
 import FormWidget from "@/components/FormWidget.vue";
 import Button from "@/components/Button.vue";
 
@@ -28,39 +27,33 @@ import Button from "@/components/Button.vue";
 })
 export default class EditLabel extends Vue {
   // typescript 要求申明的时候需要写明类型
-  tag?: { id: string; name: string } = undefined;
+  // 这一步很重要，怎么获取，url上的ID
+  tag = window.findTag(this.$route.params.id);
 
   created() {
-    // 这一步很重要，怎么获取，url上的ID
-    const id = this.$route.params.id
-    tagListModel.fetch();
-    const tags = tagListModel.data;
-    // filter 返回的是一个数组
-    const tag = tags.filter(t => t.id === id)[0]
-    if (tag) {
-      this.tag = tag
-    } else {
-      //为了防止用户不能后退，需要用 replace 而不是 push
+    //为了防止用户不能后退，需要用 replace 而不是 push
+    if (!this.tag) {
       this.$router.replace('/404')
     }
   }
 
   update(name: string) {
     if (this.tag) {
-      tagListModel.update(this.tag.id, name)
+      window.updateTag(this.tag.id, name)
     }
   }
 
   remove() {
     if (this.tag) {
-      tagListModel.remove(this.tag.id)
-      this.$router.back()
-    }else{
+      if (window.removeTag(this.tag.id)) {
+        this.$router.back()
+      }
+    } else {
       window.alert('Delete Failed')
     }
   }
 
-  goBack(){
+  goBack() {
     this.$router.back()
   }
 }

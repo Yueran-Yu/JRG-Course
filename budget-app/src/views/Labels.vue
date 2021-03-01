@@ -18,7 +18,6 @@
 
 <script lang="ts">
 import {Vue, Component} from "vue-property-decorator";
-import tagListModel from "@/models/tagListModel";
 import Button from "@/components/Button.vue";
 
 
