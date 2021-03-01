@@ -9,6 +9,7 @@ const tagListModel: TagListModel = {
         return this.data
     },
     create(name: string) {
+        // map method to fetch names array
         const names = this.data.map(item => item.name)
         if (names.indexOf(name) >= 0) {
             return 'duplicated'

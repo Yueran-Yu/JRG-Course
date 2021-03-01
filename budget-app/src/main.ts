@@ -14,6 +14,15 @@ Vue.component('Layout', Layout)
 Vue.component('Icon', Icon)
 
 window.tagList = tagListModel.fetch()
+window.createTag = (name: string)=>{
+    // point 2: write data: from the tagListModel
+    const message = tagListModel.create(name)
+    if (message === 'duplicated') {
+        window.alert('The tag id duplicated.')
+    } else if (message === 'success') {
+        window.alert('Added successfully.')
+    }
+}
 new Vue({
     router: router,
     store,

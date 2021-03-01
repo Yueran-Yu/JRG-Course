@@ -26,17 +26,12 @@ import Button from "@/components/Button.vue";
   components: {Button}
 })
 export default class Labels extends Vue {
-  tags = window.tagList
+  tags = window.tagList  // point 1: read data: from the window interface
 
   createTag() {
     const name = window.prompt('Please enter the tag name:')
     if (name) {
-      const message = tagListModel.create(name)
-      if (message === 'duplicated') {
-        window.alert('The tag id duplicated.')
-      } else if (message === 'success') {
-        window.alert('Added successfully.')
-      }
+      window.createTag(name)
     }
   }
 }

@@ -24,7 +24,6 @@ import recordListModel from "@/models/recordListModel";
 
 const recordList = recordListModel.fetch()
 
-
 @Component({
   components: {Tags, FormWidget, Types, NumberPad}
 })
