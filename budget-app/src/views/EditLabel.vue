@@ -21,6 +21,7 @@
 import {Vue, Component} from 'vue-property-decorator'
 import FormWidget from "@/components/FormWidget.vue";
 import Button from "@/components/Button.vue";
+import store from "@/store/index2";
 
 @Component({
   components: {Button, FormWidget}
@@ -31,7 +32,7 @@ export default class EditLabel extends Vue {
 
   created() {
     // 这一步很重要，怎么获取，url上的ID
-    this.tag = window.findTag(this.$route.params.id);
+    this.tag = store.findTag(this.$route.params.id);
     if (!this.tag) {
       //为了防止用户不能后退，需要用 replace 而不是 push
       this.$router.replace('/404')
@@ -40,17 +41,17 @@ export default class EditLabel extends Vue {
 
   update(name: string) {
     if (this.tag) {
-      window.updateTag(this.tag.id, name)
+      store.updateTag(this.tag.id, name)
     }
   }
 
   remove() {
     if (this.tag) {
-      if (window.removeTag(this.tag.id)) {
+      if (store.removeTag(this.tag.id)) {
         this.$router.back()
       }
     } else {
-      window.alert('Delete Failed')
+      store.alert('Delete Failed')
     }
   }
 
