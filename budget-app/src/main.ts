@@ -11,43 +11,41 @@ import recordListModel from "@/models/recordListModel";
 
 Vue.config.productionTip = false
 Vue.component('Nav', Nav)
-Vue.component('Layout', Layout)
+Vue.component('Layout', Layout)/**/
 Vue.component('Icon', Icon)
 
+// Disadvantage:
+// 1 global variables are too many
+// 2 severely depend on window
+window.store = {
+    // store record
+    recordList: recordListModel.fetch(),
 
-// store record
-window.recordList = recordListModel.fetch()
+    // create record
+    createRecord: (record: RecordItem) => recordListModel.create(record),
 
-// create record
-window.createRecord = (record: RecordItem) => recordListModel.create(record)
+    // tag store
+    tagList: tagListModel.fetch(),
+    findTag(id: string) {
+        // filter 返回的是一个数组
+        return this.tagList.filter(t => t.id === id)[0]
+    },
 
-//remove record
-
-
-// tag store
-window.tagList = tagListModel.fetch()
-
-window.findTag = (id: string) => {
-    // filter 返回的是一个数组
-    return window.tagList.filter(t => t.id === id)[0]
-}
-
-window.createTag = (name: string) => {
-    // point 2: write data: from the tagListModel
-    const message = tagListModel.create(name)
-    if (message === 'duplicated') {
-        window.alert('The tag id duplicated.')
-    } else if (message === 'success') {
-        window.alert('Added successfully.')
+    createTag: (name: string) => {
+        // point 2: write data: from the tagListModel
+        const message = tagListModel.create(name)
+        if (message === 'duplicated') {
+            window.alert('The tag id duplicated.')
+        } else if (message === 'success') {
+            window.alert('Added successfully.')
+        }
+    },
+    removeTag: (id: string) => {
+        return tagListModel.remove(id);
+    },
+    updateTag: (id: string, name: string) => {
+        return tagListModel.update(id, name)
     }
-}
-
-window.removeTag = (id: string) => {
-    return tagListModel.remove(id);
-}
-
-window.updateTag = (id: string, name: string) => {
-    return tagListModel.update(id, name)
 }
 
 
