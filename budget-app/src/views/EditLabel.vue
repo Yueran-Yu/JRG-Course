@@ -51,7 +51,7 @@ export default class EditLabel extends Vue {
         this.$router.back()
       }
     } else {
-      store.alert('Delete Failed')
+      window.alert('Delete Failed')
     }
   }
 
