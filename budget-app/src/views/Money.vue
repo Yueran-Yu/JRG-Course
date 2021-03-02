@@ -15,14 +15,11 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue, Watch} from "vue-property-decorator";
+import {Component, Vue} from "vue-property-decorator";
 import NumberPad from "@/components/Money/NumberPad.vue";
 import Types from "@/components/Money/Types.vue";
 import FormWidget from "@/components/FormWidget.vue";
 import Tags from "@/components/Money/Tags.vue";
-import recordListModel from "@/models/recordListModel";
-
-const recordList = recordListModel.fetch()
 
 @Component({
   components: {Tags, FormWidget, Types, NumberPad}
@@ -30,7 +27,7 @@ const recordList = recordListModel.fetch()
 export default class Money extends Vue {
   tags = window.tagList
   record: RecordItem = {tags: [], notes: '', type: '-', amount: 0};
-  recordList: RecordItem[] = recordList;
+  recordList = window.recordList;
 
   onUpdateTags(tags: string[]) {
     this.record.tags = tags
@@ -41,14 +38,11 @@ export default class Money extends Vue {
   }
 
   saveRecord() {
-   recordListModel.create(this.record)
-  }
-
-  @Watch('recordList')
-  onRecordListChanged() {
-    recordListModel.save()
+   window.createRecord(this.record)
   }
 }
+
+
 </script>
 
 <style lang="scss">
