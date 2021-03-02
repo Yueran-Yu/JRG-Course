@@ -2,7 +2,7 @@ import tagListModel from "@/models/tagListModel";
 
 export default {
     // tag store
-    tagList: tagListModel.fetch(),
+    tagList: [],
     findTag(id: string) {
         // filter 返回的是一个数组
         return this.tagList.filter(t => t.id === id)[0]
@@ -21,5 +21,8 @@ export default {
     },
     updateTag: (id: string, name: string) => {
         return tagListModel.update(id, name)
+    },
+    saveTags(){
+
     }
 }
