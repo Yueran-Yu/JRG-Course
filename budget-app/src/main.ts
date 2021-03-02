@@ -17,7 +17,6 @@ Vue.component('Icon', Icon)
 // 1 global variables are too many
 // 2 severely depend on window
 
-
 new Vue({
     router: router,
     store,
