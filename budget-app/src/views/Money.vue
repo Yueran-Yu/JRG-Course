@@ -8,7 +8,7 @@
              placeholder="Please enter notes here"
              @update:value="onUpdateNotes"/>
       </div>
-      <Tags :dataSource.sync="tags" @update:valueTags="onUpdateTags"/>
+      <Tags />
     </Layout>
   </div>
 </template>
@@ -25,16 +25,11 @@ import store from "@/store/index2.ts";
   components: {Tags, FormWidget, Types, NumberPad}
 })
 export default class Money extends Vue {
-  tags = store.tagList
   record: RecordItem = {tags: [], notes: '', type: '-', amount: 0};
   recordList = store.recordList;
 
   onUpdateTags(tags: string[]) {
     this.record.tags = tags
-  }
-
-  onUpdateNotes(notes: string) {
-    this.record.notes = notes
   }
 
   saveRecord() {

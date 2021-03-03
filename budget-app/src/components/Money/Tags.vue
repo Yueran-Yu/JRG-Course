@@ -4,7 +4,7 @@
       <button @click="createTag">New Tag</button>
     </div>
     <ul class="current">
-      <li v-for="tag in dataSource" :key="tag.id"
+      <li v-for="tag in tagList" :key="tag.id"
           :class="{selected: selectedTags.indexOf(tag)>= 0}"
           @click="toggle(tag)">{{ tag.name }}
       </li>
@@ -14,11 +14,11 @@
 
 <script lang="ts">
 import {Vue, Component, Prop} from "vue-property-decorator";
+import store from "@/store/index2";
 
 @Component
 export default class Tags extends Vue {
-  // need pass from outside
-  @Prop() readonly dataSource: string[] | undefined
+  tagList = store.fetchTags()
   selectedTags: string[] = []
 
   toggle(tag: string) {
@@ -36,11 +36,8 @@ export default class Tags extends Vue {
 
   createTag() {
     const name = window.prompt('Please enter the tag name:')
-    if (name === '') {
-      window.alert("Tag name can't be empty.")
-    } else if (this.dataSource) {
-      this.$emit('update:dataSource', [...this.dataSource, name])
-    }
+    if (!name) { return window.alert("Tag name can't be empty.") }
+    store.createTag(name)
   }
 }
 </script>
