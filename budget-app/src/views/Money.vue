@@ -4,11 +4,13 @@
       <NumberPad :value.sync="record.amount" @submit="saveRecord"/>
       <Types :valueType.sync="record.type"/>
       <div class="notes">
-      <FormWidget field-name="Notes: "
-             placeholder="Please enter notes here"
-             @update:value="onUpdateNotes"/>
+        <FormWidget field-name="Notes: "
+                    placeholder="Please enter notes here"
+                    @update:value="onUpdateNotes"/>
       </div>
-      <Tags />
+      <Tags/>
+      {{ count }}
+      <button @click="add">+1</button>
     </Layout>
   </div>
 </template>
@@ -22,16 +24,31 @@ import Tags from "@/components/Money/Tags.vue";
 import store from "@/store/index2.ts";
 
 @Component({
-  components: {Tags, FormWidget, Types, NumberPad}
+  components: {Tags, FormWidget, Types, NumberPad},
+  computed: {
+    count() {
+      return store.count;
+    }
+  }
 })
 export default class Money extends Vue {
+  count = store.count; // copy 0 to count
   record: RecordItem = {tags: [], notes: '', type: '-', amount: 0};
-  recordList = store.recordList;
+  recordList = store.recordList;  //  copy the address of recordList to variable recordList
+
+  onUpdateNotes(notes: string) {
+    this.record.notes = notes
+  }
 
   saveRecord() {
-   store.createRecord(this.record)
+    store.createRecord(this.record)
+  }
+
+  add() {
+    store.addCount()
   }
 }
+
 
 </script>
 
@@ -40,8 +57,9 @@ export default class Money extends Vue {
   display: flex;
   flex-direction: column-reverse;
 }
-.formItem{
-  padding:10px 0;
+
+.formItem {
+  padding: 10px 0;
 }
 
 </style>
