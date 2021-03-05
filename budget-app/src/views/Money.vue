@@ -21,34 +21,34 @@ import NumberPad from "@/components/Money/NumberPad.vue";
 import Types from "@/components/Money/Types.vue";
 import FormWidget from "@/components/FormWidget.vue";
 import Tags from "@/components/Money/Tags.vue";
-import store from "@/store/index2.ts";
+import { RecordItem } from '@/custom';
 
 @Component({
   components: {Tags, FormWidget, Types, NumberPad},
   computed: {
     count() {
-      return store.count;
-    }
+      return this.$store2.count;
+    },
+    recordList() {
+      return this.$store2.recordList;
+    }  //  copy the address of recordList to variable recordList
+
   }
 })
 export default class Money extends Vue {
-  count = store.count; // copy 0 to count
   record: RecordItem = {tags: [], notes: '', type: '-', amount: 0};
-  recordList = store.recordList;  //  copy the address of recordList to variable recordList
-
   onUpdateNotes(notes: string) {
     this.record.notes = notes
   }
 
   saveRecord() {
-    store.createRecord(this.record)
+    this.$store2.createRecord(this.record)
   }
 
   add() {
-    store.addCount()
+    this.$store2.addCount()
   }
 }
-
 
 </script>
 

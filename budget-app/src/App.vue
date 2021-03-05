@@ -6,8 +6,15 @@
 
 
 <script lang="ts">
+import store from "@/store/index2";
+
 export default {
-  name: "App"
+  name: "App",
+  data(){
+    return {
+      store: store
+    }
+  }
 }
 </script>
 
