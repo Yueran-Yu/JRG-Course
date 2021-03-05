@@ -28,15 +28,10 @@ export default class Money extends Vue {
   record: RecordItem = {tags: [], notes: '', type: '-', amount: 0};
   recordList = store.recordList;
 
-  onUpdateTags(tags: string[]) {
-    this.record.tags = tags
-  }
-
   saveRecord() {
    store.createRecord(this.record)
   }
 }
-
 
 </script>
 
