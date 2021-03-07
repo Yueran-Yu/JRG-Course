@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import clone from "@/lib/clone";
+import createId from "@/lib/idCreator";
 
 Vue.use(Vuex)
 // bind the store to Vue.prototype.$store = store
@@ -15,7 +16,23 @@ const store = new Vuex.Store({
     mutations: {
         fetchTags(state) {
             state.tagList = JSON.parse(window.localStorage.getItem(localStorageTagKeyName) || '[]');
-
+        },
+        createTag(state, name: string) {
+            // map method to fetch names array
+            const names = state.tagList.map(item => item.name)
+            if (names.indexOf(name) >= 0) {
+                window.alert('The tag id duplicated.')
+                return 'duplicated'
+            }
+            // this.data = [{id:'1', name: '1'}, {id:'2',name: '2'}]
+            const id = createId().toString()
+            state.tagList.push({id, name: name})
+            store.commit('saveTags')
+            window.alert('Added successfully.')
+            return 'success';
+        },
+        saveTags(state) {
+            window.localStorage.setItem(localStorageTagKeyName, JSON.stringify(state.tagList));
         },
         fetchRecords(state) {
             state.recordList = JSON.parse(window.localStorage.getItem(localStorageRecordKeyName) || '[]') as RecordItem[];
@@ -30,7 +47,8 @@ const store = new Vuex.Store({
         },
         saveRecords(state) {
             window.localStorage.setItem(localStorageRecordKeyName, JSON.stringify(state.recordList));
-        }
+        },
+
     }
 })
 

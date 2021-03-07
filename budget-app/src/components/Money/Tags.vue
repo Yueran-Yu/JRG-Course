@@ -16,18 +16,19 @@
 import {Vue, Component} from "vue-property-decorator";
 
 @Component({
-  computed:{
-    // TODO
-    tagList(){
-      return this.$store.fetchTags()
-
+  computed: {
+    tagList() {
+      return this.$store.state.tagList;
     }
   }
 })
 
 export default class Tags extends Vue {
-
   selectedTags: Tag[] = []
+
+  created() {
+    this.$store.commit('fetchTags')
+  }
 
   toggle(tag: Tag) {
     const index = this.selectedTags.indexOf(tag)
@@ -45,8 +46,7 @@ export default class Tags extends Vue {
   createTag() {
     const name = window.prompt('Please enter the tag name:')
     if (!name) { return window.alert("Tag name can't be empty.") }
-    // TODO
-    // store.createTag(name)
+    this.$store.commit('createTag', name)
   }
 }
 </script>
