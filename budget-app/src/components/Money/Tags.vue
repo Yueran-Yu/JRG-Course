@@ -13,7 +13,8 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component} from "vue-property-decorator";
+import Component, {mixins} from "vue-class-component";
+import {TagHelper} from "@/mixins/TagHelper";
 
 @Component({
   computed: {
@@ -23,9 +24,8 @@ import {Vue, Component} from "vue-property-decorator";
   }
 })
 
-export default class Tags extends Vue {
+export default class Tags extends mixins(TagHelper) {
   selectedTags: Tag[] = []
-
   created() {
     this.$store.commit('fetchTags')
   }
@@ -41,12 +41,6 @@ export default class Tags extends Vue {
     //这个方法里， this.selectedTags 是传出去的参数
     //Tags.vue组件里的 update:valueTags  名字需要和  Money.vue 里的 @update:valueTags 一样
     this.$emit('update:valueTags', this.selectedTags)
-  }
-
-  createTag() {
-    const name = window.prompt('Please enter the tag name:')
-    if (!name) { return window.alert("Tag name can't be empty.") }
-    this.$store.commit('createTag', name)
   }
 }
 </script>

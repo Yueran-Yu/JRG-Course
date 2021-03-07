@@ -33,7 +33,6 @@ import Tags from "@/components/Money/Tags.vue";
 })
 export default class Money extends Vue {
   record: RecordItem = {tags: [], notes: '', type: '-', amount: 0};
-
   created(){
     this.$store.commit('fetchRecords')
   }
