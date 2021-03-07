@@ -19,9 +19,9 @@ import store from "@/store/index2";
 @Component
 export default class Tags extends Vue {
   tagList = store.fetchTags()
-  selectedTags: string[] = []
+  selectedTags: Tag[] = []
 
-  toggle(tag: string) {
+  toggle(tag: Tag) {
     const index = this.selectedTags.indexOf(tag)
     if (index >= 0) {
       this.selectedTags.splice(index, 1)

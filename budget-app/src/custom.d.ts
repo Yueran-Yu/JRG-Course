@@ -1,10 +1,3 @@
-import Vue from 'vue';
-
-declare module 'vue/types/vue'{
-    interface Vue{
-        $store2: any;
-    }
-}
 
 // global declaration
 type RecordItem = {
@@ -21,15 +14,24 @@ type Tag = {
     name: string;
 }
 
-type TagListModel = {
+/*type TagListModel = {
     data: Tag[];
     fetch: () => Tag[];
     create: (name: string) => 'success' | 'duplicated'; //字符串的子类型：联合类型
     update: (id: string, name: string) => 'success' | 'not found' | 'duplicated';
     remove: (id: string) => boolean;
     save: () => void;
-}
+}*/
 
 interface Window {
 
 }
+
+
+// import Vue from 'vue';
+//
+// declare module 'vue/types/vue'{
+//     interface Vue{
+//         $store2: any;
+//     }
+// }

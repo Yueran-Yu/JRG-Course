@@ -8,9 +8,10 @@
                     placeholder="Please enter notes here"
                     @update:value="onUpdateNotes"/>
       </div>
-      <Tags/>
+      <Tags @update:value="onUpdateTags"/>
       {{ count }}
-      <button @click="add">+1</button>
+      <button @click="$store.commit('increment', 10)">+2</button>
+<!--      <button @click="add">+1</button>-->
     </Layout>
   </div>
 </template>
@@ -21,34 +22,40 @@ import NumberPad from "@/components/Money/NumberPad.vue";
 import Types from "@/components/Money/Types.vue";
 import FormWidget from "@/components/FormWidget.vue";
 import Tags from "@/components/Money/Tags.vue";
-import { RecordItem } from '@/custom';
+import oldStore from "@/store/index2.ts";
 
 @Component({
   components: {Tags, FormWidget, Types, NumberPad},
   computed: {
     count() {
-      return this.$store2.count;
+      return this.$store.state.count;
     },
     recordList() {
-      return this.$store2.recordList;
+      return oldStore.recordList;
     }  //  copy the address of recordList to variable recordList
 
   }
 })
 export default class Money extends Vue {
   record: RecordItem = {tags: [], notes: '', type: '-', amount: 0};
+
   onUpdateNotes(notes: string) {
     this.record.notes = notes
   }
 
-  saveRecord() {
-    this.$store2.createRecord(this.record)
+  onUpdateTags(tags: string[]) {
+    this.record.tags = tags
   }
 
-  add() {
-    this.$store2.addCount()
+  saveRecord() {
+    oldStore.createRecord(this.record)
   }
+
+  // add(){
+  //   store.commit('increment',2)
+  // }
 }
+
 
 </script>
 
