@@ -9,7 +9,6 @@
                     @update:value="onUpdateNotes"/>
       </div>
       <Tags @update:value="onUpdateTags"/>
-      {{ count }}
       <button @click="$store.commit('increment', 10)">+2</button>
 <!--      <button @click="add">+1</button>-->
     </Layout>
@@ -22,16 +21,12 @@ import NumberPad from "@/components/Money/NumberPad.vue";
 import Types from "@/components/Money/Types.vue";
 import FormWidget from "@/components/FormWidget.vue";
 import Tags from "@/components/Money/Tags.vue";
-import oldStore from "@/store/index2.ts";
 
 @Component({
   components: {Tags, FormWidget, Types, NumberPad},
   computed: {
-    count() {
-      return this.$store.state.count;
-    },
     recordList() {
-      return oldStore.recordList;
+      return this.$store.state.recordList;
     }  //  copy the address of recordList to variable recordList
 
   }
@@ -39,6 +34,9 @@ import oldStore from "@/store/index2.ts";
 export default class Money extends Vue {
   record: RecordItem = {tags: [], notes: '', type: '-', amount: 0};
 
+  created(){
+    this.$store.commit('fetchRecords')
+  }
   onUpdateNotes(notes: string) {
     this.record.notes = notes
   }
@@ -48,7 +46,7 @@ export default class Money extends Vue {
   }
 
   saveRecord() {
-    oldStore.createRecord(this.record)
+    this.$store.commit('createRecord', this.record)
   }
 
   // add(){

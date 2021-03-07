@@ -13,12 +13,20 @@
 </template>
 
 <script lang="ts">
-import {Vue, Component, Prop} from "vue-property-decorator";
-import store from "@/store/index2";
+import {Vue, Component} from "vue-property-decorator";
 
-@Component
+@Component({
+  computed:{
+    // TODO
+    tagList(){
+      // return this.$store.fetchTags()
+      return [];
+    }
+  }
+})
+
 export default class Tags extends Vue {
-  tagList = store.fetchTags()
+
   selectedTags: Tag[] = []
 
   toggle(tag: Tag) {
@@ -37,7 +45,8 @@ export default class Tags extends Vue {
   createTag() {
     const name = window.prompt('Please enter the tag name:')
     if (!name) { return window.alert("Tag name can't be empty.") }
-    store.createTag(name)
+    // TODO
+    // store.createTag(name)
   }
 }
 </script>
