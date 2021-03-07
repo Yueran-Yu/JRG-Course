@@ -4,15 +4,21 @@ import clone from "@/lib/clone";
 
 Vue.use(Vuex)
 // bind the store to Vue.prototype.$store = store
-const localStorageKeyName = 'recordList';
+const localStorageTagKeyName = 'tagList';
+const localStorageRecordKeyName = 'recordList';
+
 const store = new Vuex.Store({
     state: {
-        // store record
-        recordList: [] as RecordItem[],
+        tagList: [] as Tag[],
+        recordList: [] as RecordItem[]
     },
     mutations: {
+        fetchTags(state) {
+            state.tagList = JSON.parse(window.localStorage.getItem(localStorageTagKeyName) || '[]');
+
+        },
         fetchRecords(state) {
-            state.recordList = JSON.parse(window.localStorage.getItem(localStorageKeyName) || '[]') as RecordItem[];
+            state.recordList = JSON.parse(window.localStorage.getItem(localStorageRecordKeyName) || '[]') as RecordItem[];
         },
         createRecord(state, record: RecordItem) {
             const record2: RecordItem = clone(record)
@@ -23,7 +29,7 @@ const store = new Vuex.Store({
             // recordStore.saveRecords();
         },
         saveRecords(state) {
-            window.localStorage.setItem(localStorageKeyName, JSON.stringify(state.recordList));
+            window.localStorage.setItem(localStorageRecordKeyName, JSON.stringify(state.recordList));
         }
     }
 })

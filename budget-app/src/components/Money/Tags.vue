@@ -19,8 +19,8 @@ import {Vue, Component} from "vue-property-decorator";
   computed:{
     // TODO
     tagList(){
-      // return this.$store.fetchTags()
-      return [];
+      return this.$store.fetchTags()
+
     }
   }
 })
