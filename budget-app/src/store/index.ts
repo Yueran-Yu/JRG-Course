@@ -7,12 +7,17 @@ Vue.use(Vuex)
 // bind the store to Vue.prototype.$store = store
 const localStorageTagKeyName = 'tagList';
 const localStorageRecordKeyName = 'recordList';
-
+type RootState = {
+    recordList: RecordItem[];
+    tagList: Tag[];
+    currentTag?: Tag;
+}
 const store = new Vuex.Store({
     state: {
-        tagList: [] as Tag[],
-        recordList: [] as RecordItem[]
-    },
+        tagList: [],
+        recordList: [],
+        currentTag: undefined
+    } as RootState,
     mutations: {
         fetchTags(state) {
             state.tagList = JSON.parse(window.localStorage.getItem(localStorageTagKeyName) || '[]');
@@ -30,6 +35,10 @@ const store = new Vuex.Store({
             store.commit('saveTags')
             window.alert('Added successfully.')
             return 'success';
+        },
+        setCurrentTag(state, id: string) {
+            // filter 返回的是一个数组
+            state.currentTag =  state.tagList.filter(t => t.id === id)[0]
         },
         saveTags(state) {
             window.localStorage.setItem(localStorageTagKeyName, JSON.stringify(state.tagList));

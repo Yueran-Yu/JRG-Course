@@ -26,13 +26,13 @@ import Button from "@/components/Button.vue";
   components: {Button, FormWidget}
 })
 export default class EditLabel extends Vue {
-  // typescript 要求申明的时候需要写明类型
-  tag?: Tag = undefined;
 
+  get tag(){
+    return this.$store.state.currentTag
+  }
   created() {
-    // 这一步很重要，怎么获取，url上的ID
-    //TODO
-    // this.tag = store.findTag(this.$route.params.id);
+    //怎么获取，url上的ID
+    this.$store.commit('setCurrentTag', this.$route.params.id);
     if (!this.tag) {
       //为了防止用户不能后退，需要用 replace 而不是 push
       this.$router.replace('/404')
@@ -60,10 +60,10 @@ export default class EditLabel extends Vue {
     }
   }
 
-    // goBack() {
-    //   this.$router.back()
-    // }
-  }
+  // goBack() {
+  //   this.$router.back()
+  // }
+}
 </script>
 
 <style lang="scss" scoped>
