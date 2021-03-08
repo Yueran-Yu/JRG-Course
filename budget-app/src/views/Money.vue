@@ -10,7 +10,7 @@
       </div>
       <Tags @update:value="onUpdateTags"/>
       <button @click="$store.commit('increment', 10)">+2</button>
-<!--      <button @click="add">+1</button>-->
+      <!--      <button @click="add">+1</button>-->
     </Layout>
   </div>
 </template>
@@ -23,19 +23,19 @@ import FormWidget from "@/components/FormWidget.vue";
 import Tags from "@/components/Money/Tags.vue";
 
 @Component({
-  components: {Tags, FormWidget, Types, NumberPad},
-  computed: {
-    recordList() {
-      return this.$store.state.recordList;
-    }  //  copy the address of recordList to variable recordList
-
-  }
+  components: {Tags, FormWidget, Types, NumberPad}
 })
 export default class Money extends Vue {
   record: RecordItem = {tags: [], notes: '', type: '-', amount: 0};
-  created(){
+
+  get recordList() {
+    return this.$store.state.recordList;
+  }  //  copy the address of recordList to variable recordList
+
+  created() {
     this.$store.commit('fetchRecords')
   }
+
   onUpdateNotes(notes: string) {
     this.record.notes = notes
   }
