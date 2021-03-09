@@ -38,7 +38,21 @@ const store = new Vuex.Store({
         },
         setCurrentTag(state, id: string) {
             // filter 返回的是一个数组
-            state.currentTag =  state.tagList.filter(t => t.id === id)[0]
+            state.currentTag = state.tagList.filter(t => t.id === id)[0]
+        },
+        updateTag(state, payload: { id: string, name: string }) {
+            const {id,name} = payload
+            const idList = state.tagList.map(item => item.id)
+            if (idList.indexOf(id) >= 0) {
+                const names = state.tagList.map(item => item.name)
+                if (names.indexOf(name) >= 0) {
+                    window.alert('duplicated')
+                } else {
+                    const tag = state.tagList.filter(item => item.id === id)[0]
+                    tag.name = name
+                    store.commit('saveTags')
+                }
+            }
         },
         saveTags(state) {
             window.localStorage.setItem(localStorageTagKeyName, JSON.stringify(state.tagList));
