@@ -32,6 +32,7 @@ export default class EditLabel extends Vue {
   }
   created() {
     //怎么获取，url上的ID
+    this.$store.commit('fetchTags')
     this.$store.commit('setCurrentTag', this.$route.params.id);
     if (!this.tag) {
       //为了防止用户不能后退，需要用 replace 而不是 push
@@ -48,20 +49,15 @@ export default class EditLabel extends Vue {
   remove() {
     if (this.tag) {
       //TODO
-      //   if (store.removeTag(this.tag.id)) {
-      //     this.$router.back()
-      //   }
-      // } else {
-      //   window.alert('Delete Failed')
-      // }
+
 
       return [];
     }
   }
 
-  // goBack() {
-  //   this.$router.back()
-  // }
+  goBack() {
+    this.$router.back()
+  }
 }
 </script>
 
