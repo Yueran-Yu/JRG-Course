@@ -7,13 +7,54 @@ import {
     Link,
     Redirect
 } from "react-router-dom";
+import styled from 'styled-components';
 
+const Wrapper = styled.div`
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+`
+
+const Main = styled.div`
+  flex-grow: 1;
+  overflow: auto;
+`
+
+const Nav = styled.nav`
+  border: 2px solid blue;
+
+  > ul {
+    display: flex;
+    justify-content: space-around;
+    >li{
+      text-align: center;
+      padding: 16px;
+    }
+  }
+  
+`
 
 function App() {
     return (
         <Router>
-            <div>
-                <nav>
+            <Wrapper>
+                <Main>
+                    <Switch>
+                        <Route path="/tags">
+                            <Tags/>
+                        </Route>
+                        <Route path="/money">
+                            <Money/>
+                        </Route>
+                        <Statistics/>
+                        <Redirect exact from='/' to="/money"/>
+                        <Route path="*">
+                            <NoMatch/>
+                        </Route>
+                    </Switch>
+                </Main>
+
+                <Nav>
                     <ul>
                         <li>
                             <Link to="/tags">Tags</Link>
@@ -25,24 +66,9 @@ function App() {
                             <Link to="/statistics">Statistics</Link>
                         </li>
                     </ul>
-                </nav>
+                </Nav>
 
-                <Switch>
-                    <Route path="/tags">
-                        <Tags/>
-                    </Route>
-                    <Route path="/money">
-                        <Money/>
-                    </Route>
-                    <Route path="/statistics">
-                        <Statistics/>
-                    </Route>
-                    <Redirect exact from='/' to="/money"/>
-                    <Route path="*">
-                        <NoMatch/>
-                    </Route>
-                </Switch>
-            </div>
+            </Wrapper>
         </Router>
     );
 }
