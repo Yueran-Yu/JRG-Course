@@ -1,6 +1,7 @@
 import React from 'react';
 import {
-    BrowserRouter as Router,
+    // hashRouter no need to use the backend server
+    HashRouter as Router,
     Switch,
     Route,
     Link,
@@ -36,7 +37,10 @@ function App() {
                     <Route path="/statistics">
                         <Statistics/>
                     </Route>
-                    <Redirect  from='/' to="/money"/>
+                    <Redirect exact from='/' to="/money"/>
+                    <Route path="*">
+                        <NoMatch/>
+                    </Route>
                 </Switch>
             </div>
         </Router>
@@ -53,6 +57,12 @@ function Money() {
 
 function Statistics() {
     return <h2>Statistics</h2>;
+}
+
+function NoMatch() {
+    return (
+        <div>Page Not Found.</div>
+    )
 }
 
 export default App;
