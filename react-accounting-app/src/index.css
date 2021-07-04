@@ -13,6 +13,7 @@ ul, ol {
   list-style: none; }
 
 a {
-  text-decoration: none; }
+  text-decoration: none;
+  color: inherit; }
 
 /*# sourceMappingURL=index.css.map */

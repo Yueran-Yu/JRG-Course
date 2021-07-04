@@ -26,12 +26,13 @@ const Nav = styled.nav`
   > ul {
     display: flex;
     justify-content: space-around;
-    >li{
+
+    > li {
       text-align: center;
       padding: 16px;
     }
   }
-  
+
 `
 
 function App() {
@@ -67,7 +68,6 @@ function App() {
                         </li>
                     </ul>
                 </Nav>
-
             </Wrapper>
         </Router>
     );
