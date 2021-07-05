@@ -1,3 +1,4 @@
+import Nav from 'components/Nav';
 import React from 'react';
 import {
     // hashRouter no need to use the backend server
@@ -20,20 +21,6 @@ const Main = styled.div`
   overflow: auto;
 `
 
-const Nav = styled.nav`
-  border: 2px solid blue;
-
-  > ul {
-    display: flex;
-    justify-content: space-around;
-
-    > li {
-      text-align: center;
-      padding: 16px;
-    }
-  }
-
-`
 
 function App() {
     return (
@@ -54,20 +41,7 @@ function App() {
                         </Route>
                     </Switch>
                 </Main>
-
-                <Nav>
-                    <ul>
-                        <li>
-                            <Link to="/tags">Tags</Link>
-                        </li>
-                        <li>
-                            <Link to="/money">Money</Link>
-                        </li>
-                        <li>
-                            <Link to="/statistics">Statistics</Link>
-                        </li>
-                    </ul>
-                </Nav>
+                <Nav/>
             </Wrapper>
         </Router>
     );
