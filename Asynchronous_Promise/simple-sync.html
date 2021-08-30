@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple synchronous Javascript example</title>
+</head>
+<body>
+<button>Click Me</button>
+<script>
+  const btn = document.querySelector('button')
+  btn.addEventListener('click', ()=>{
+    let myDate
+    for(let i = 0; i < 100000000; i++){
+      let date = new Date()
+      myDate = date
+    }
+    console.log(myDate);
+    let pElement = document.createElement('p')
+    pElement.textContent = 'This is a new paragraph that need to add to the body'
+    document.body.appendChild(pElement)
+  })
+</script>
+</body>
+</html>

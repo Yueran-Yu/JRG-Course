@@ -1,0 +1,29 @@
+#app2{
+ background-color:aliceblue ;
+}
+
+#app2 .tab-bar{
+ border:1px dashed black;
+ display: flex;
+}
+
+#app2 .tab-bar > li{
+ padding:10px;
+ width: 50%;
+ text-align: center;
+}
+
+#app2 .tab-bar > li.selected{
+ background: rgb(37, 114, 196);
+ color: #dddddd;
+ font-weight: bold;
+ font-size:1.5rem;
+}
+
+#app2 .tab-content > li{
+ display: none;
+}
+
+#app2 .tab-content > li.active{
+ display: block;
+}
